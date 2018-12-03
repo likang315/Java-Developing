@@ -1,9 +1,12 @@
 package com.redcms.beans;
 
 public class ChannelAttr {
+	
 	private long channel_id;
 	private String field_name;
 	private String field_value;
+	
+	
 	public long getChannel_id() {
 		return channel_id;
 	}

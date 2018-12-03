@@ -127,17 +127,16 @@
     
     
     <c:when test="${mis.data_type==3}">
-     		    <textarea col=23 rows="5" name="${mis.field}" id="${mis.field}_id" class="control-label" style="width:100%;height:300px;" > </textarea>
-<script type="text/javascript">
-				    	
-        KindEditor.ready(function(K) {
-                window.editor = K.create('#${mis.field}_id',{			
-                	uploadJson : 'admin/uploadpic/imgupload',
-    					allowFileManager : false,
-				fileManagerJson : '../jsp/file_manager_json.jsp'
-                });
-        });
-</script>
+     	<textarea col=23 rows="5" name="${mis.field}" id="${mis.field}_id" class="control-label" style="width:100%;height:300px;" > </textarea>
+		<script type="text/javascript">			    	
+		        KindEditor.ready(function(K) {
+		                window.editor = K.create('#${mis.field}_id',{			
+		                uploadJson : 'admin/uploadpic/imgupload',
+		    			allowFileManager : false,
+						fileManagerJson : '../jsp/file_manager_json.jsp'
+		                });
+		        });
+		</script>
     </c:when>
     
     
@@ -148,9 +147,9 @@
     
     <c:when test="${mis.data_type==5}">
        
-                     <input  type="hidden"  value="" name="${mis.field}" id="${mis.field}_field"/>
+        <input  type="hidden"  value="" name="${mis.field}" id="${mis.field}_field"/>
 
-				     <img src="img/upload.jpg" width="68" height="57" style="cursor: pointer;" id="${mis.field}_id" />
+		<img src="img/upload.jpg" width="68" height="57" style="cursor: pointer;" id="${mis.field}_id" />
            
 		<script type="text/javascript">
         KindEditor.ready(function(K) {
@@ -176,32 +175,31 @@
     </c:when>
     
     
-    
     <c:when test="${mis.data_type==6}">
         <div id="pics_${mis.field}">${mis.field_dis}</div>
         <ul id="shows_${mis.field}"></ul>
      
-<script type="text/javascript">
-
-$(function() {
-   // 初始化Web Uploader
-var uploader${mis.field}= WebUploader.create({
-    // 选完文件后，是否自动上传。
-    auto: true,
-    // swf文件路径
-    swf: 'js/plugins/webuploader/Uploader.swf',
-    // 文件接收服务端。
-    server: 'admin/uploadpic/imguploadpictures',
-    // 选择文件的按钮。可选。
-    // 内部根据当前运行是创建，可能是input元素，也可能是flash.
-    pick:  '#pics_${mis.field}',
-    // 只允许选择图片文件。
-    accept: {
-        title: 'Images',
-        extensions: 'gif,jpg,jpeg,bmp,png',
-        mimeTypes: 'image/*'
-    }
-});
+		<script type="text/javascript">
+		
+		$(function() {
+		   // 初始化Web Uploader
+		var uploader${mis.field}= WebUploader.create({
+		    // 选完文件后，是否自动上传
+		    auto: true,
+		    // swf文件路径
+		    swf: 'js/plugins/webuploader/Uploader.swf',
+		    // 文件接收服务端。
+		    server: 'admin/uploadpic/imguploadpictures',
+		    // 选择文件的按钮。可选。
+		    // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+		    pick:  '#pics_${mis.field}',
+		    // 只允许选择图片文件。
+		    accept: {
+		        title: 'Images',
+		        extensions: 'gif,jpg,jpeg,bmp,png',
+		        mimeTypes: 'image/*'
+		    }
+		});
 
 
 uploader${mis.field}.on( 'uploadSuccess', function( file,response ) {
@@ -227,6 +225,7 @@ uploader${mis.field}.on( 'uploadError', function( file ) {
 
 
     </c:when>
+  
    <c:otherwise>
        
    </c:otherwise>
@@ -241,14 +240,12 @@ uploader${mis.field}.on( 'uploadError', function( file ) {
 </c:forEach>
 
 
-
-
-
- <div class="form-group">
+<div class="form-group">
     <div class="col-sm-offset-3 col-sm-6">
       <button type="submit" class="btn btn-success">增加栏目</button>
     </div>
 </div>
+
 </form>
 <!--面板结束-->      
 

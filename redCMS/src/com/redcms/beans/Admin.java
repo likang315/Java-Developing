@@ -1,6 +1,7 @@
 package com.redcms.beans;
 
 public class Admin {
+	
   private int id;
   private String uname;
   private String upwd;

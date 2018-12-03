@@ -27,19 +27,22 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.json.simple.JSONObject;
 
 import com.redcms.db.Db;
+
 @WebServlet("/admin/uploadpic/imguploadpictures")
 public class ImageUploads2 extends HttpServlet{
 	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out=response.getWriter();
+	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("utf-8");
+		resp.setContentType("text/html;charset=utf-8");
+		PrintWriter out=resp.getWriter();
+		
 		int lastid=0;
 		try {
 			//文件保存目录路径
 			String savePath = this.getServletContext().getRealPath("/") + "ups/";
 
 			//文件保存目录URL
-			String saveUrl  = request.getContextPath() + "/ups/";
+			String saveUrl  = req.getContextPath() + "/ups/";
 
 			//定义允许上传的文件扩展名
 			HashMap<String, String> extMap = new HashMap<String, String>();
@@ -49,26 +52,26 @@ public class ImageUploads2 extends HttpServlet{
 			extMap.put("file", "doc,docx,xls,xlsx,ppt,htm,html,txt,zip,rar,gz,bz2");
 
 			//最大文件大小
-			long maxSize = 1000000;
+			long maxSize = 1000000000;
 
 
-			if(!ServletFileUpload.isMultipartContent(request)){
-				out.println(getError("请选择文件。"));
+			if(!ServletFileUpload.isMultipartContent(req)){
+				out.println(getError("请选择文件..."));
 				return;
 			}
 			//检查目录
 			File uploadDir = new File(savePath);
 			if(!uploadDir.isDirectory()){
-				out.println(getError("上传目录不存在。"));
+				out.println(getError("上传目录不存在..."));
 				return;
 			}
 			//检查目录写权限
 			if(!uploadDir.canWrite()){
-				out.println(getError("上传目录没有写权限。"));
+				out.println(getError("上传目录没有写权限..."));
 				return;
 			}
 
-			String dirName = request.getParameter("dir");
+			String dirName = req.getParameter("dir");
 			if (dirName == null) {
 				dirName = "image";
 			}
@@ -76,6 +79,7 @@ public class ImageUploads2 extends HttpServlet{
 				out.println(getError("目录名不正确。"));
 				return;
 			}
+			
 			//创建文件夹
 			savePath += dirName + "/";
 			saveUrl += dirName + "/";
@@ -91,11 +95,13 @@ public class ImageUploads2 extends HttpServlet{
 			if (!dirFile.exists()) {
 				dirFile.mkdirs();
 			}
-
+			
+			//得到所有的FileItem,form 中<input>的封装
 			FileItemFactory factory = new DiskFileItemFactory();
 			ServletFileUpload upload = new ServletFileUpload(factory);
 			upload.setHeaderEncoding("UTF-8");
-			List<FileItem> items =upload.parseRequest(request);
+			List<FileItem> items =upload.parseRequest(req);
+			
 			Iterator<FileItem> itr = items.iterator();
 			while (itr.hasNext()) {
 				FileItem item = (FileItem) itr.next();
@@ -110,16 +116,18 @@ public class ImageUploads2 extends HttpServlet{
 					//检查扩展名
 					String fileExt = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
 					if(!Arrays.<String>asList(extMap.get(dirName).split(",")).contains(fileExt)){
-						out.println(getError("上传文件扩展名是不允许的扩展名。\n只允许" + extMap.get(dirName) + "格式。"));
+						out.println(getError("上传文件扩展名是不允许的扩展名...\n只允许" + extMap.get(dirName) + "格式"));
 						return;
 					}
-
+					
+					//给上传文件取名
 					SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
 					String newFileName = df.format(new Date()) + "_" + new Random().nextInt(1000) + "." + fileExt;
 					try{
 						File uploadedFile = new File(savePath, newFileName);
 						item.write(uploadedFile);
 						Db.update("insert into pictures(path,priority) values(?,?)",saveUrl+"/"+newFileName,10);
+						
 						Object lastobj=Db.query("select LAST_INSERT_ID() from dual", new ArrayHandler())[0];
 					
 						if(lastobj instanceof Long)
@@ -133,13 +141,10 @@ public class ImageUploads2 extends HttpServlet{
 						
 						
 					}catch(Exception e){
-						out.println(getError("上传文件失败。"));
+						out.println(getError("上传文件失败..."));
 						return;
 					}
 
-				
-				
-					
 					JSONObject obj = new JSONObject();
 					obj.put("error", 0);
 					obj.put("url", saveUrl + newFileName);
@@ -148,15 +153,16 @@ public class ImageUploads2 extends HttpServlet{
 				}
 			}
 		} catch (FileUploadException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	private String getError(String message) {
+	private String getError(String message) 
+	{
 		JSONObject obj = new JSONObject();
 		obj.put("error", 1);
 		obj.put("message", message);
 		return obj.toJSONString();
 	}
+	
 }

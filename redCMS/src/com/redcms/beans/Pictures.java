@@ -6,9 +6,6 @@ import java.io.Serializable;
  * <p>
  * 图集
  * </p>
- *
- * @author 刘慧涛123
- * @since 2018-07-13
  */
 public class Pictures {
 
@@ -26,6 +23,7 @@ public class Pictures {
   
     private Integer priority;
     private Integer sequ;
+    
 	public Long getId() {
 		return id;
 	}

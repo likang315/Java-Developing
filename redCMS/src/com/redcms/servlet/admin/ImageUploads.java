@@ -25,18 +25,28 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.json.simple.JSONObject;
 
 import com.redcms.db.Db;
+
+/**
+ * 上传附件的
+ * @author likang
+ *
+ */
 @WebServlet("/admin/uploadpic/imgupload")
 public class ImageUploads extends HttpServlet{
+	
 	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out=response.getWriter();
+	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
+	{
+		req.setCharacterEncoding("utf-8");
+		resp.setContentType("text/html;charset=utf-8");
+		PrintWriter out=resp.getWriter();
+		
 		try {
 			//文件保存目录路径
 			String savePath = this.getServletContext().getRealPath("/") + "ups/";
 
 			//文件保存目录URL
-			String saveUrl  = request.getContextPath() + "/ups/";
+			String saveUrl  = req.getContextPath() + "/ups/";
 
 			//定义允许上传的文件扩展名
 			HashMap<String, String> extMap = new HashMap<String, String>();
@@ -48,31 +58,35 @@ public class ImageUploads extends HttpServlet{
 			//最大文件大小
 			long maxSize = 1000000;
 
-
-			if(!ServletFileUpload.isMultipartContent(request)){
-				out.println(getError("请选择文件。"));
+			//是否会提交内容
+			if(!ServletFileUpload.isMultipartContent(req)){
+				out.println(getError("请选择文件..."));
 				return;
 			}
+			
 			//检查目录
 			File uploadDir = new File(savePath);
 			if(!uploadDir.isDirectory()){
-				out.println(getError("上传目录不存在。"));
+				out.println(getError("上传目录不存在..."));
 				return;
 			}
+			
 			//检查目录写权限
 			if(!uploadDir.canWrite()){
-				out.println(getError("上传目录没有写权限。"));
+				out.println(getError("上传目录没有写权限..."));
 				return;
 			}
-
-			String dirName = request.getParameter("dir");
+			
+			
+			String dirName = req.getParameter("dir");
 			if (dirName == null) {
 				dirName = "image";
 			}
 			if(!extMap.containsKey(dirName)){
-				out.println(getError("目录名不正确。"));
+				out.println(getError("目录名不正确..."));
 				return;
 			}
+			
 			//创建文件夹
 			savePath += dirName + "/";
 			saveUrl += dirName + "/";
@@ -80,6 +94,7 @@ public class ImageUploads extends HttpServlet{
 			if (!saveDirFile.exists()) {
 				saveDirFile.mkdirs();
 			}
+			
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 			String ymd = sdf.format(new Date());
 			savePath += ymd + "/";
@@ -89,25 +104,30 @@ public class ImageUploads extends HttpServlet{
 				dirFile.mkdirs();
 			}
 
+			
+			
+			
 			FileItemFactory factory = new DiskFileItemFactory();
 			ServletFileUpload upload = new ServletFileUpload(factory);
 			upload.setHeaderEncoding("UTF-8");
-			List<FileItem> items =upload.parseRequest(request);
+			
+			List<FileItem> items =upload.parseRequest(req);
 			Iterator<FileItem> itr = items.iterator();
 			while (itr.hasNext()) {
 				FileItem item = (FileItem) itr.next();
 				String fileName = item.getName();
 				long fileSize = item.getSize();
+				//否表示此表单是上传文件
 				if (!item.isFormField()) {
 					//检查文件大小
 					if(item.getSize() > maxSize){
 						out.println(getError("上传文件大小超过限制。"));
 						return;
 					}
-					//检查扩展名
+					//检查扩展名,根据key值得到map的value，然后依据 ， 分隔，查看是否包含
 					String fileExt = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
 					if(!Arrays.<String>asList(extMap.get(dirName).split(",")).contains(fileExt)){
-						out.println(getError("上传文件扩展名是不允许的扩展名。\n只允许" + extMap.get(dirName) + "格式。"));
+						out.println(getError("上传文件扩展名是不允许的扩展名。\n只允许" + extMap.get(dirName) + "格式..."));
 						return;
 					}
 
@@ -122,10 +142,7 @@ public class ImageUploads extends HttpServlet{
 						out.println(getError("上传文件失败。"));
 						return;
 					}
-
-				
-					
-					
+			
 					JSONObject obj = new JSONObject();
 					obj.put("error", 0);
 					obj.put("url", saveUrl + newFileName);
@@ -133,15 +150,16 @@ public class ImageUploads extends HttpServlet{
 				}
 			}
 		} catch (FileUploadException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
+	
 	private String getError(String message) {
 		JSONObject obj = new JSONObject();
 		obj.put("error", 1);
 		obj.put("message", message);
 		return obj.toJSONString();
 	}
+	
 }

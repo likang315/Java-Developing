@@ -1,7 +1,7 @@
 package com.redcms.beans;
 
 /**
- * 模型表
+ * 模型
  */
 public class Model {
 
