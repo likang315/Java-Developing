@@ -1,8 +1,5 @@
 package com.redcms.beans;
 
-
-import java.io.Serializable;
-
 /**
  * 栏目模型属性
  */

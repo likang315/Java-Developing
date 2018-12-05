@@ -2,8 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@page import="java.util.*,com.redcms.beans.*" %>
 
-<%-- <%@taglib uri="/redcms/tags" prefix="cms" %> --%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%@ taglib prefix="cms" uri="/redcms/tags" %>
+
 <!DOCTYPE html>
 <head>
 <%@include file="header.jsp" %>
@@ -50,6 +52,8 @@
 		<th>排序</th>
 		<th>管理</th>
 	</tr>
+	
+		<cms:allChannel />
     </table>
         <!-- 内容结束 -->
   </div>
@@ -64,8 +68,9 @@
     <!-- 全局js -->
     <script src="js/jquery.min.js?v=2.1.4"></script>
     <script src="js/bootstrap.min.js?v=3.3.6"></script>
-
-   <script type="text/javascript">
+	
+	<!-- 显示弹出框BootStrap -->
+    <script type="text/javascript">
 	   $(function(){
 		   var show=false;
 		   $("#ashow").click(function(){
@@ -79,7 +84,7 @@
 		   	}
 		   });  
 	   });
-   </script>
+    </script>
 </body>
 </html>
 

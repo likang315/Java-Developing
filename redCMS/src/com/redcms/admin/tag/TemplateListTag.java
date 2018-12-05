@@ -10,12 +10,16 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 import com.redcms.util.TemplateFileFilter;
 
 
-
+/**
+ * tempFiles标签的处理器
+ * @author likang
+ *
+ */
 public class TemplateListTag extends SimpleTagSupport 
 {
-    private String temType;//模板的类型，只能中index list content
+    private String temType;   //模板的类型，只能中index list content
     private String fieldName; //表单项的名字
-    private String defVal;//哪一项默认选中
+    private String defVal;    //哪一项默认选中
     
 	@Override
 	public void doTag() throws JspException, IOException 
@@ -23,15 +27,17 @@ public class TemplateListTag extends SimpleTagSupport
 		StringBuilder sb=new StringBuilder();
 		if(null==fieldName)
 		{
-			if("index".equals(temType))fieldName="index_tem";
-			if("list".equals(temType))fieldName="list_tem";
-			if("content".equals(temType))fieldName="content_tem";
+			if("index".equals(temType))
+				fieldName="index_tem";
+			if("list".equals(temType))
+				fieldName="list_tem";
+			if("content".equals(temType))
+				fieldName="content_tem";
 		}
-		//sb.append("<select class='form-control' name='"+fieldName+"'>");
+
 		sb.append("<select   name='"+fieldName+"'>");
 		if(!"content".equals(temType))
 		{
-			
 			sb.append("<option value='-1'>不需要"+("list".equals(temType)?"列表":"首页")+"模板</option>");
 			
 		}
@@ -45,10 +51,8 @@ public class TemplateListTag extends SimpleTagSupport
 		{
 			for(String temfile:alltem)
 			{
-				
 				if(temfile.equals(defVal))
-				{
-					
+				{	
 					sb.append("<option  selected='selected' value='"+temfile.substring(0,temfile.lastIndexOf("."))+"'>"+temfile+"</option>");	
 				}else
 				{

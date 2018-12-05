@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="java.util.*,com.redcms.filter.*,com.redcms.beans.*" %>
+<%@page import="java.util.*,com.redcms.beans.*" %>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@ taglib prefix="red" uri="/redcms/tags" %>
+
 <!DOCTYPE html>
 <head>
 <%@include file="header.jsp" %>
@@ -16,8 +18,8 @@
 </head>
 
 <%
-Channel chl=(Channel)request.getAttribute("channel");
-Class chlclazz=chl.getClass();
+	Channel chl=(Channel)request.getAttribute("channel");
+	Class chlclazz=chl.getClass();
 %>
 <body class="gray-bg" style="font-family:微软雅黑;">
    
@@ -37,12 +39,12 @@ Class chlclazz=chl.getClass();
                     
                      <div class="ibox-content">
                        <!--面板开始-->   
-<form class="form-horizontal" action="admin/channel/editsave" method="post">
-
+<form class="form-horizontal" action="admin/channel" method="post">
+<input type="hidden" value="editsave" name="action"/>
 		      <div class="form-group col-sm-4">
 				    <label  class="col-sm-5 col-md-4 control-label">模型名:</label>
 				    <div class="col-sm-7 col-md-8">
-				    <input type="hidden" name="modelId" value="${mo.id}"/>
+				    <input type="hidden" name="model_id" value="${mo.id}"/>
 				    <input type="hidden" name="id" value="${channel.id}"/>
 				    ${mo.name}
 				    </div>
@@ -52,10 +54,10 @@ Class chlclazz=chl.getClass();
 				    <label  class="col-sm-5 col-md-4 control-label">父栏目:</label>
 				    <div class="col-sm-7 col-md-8">
 				    
-				     <select name="parentId">
+				     <select name="parent_id">
 				      <option value="0">顶层栏目</option>
 				       <c:forEach items="${parentchannel}" var="p">
-				         <option value="${p.id}" ${channel.parentId==p.id?"selected=\"selected\"":""}>${p.name}</option>
+				         <option value="${p.id}" ${channel.parent_id==p.id?"selected=\"selected\"":""}>${p.name}</option>
 				       </c:forEach>
 				     </select>
 				    </div>
@@ -82,32 +84,32 @@ Class chlclazz=chl.getClass();
 		  
 		      %>
 
-              <c:if test="${mis.isSingle==0}">
+              <c:if test="${mis.is_single==0}">
 	              <div class="form-group col-sm-4">
-					    <label  class="col-sm-5 col-md-4 control-label">${mis.fieldDis}:</label>
+					    <label  class="col-sm-5 col-md-4 control-label">${mis.field_dis}:</label>
 	                  <div class="col-sm-7 col-md-8">
 					 
               </c:if>
-               <c:if test="${mis.isSingle==1}">
+               <c:if test="${mis.is_single==1}">
 	              <div class="form-group col-sm-12 ">
-					   <label  class="col-sm-2 col-md-1 control-label">${mis.fieldDis}::</label>
+					   <label  class="col-sm-2 col-md-1 control-label">${mis.field_dis}::</label>
 	             <div class="col-sm-8 col-md-10" >
 					  
               </c:if>
 <c:choose>
-    <c:when test="${mis.dataType==1 ||(mis.isCustom==1)}">
+    <c:when test="${mis.data_type==1 ||(mis.is_custom==1)}">
     
 		    <c:choose>
-		    <c:when test="${mis.field=='indexTem'}">
-		        <red:tempFiles temType="index" fieldName="${mis.field}" defVal="${channel.indexTem}"/>
+		    <c:when test="${mis.field=='index_tem'}">
+		        <red:tempFiles temType="index" fieldName="${mis.field}" defVal="${channel.index_tem}"/>
 		    </c:when>
-		    <c:when test="${mis.field=='listTem'}">
-		        <red:tempFiles temType="list" fieldName="${mis.field}"  defVal="${channel.listTem}"/>
+		    <c:when test="${mis.field=='list_tem'}">
+		        <red:tempFiles temType="list" fieldName="${mis.field}"  defVal="${channel.list_tem}"/>
 		    </c:when>
-		     <c:when test="${mis.field=='contentTem'}">
-		        <red:tempFiles temType="content" fieldName="${mis.field}"  defVal="${channel.contentTem}"/>
+		     <c:when test="${mis.field=='content_tem'}">
+		        <red:tempFiles temType="content" fieldName="${mis.field}"  defVal="${channel.content_tem}"/>
 		    </c:when>
-		   <c:when test="${mis.isCustom==1}"> 
+		   <c:when test="${mis.is_custom==1}"> 
 		      <%
 		      String cosvalue="";
 		         Map<String,String> map=(Map<String,String>)request.getAttribute("channalattr");
@@ -117,10 +119,10 @@ Class chlclazz=chl.getClass();
 		         }
 		      %>
 		   
-		         <input type="text" name="${mis.field}"  class="form-control" value="<%=cosvalue%>"  placeholder="${mis.fieldDis}" >
+		         <input type="text" name="${mis.field}"  class="form-control" value="<%=cosvalue%>"  placeholder="${mis.field_dis}" >
 		    </c:when>
 		    
-		      <c:when test="${mis.field=='tName'}">
+		      <c:when test="${mis.field=='t_name'}">
 		         <select name="${mis.field}">
 		           <option value="data1" <%=(null!=result&&result.equals("data1"))?"selected=\"selected\"":"" %> >data1</option>
 		           <option value="data2" <%=(null!=result&&result.equals("data2"))?"selected=\"selected\"":"" %>>data2</option>
@@ -130,12 +132,12 @@ Class chlclazz=chl.getClass();
 		         </select>
 		    </c:when>
 		    <c:otherwise>
-		       <input type="text" name="${mis.field}"  class="form-control" value="<%=result%>"  placeholder="${mis.fieldDis}" >
+		       <input type="text" name="${mis.field}"  class="form-control" value="<%=result%>"  placeholder="${mis.field_dis}" >
 		    </c:otherwise>
 		</c:choose>
 
     </c:when>
-     <c:when test="${(mis.dataType==2)&&(mis.isCustom==0)}">
+     <c:when test="${(mis.data_type==2)&&(mis.is_custom==0)}">
         <c:if test="${mis.field=='priority'}">
 		   <select name="priority">
 		       <%
@@ -151,10 +153,10 @@ Class chlclazz=chl.getClass();
 		    </c:if>
      <c:if test="${mis.field!='priority'}">
 
-       <input type="number" name="${mis.field}"  class="form-control" value="<%=result%>"  placeholder="${mis.fieldDis}" value="${mis.field}">
+       <input type="number" name="${mis.field}"  class="form-control" value="<%=result%>"  placeholder="${mis.field_dis}" value="${mis.field}">
        </c:if>
     </c:when> 
-    <c:when test="${mis.dataType==3 &&(mis.isCustom==0)}">
+    <c:when test="${mis.data_type==3 &&(mis.is_custom==0)}">
      		    <textarea col=23 rows="5" name="${mis.field}" id="${mis.field}_id" class="control-label" style="width:100%;height:300px;" ><%=result%></textarea>
 <script type="text/javascript">
 				    	
@@ -167,15 +169,15 @@ Class chlclazz=chl.getClass();
         });
 </script>
     </c:when>
-   <c:when test="${mis.dataType==4 &&(mis.isCustom==0)}">
+   <c:when test="${mis.data_type==4 &&(mis.is_custom==0)}">
         
         <input  class="form-control layer-date" name="${mis.field}" value="<%=result%>" placeholder="YYYY-MM-DD hh:mm:ss" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
     </c:when>
-   <c:when test="${mis.dataType==5 &&(mis.isCustom==0)}">
+   <c:when test="${mis.data_type==5 &&(mis.is_custom==0)}">
        
                      <input  type="hidden"   value="<%=result%>"  name="${mis.field}" id="${mis.field}_field"/>
                      <%
-                     if(null!=result&&(!"null".equals(result)))
+                     if(null!=result&&(!"null".equals(result))&&(!"".equals(result)))
                      {
                      %>
 				     <img src="<%=result%>" width="68" height="57" style="cursor: pointer;" id="${mis.field}_id" />
@@ -210,9 +212,9 @@ Class chlclazz=chl.getClass();
 						});
 					</script>
     </c:when>
-    <c:when test="${mis.dataType==6 &&(mis.isCustom==0)}">
+    <c:when test="${mis.data_type==6 &&(mis.is_custom==0)}">
       
-        <div id="pics_${mis.field}">${mis.fieldDis}</div>
+        <div id="pics_${mis.field}">${mis.field_dis}</div>
         <ul id="shows_${mis.field}">
          <c:if test="${mis.field=='pics1'}">
 	           <c:forEach items="${pics1}" var="pics">

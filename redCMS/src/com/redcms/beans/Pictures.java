@@ -1,7 +1,5 @@
 package com.redcms.beans;
 
-import java.io.Serializable;
-
 /**
  * <p>
  * 图集
@@ -22,6 +20,7 @@ public class Pictures {
     private String picdis;
   
     private Integer priority;
+    //区分那个图集
     private Integer sequ;
     
 	public Long getId() {
