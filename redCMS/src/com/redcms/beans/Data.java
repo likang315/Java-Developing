@@ -6,12 +6,7 @@ import java.util.Date;
 import java.io.Serializable;
 
 /**
- * <p>
  * 数据
- * </p>
- *
- * @author 刘慧涛123
- * @since 2018-07-11
  */
 
 public class Data {
@@ -21,12 +16,10 @@ public class Data {
     /**
      * id
      */
-
     private Long id;
     /**
      * 栏目
      */
-  
     private Integer channel_id;
 
     private String content_tem;
@@ -109,8 +102,9 @@ public class Data {
      */
     private String attach2;
     
-    private String tName;//表名
-    private String channelName;//栏目名
+    private String t_name;//表名
+    private String channel_name;//栏目名
+    
 	public Long getId() {
 		return id;
 	}
@@ -273,17 +267,17 @@ public class Data {
 	public void setAttach2(String attach2) {
 		this.attach2 = attach2;
 	}
-	public String gettName() {
-		return tName;
+	public String getT_name() {
+		return t_name;
 	}
-	public void settName(String tName) {
-		this.tName = tName;
+	public void setT_name(String t_name) {
+		this.t_name = t_name;
 	}
-	public String getChannelName() {
-		return channelName;
+	public String getChannel_name() {
+		return channel_name;
 	}
-	public void setChannelName(String channelName) {
-		this.channelName = channelName;
+	public void setChannel_name(String channel_name) {
+		this.channel_name = channel_name;
 	}
 
 

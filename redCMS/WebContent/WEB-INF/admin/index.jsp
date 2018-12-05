@@ -52,18 +52,13 @@
                         
                     </li> -->
                      <!-- 文章管理 -->
-                     <li>
-                        <a href="#"><i class="fa fa-desktop"></i> 
-                        <span class="nav-label">文章管理</span>
-                        <span class="fa arrow"></span></a>
-                        
-                        <ul class="nav nav-second-level">
-                       
-                            <li><a class="J_menuItem" onclick="$('#myModal').modal('show')" >增加文章</a> </li>
-                            <li><a class="J_menuItem" href="admin/article">显示所有</a></li>
-                      
-                        </ul>
+                      <li>
+                        <a class="J_menuItem" href="admin/article">
+                            <i class="fa fa-desktop"></i>
+                            <span class="nav-label">文章管理</span>
+                        </a>
                     </li>
+                    
                       <!-- 文章管理 -->
                     
                      <li>
