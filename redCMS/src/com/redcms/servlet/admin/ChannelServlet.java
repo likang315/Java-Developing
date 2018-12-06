@@ -121,7 +121,6 @@ public class ChannelServlet extends Action {
 						row[2]=Integer.parseInt(prio[z]);
 						row[3]=i;
 						row[4]=ids[z];
-						
 						parasm[z]=row;
 					}
 					Db.batch(sqlba, parasm);
@@ -131,8 +130,8 @@ public class ChannelServlet extends Action {
 			//第三步：增加额外字段，利用扩展字段
 			//还需要增加扩展字段
 			//查询那些是自定义字段
-			//然后获取请求参数
-			//如果有值，就写入扩展数据表中
+			//如果有值，就写入扩展数据表中后获取请求参数
+			
 			
 			String sqlmol="select * from model_item where model_id=? and is_channel=1 and is_custom=1 order by priority";
 			List<ModelItem> modelitemlist=Db.query(sqlmol, new BeanListHandler<ModelItem>(ModelItem.class),channel.getModel_id());
@@ -220,7 +219,7 @@ public class ChannelServlet extends Action {
 			String sql="update channel set model_id=?,name=?,title=?,keywords=?,description=?,parent_id=?,pic01=?,pic02=?,priority=?,links=?,t_name=?,index_tem=?,list_tem=?,content_tem=?,create_time=?,txt=?,txt1=?,txt2=?,num01=?,num02=?,date1=?,date2=? where id=?";
 			Object rowparam[]=new Object[] {channel.getModel_id(),channel.getName(),channel.getTitle(),channel.getKeywords(),channel.getDescription(),channel.getParent_id(),channel.getPic01(),channel.getPic02(),channel.getPriority(),channel.getLinks(),channel.getT_name(),channel.getIndex_tem(),channel.getList_tem(),channel.getContent_tem(),channel.getCreate_time(),
 					channel.getTxt(),channel.getTxt1(),channel.getTxt2(),channel.getNum01(),channel.getNum02(),channel.getDate1(),channel.getDate2(),channel.getId()};
-			
+			System.out.println(channel.getT_name());
 			Db.update(sql,rowparam);
 			
 			

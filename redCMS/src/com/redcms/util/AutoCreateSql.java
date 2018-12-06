@@ -19,7 +19,7 @@ public class AutoCreateSql {
 
 	public static void main(String[] args)throws Exception
 	{
-		String tablename="admin";
+		String tablename="data";
 		String dataBasename="redcmsv6";
 		
 		Class.forName("com.mysql.jdbc.Driver");

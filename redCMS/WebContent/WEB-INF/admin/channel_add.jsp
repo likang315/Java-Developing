@@ -60,6 +60,7 @@
 				     </select>
 				    </div>
 		      </div>
+		      
 <c:forEach items="${modelItems}" var="mis">
 
               <c:if test="${mis.is_single==0}">
@@ -176,7 +177,7 @@
     
     
 
-    <c:when test="${mis.data_type==6}">
+      <c:when test="${mis.data_type==6}">
         <div id="pics_${mis.field}">${mis.field_dis}</div>
         <ul id="shows_${mis.field}"></ul>
       
@@ -203,7 +204,7 @@ var uploader${mis.field} = WebUploader.create({
 });
 
 
-uploader${mis.field}.on( 'uploadSuccess', function( file,response) {
+uploader${mis.field}.on( 'uploadSuccess', function( file,response ) {
 	$("#shows_${mis.field}").append("<li><img src='"+response.url+"' width='30' height='30'/><input type='hidden' name='${mis.field}_ids' value='"+response.upid+"'/><select name='${mis.field}_priority'><c:forEach begin='1' end='10' var='proid'><option value='${proid}'>${proid}</option></c:forEach></select><input type='text' name='${mis.field}_dis' placeholder='图片描述' /></li>");
 });
 
@@ -218,7 +219,6 @@ uploader${mis.field}.on( 'uploadError', function( file ) {
 
 
     </c:when>
-    
 </c:choose>
                        
                         
@@ -235,7 +235,8 @@ uploader${mis.field}.on( 'uploadError', function( file ) {
     </div>
   </div>
 </form>
-                 <!--面板结束-->      
+<!--面板结束-->      
+                 
                     </div>
                     
                  </div>
