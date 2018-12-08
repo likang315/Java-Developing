@@ -70,7 +70,6 @@
         
          <c:set value="${mis.field}" var="misField" scope="request"/>
          
-         <%--? --%> 
           <%
 		       String field=(String)request.getAttribute("misField");
                Object result="";

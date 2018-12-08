@@ -108,6 +108,7 @@ public class Channel {
      * 扩展01
      */
     private String date2;
+    
 	public Long getId() {
 		return id;
 	}

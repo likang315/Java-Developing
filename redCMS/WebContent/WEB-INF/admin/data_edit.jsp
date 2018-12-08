@@ -6,13 +6,17 @@
 <!DOCTYPE html>
 <head>
 <%@include file="header.jsp" %>
-<title>增加内容</title>
+<title>修改内容</title>
 	<link rel="stylesheet" href="css/plugins/webuploader/webuploader.css" />
  <script charset="utf-8" src="kindeditor/kindeditor-all-min.js"></script>
 <script charset="utf-8" src="kindeditor/lang/zh-CN.js"></script>
     <script src="js/jquery.min.js?v=2.1.4"></script>
 	<script type="text/javascript" src="js/plugins/webuploader/webuploader.min.js" ></script>
 </head>
+<%
+Data chl=(Data)request.getAttribute("data");
+Class chlclazz=chl.getClass();
+%>
 <body class="gray-bg" style="font-family:微软雅黑;">
    
     <div class="wrapper wrapper-content">
@@ -20,7 +24,7 @@
             <div class="col-sm-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>增加内容<span style="margin-left: 25px;">${channel.name}</span></h5>
+                        <h5>修改内容：<span style="margin-left: 25px;">${channel.name}</span></h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -32,8 +36,10 @@
                      <div class="ibox-content">
                        <!--面板开始-->   
 <form class="form-horizontal" action="admin/article" method="post">
-<input type="hidden" name="action" value="saveadd"/>
- <input type="hidden" name="channel_id" value="${channel.id}"/>
+        <input type="hidden" name="action" value="editsave"/>
+                   <input type="hidden" name="channel_id" value="${channel.id}"/>
+                   <input type="hidden" name="id" value="${data.id}"/>
+                   <input type="hidden" name="t_name" value="${data.t_name}"/>
       <!--        <div class="form-group col-sm-4">
 				    <label  class="col-sm-5 col-md-4 control-label">栏目名:</label>
 				    <div class="col-sm-7 col-md-8">
@@ -63,6 +69,26 @@
 		      </div> --%>
 <c:forEach items="${modelItems}" var="mis">
 
+
+         <c:set value="${mis.field}" var="misField" scope="request"/>
+          
+          <%
+		       String field=(String)request.getAttribute("misField");
+               Object result="";
+          try{
+        	     java.lang.reflect.Field cfield=chlclazz.getDeclaredField(field);
+  		         if(null!=cfield)
+  		         {
+  		       cfield.setAccessible(true);
+  		       result=cfield.get(chl); 
+  		         }
+          }catch(Exception e)
+          {
+        	  
+          }
+		  
+		      %>
+
               <c:if test="${mis.is_single==0}">
 	              <div class="form-group col-sm-4">
 					    <label  class="col-sm-5 col-md-4 control-label">${mis.field_dis}:</label>
@@ -76,38 +102,51 @@
 					  
               </c:if>
 <c:choose>
-    <c:when test="${mis.data_type==1}">
+    <c:when test="${mis.data_type==1||(mis.is_custom==1)}">
 		   <c:choose>
 			     <c:when test="${mis.field=='content_tem'}">
-			        <red:tempFiles temType="content" fieldName="${mis.field}" defVal="${channel.content_tem}"/>
+			   
+			        <red:tempFiles temType="content" fieldName="${mis.field}" defVal="${data.content_tem}"/>
 			    </c:when>
-		
+		 <c:when test="${mis.is_custom==1}"> 
+		      <%
+		      String cosvalue="";
+		         Map<String,String> map=(Map<String,String>)request.getAttribute("dataattr");
+		         if(null!=map)
+		         {
+		        	 cosvalue=map.get(field);
+		         }
+		      %>
+		   
+		         <input type="text" name="${mis.field}"  class="form-control" value="<%=cosvalue%>"  placeholder="${mis.field_dis}" >
+		    </c:when>
 			    <c:otherwise>
-			       <input type="text" name="${mis.field}"  class="form-control" value=""  placeholder="${mis.field_dis}">
+			       <input type="text" name="${mis.field}"  class="form-control" value="<%=result%>" placeholder="${mis.field_dis}">
 			    </c:otherwise>
 		   </c:choose> 
 		
 
     </c:when>
-    <c:when test="${mis.data_type==2}">
+    <c:when test="${mis.data_type==2 &&(mis.is_custom==0)}">
         <c:if test="${mis.field=='level'}">
 		   <select name="level">
 		       <%
-		          for(int i=10;i>0;i--)
+		       for(int i=10;i>0;i--)
 		          {
+		        	  request.setAttribute("temi", i);
 		        	  %>
-		        	  <option value="<%=i%>"><%=i%></option>
+		        	  <option value="<%=i%>"  ${data.level==temi?"selected=\"selected\"":""}><%=i%></option>
 		        	  <%
 		          }
 		       %>
 		       </select>
 		    </c:if>
      <c:if test="${mis.field!='level'}">
-       <input type="number" name="${mis.field}"  class="form-control" value="1"  placeholder="${mis.field_dis}">
+       <input type="number" name="${mis.field}"  class="form-control" value="<%=result%>"   placeholder="${mis.field_dis}">
        </c:if>
     </c:when>
-    <c:when test="${mis.data_type==3}">
-     		    <textarea col=23 rows="5" name="${mis.field}" id="${mis.field}_id" class="control-label" style="width:100%;height:300px;" > </textarea>
+    <c:when test="${mis.data_type==3 &&(mis.is_custom==0)}">
+     		    <textarea col=23 rows="5" name="${mis.field}" id="${mis.field}_id" class="control-label" style="width:100%;height:300px;" ><%=result%></textarea>
 <script type="text/javascript">
 				    	
         KindEditor.ready(function(K) {
@@ -119,14 +158,28 @@
         });
 </script>
     </c:when>
-     <c:when test="${mis.data_type==4}">
-        <input  class="form-control layer-date" name="${mis.field}"  placeholder="YYYY-MM-DD hh:mm:ss" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+     <c:when test="${mis.data_type==4 &&(mis.is_custom==0)}">
+        <input  class="form-control layer-date" name="${mis.field}" value="<%=result%>"  placeholder="YYYY-MM-DD hh:mm:ss" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
     </c:when>
-    <c:when test="${mis.data_type==5}">
+    <c:when test="${mis.data_type==5 &&(mis.is_custom==0)}">
        
-                     <input  type="hidden"  value="" name="${mis.field}" id="${mis.field}_field"/>
-
-				     <img src="img/upload.jpg" width="68" height="57" style="cursor: pointer;" id="${mis.field}_id" />
+                     <input  type="hidden"  value="<%=result%>" name="${mis.field}" id="${mis.field}_field"/>
+                        <%
+                     if(null!=result&&(!"null".equals(result))&&(!"".equals(result)))
+                     {
+                     %>
+				     <img src="<%=result%>" width="68" height="57" style="cursor: pointer;" id="${mis.field}_id" />
+				     <%
+                     }else
+                     {
+                    	 %>
+                    	  <img src="img/upload.jpg" width="68" height="57" style="cursor: pointer;" id="${mis.field}_id" />
+                    	 <%
+                     }
+				     %>
+                     
+                     
+				  
                      <!-- <label class="laydate-icon col-sm-1"></label>-->
 		<script type="text/javascript">
         KindEditor.ready(function(K) {
@@ -138,7 +191,7 @@
 				K('#${mis.field}_id').click(function() {
 					editor.loadPlugin('image', function() {
 						editor.plugin.imageDialog({
-							imageUrl : K('#${mis.field}_field').val(),
+							imageUrl : K('E${mis.field}_field').val(),
 							clickFn : function(url, title, width, height, border, align) {
 								K('#${mis.field}_field').val(url);
 								K('#${mis.field}_id').attr("src",url);
@@ -150,9 +203,52 @@
 			});
 		</script>
     </c:when>
-    <c:when test="${mis.data_type==6}">
+    <c:when test="${mis.data_type==6 &&(mis.is_custom==0)}">
         <div id="pics_${mis.field}">${mis.field_dis}</div>
-        <ul id="shows_${mis.field}"></ul>
+        <ul id="shows_${mis.field}">
+         <c:if test="${mis.field=='pics1'}">
+	           <c:forEach items="${pics1}" var="pics">
+	              <li>
+	              <img src="${pics.path}" width="30" height="30"/>
+	              <input type='hidden' name='pics1_ids' value='${pics.id}'/>
+	              <select name='pics1_priority'>
+	              <%
+	                for(int i=10;i>0;i--)
+	                {
+	                	  request.setAttribute("temii", i);
+		        	  %>
+		        	  <option value="<%=i%>"  ${pics.priority==temii?"selected=\"selected\"":""}><%=i%></option>
+		        	  <%
+	                }
+	              %>
+	              </select>
+	              <input type='text' name='pics1_dis' placeholder='图片描述'  value="${pics.picdis}"/>
+	              
+	              </li>
+	            </c:forEach>
+           </c:if>
+                 <c:if test="${mis.field=='pics2'}">
+	           <c:forEach items="${pics2}" var="pics">
+	               <li>
+	              <img src="${pics.path}" width="30" height="30"/>
+	              <input type='hidden' name='pics2_ids' value='${pics.id}'/>
+	              <select name='pics2_priority'>
+	              <%
+	                for(int i=10;i>0;i--)
+	                {
+	                	  request.setAttribute("temii", i);
+		        	  %>
+		        	  <option value="<%=i%>"  ${pics.priority==temii?"selected=\"selected\"":""}><%=i%></option>
+		        	  <%
+	                }
+	              %>
+	              </select>
+	              <input type='text' name='pics2_dis' placeholder='图片描述'  value="${pics.picdis}"/>
+	              
+	              </li>
+	            </c:forEach>
+           </c:if>
+        </ul>
       
       <script type="text/javascript">
 
@@ -207,7 +303,7 @@ uploader${mis.field}.on( 'uploadError', function( file ) {
 
  <div class="form-group">
     <div class="col-sm-offset-3 col-sm-6">
-      <button type="submit" class="btn btn-success">增加内容</button>
+      <button type="submit" class="btn btn-success">修改内容</button>
     </div>
   </div>
 </form>

@@ -52,8 +52,8 @@
                         
                     </li> -->
                      <!-- 文章管理 -->
-                      <li>
-                        <a class="J_menuItem" href="admin/article">
+                    <li>
+                        <a class="J_menuItem" href="admin/article?channelId=0">
                             <i class="fa fa-desktop"></i>
                             <span class="nav-label">文章管理</span>
                         </a>

@@ -54,7 +54,6 @@ public class ModelItemServlet extends Action {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			System.out.println("大三");
 			this.forword("admin/modelItem_list.jsp");
 		}
 		
