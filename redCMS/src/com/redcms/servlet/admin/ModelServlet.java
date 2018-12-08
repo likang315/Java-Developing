@@ -21,7 +21,7 @@ import com.redcms.db.Db;
 import com.redcms.servelt.core.Action;
 
 /**
- * 模型管理
+ * 模型管理,每增加一个模型，就会增加模型对应的栏目和内容字段
  * @author likang
  *
  */
@@ -67,7 +67,7 @@ public class ModelServlet extends Action {
 				{
 					insertedId=((BigInteger)obj).longValue();
 				}
-				
+				//取栏目字段
 		    	List<ChannelField> cfields=Db.query("select * from channel_field order by id", new BeanListHandler<ChannelField>(ChannelField.class));
 		  
 		    	List<ModelItem> milist=new ArrayList<ModelItem>();

@@ -63,11 +63,22 @@ public abstract class Action extends HttpServlet
 	//返回一个数字参数
 	public int getInt(String param)
 	{
-		int re=-1;
+		int re=0;
 		String str=this.getString(param);
 		if(str.matches("\\d+"))
 		{
 			re=Integer.parseInt(str);
+		}
+		return re;
+	}
+	//返回long型
+	public long getLong(String param)
+	{
+		long re=0;
+		String str=this.getString(param);
+		if(str.matches("\\d+"))
+		{
+			re=Long.parseLong(str);
 		}
 		return re;
 	}
