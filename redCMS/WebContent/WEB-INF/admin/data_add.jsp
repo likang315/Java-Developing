@@ -1,17 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="java.util.*,com.redcms.beans.*" %>
+
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="red" uri="/redcms/tags" %>
+
+<%@ taglib prefix="cms" uri="/redcms/tags" %>
+
 <!DOCTYPE html>
 <head>
 <%@include file="header.jsp" %>
+
 <title>增加内容</title>
 	<link rel="stylesheet" href="css/plugins/webuploader/webuploader.css" />
- <script charset="utf-8" src="kindeditor/kindeditor-all-min.js"></script>
+	
+<script charset="utf-8" src="kindeditor/kindeditor-all-min.js"></script>
 <script charset="utf-8" src="kindeditor/lang/zh-CN.js"></script>
-    <script src="js/jquery.min.js?v=2.1.4"></script>
-	<script type="text/javascript" src="js/plugins/webuploader/webuploader.min.js" ></script>
+<script src="js/jquery.min.js?v=2.1.4"></script>
+<script type="text/javascript" src="js/plugins/webuploader/webuploader.min.js" ></script>
+
 </head>
 <body class="gray-bg" style="font-family:微软雅黑;">
    
@@ -30,37 +36,14 @@
                     
                     
                      <div class="ibox-content">
-                       <!--面板开始-->   
+
+
+<!--面板开始-->   
 <form class="form-horizontal" action="admin/article" method="post">
-<input type="hidden" name="action" value="saveadd"/>
- <input type="hidden" name="channel_id" value="${channel.id}"/>
-      <!--        <div class="form-group col-sm-4">
-				    <label  class="col-sm-5 col-md-4 control-label">栏目名:</label>
-				    <div class="col-sm-7 col-md-8">
-				      <input type="text" name="name" class="form-control" id="inputEmail3" placeholder="请输入模型名">
-				    </div>
-		      </div> -->
-		      
-		   <%--    <div class="form-group col-sm-4">
-				    <label  class="col-sm-5 col-md-4 control-label">栏目名:</label>
-				    <div class="col-sm-7 col-md-8">
-				    <input type="hidden" name="channelId" value="${channel.id}"/>
-				    ${channel.name}
-				    </div>
-		      </div> --%>
-		      
-		    <%--    <div class="form-group col-sm-4">
-				    <label  class="col-sm-5 col-md-4 control-label">父栏目:</label>
-				    <div class="col-sm-7 col-md-8">
-				    
-				     <select name="parentId">
-				      <option value="0">顶层栏目</option>
-				       <c:forEach items="${parentchannel}" var="p">
-				         <option value="${p.id}">${p.name}</option>
-				       </c:forEach>
-				     </select>
-				    </div>
-		      </div> --%>
+	<input type="hidden" name="action" value="saveAdd"/>
+	<input type="hidden" name="channel_id" value="${channel.id}"/>
+     
+     
 <c:forEach items="${modelItems}" var="mis">
 
               <c:if test="${mis.is_single==0}">
@@ -78,8 +61,8 @@
 <c:choose>
     <c:when test="${mis.data_type==1}">
 		   <c:choose>
-			     <c:when test="${mis.field=='content_tem'}">
-			        <red:tempFiles temType="content" fieldName="${mis.field}" defVal="${channel.content_tem}"/>
+			    <c:when test="${mis.field=='content_tem'}">
+			        <cms:tempFiles temType="content" fieldName="${mis.field}" defVal="${channel.content_tem}"/>
 			    </c:when>
 		
 			    <c:otherwise>
@@ -89,6 +72,8 @@
 		
 
     </c:when>
+    
+    
     <c:when test="${mis.data_type==2}">
         <c:if test="${mis.field=='level'}">
 		   <select name="level">
@@ -104,30 +89,35 @@
 		    </c:if>
      <c:if test="${mis.field!='level'}">
        <input type="number" name="${mis.field}"  class="form-control" value="1"  placeholder="${mis.field_dis}">
-       </c:if>
+     </c:if>
     </c:when>
+    
+    
     <c:when test="${mis.data_type==3}">
      		    <textarea col=23 rows="5" name="${mis.field}" id="${mis.field}_id" class="control-label" style="width:100%;height:300px;" > </textarea>
-<script type="text/javascript">
-				    	
-        KindEditor.ready(function(K) {
-                window.editor = K.create('#${mis.field}_id',{			
-                	uploadJson : 'admin/uploadpic/imgupload',
-    					allowFileManager : false,
-				fileManagerJson : '../jsp/file_manager_json.jsp'
-                });
-        });
-</script>
+				<script type="text/javascript">
+								    	
+				        KindEditor.ready(function(K) {
+				                window.editor = K.create('#${mis.field}_id',{			
+				                	uploadJson : 'admin/uploadpic/imgupload',
+				    				allowFileManager : false,
+				                });
+				        });
+				</script>
     </c:when>
-     <c:when test="${mis.data_type==4}">
+    
+    <c:when test="${mis.data_type==4}">
         <input  class="form-control layer-date" name="${mis.field}"  placeholder="YYYY-MM-DD hh:mm:ss" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
     </c:when>
-    <c:when test="${mis.data_type==5}">
+    
+    
+        <c:when test="${mis.data_type==5}">
        
-                     <input  type="hidden"  value="" name="${mis.field}" id="${mis.field}_field"/>
+           <input  type="hidden"  value="" name="${mis.field}" id="${mis.field}_field"/>
 
-				     <img src="img/upload.jpg" width="68" height="57" style="cursor: pointer;" id="${mis.field}_id" />
-                     <!-- <label class="laydate-icon col-sm-1"></label>-->
+		   <img src="img/upload.png" width="68" height="57" style="cursor: pointer;" id="${mis.field}_id" />
+           
+           <!-- <label class="laydate-icon col-sm-1"></label>-->
 		<script type="text/javascript">
         KindEditor.ready(function(K) {
 				var editor = K.editor({
@@ -150,6 +140,8 @@
 			});
 		</script>
     </c:when>
+   
+   
     <c:when test="${mis.data_type==6}">
         <div id="pics_${mis.field}">${mis.field_dis}</div>
         <ul id="shows_${mis.field}"></ul>

@@ -40,7 +40,7 @@ public class ChannelLeftMenuTag extends SimpleTagSupport {
 					{
 						Model mm=Db.query("select * from model where id=?", new BeanHandler<Model>(Model.class),c.getModel_id());
 						sb.append("<li class=\"parent_menu\"><span><i class=\"fa fa-folder\"></i> "+c.getName()+"</span>");
-						List<Channel> subs=Db.query("select * from channel where parent_id=? or parent_id is null order by priority", new BeanListHandler<Channel>(Channel.class),c.getId());
+						List<Channel> subs=Db.query("select * from channel where parent_id=? order by priority", new BeanListHandler<Channel>(Channel.class),c.getId());
 						
 						if(null!=subs&&subs.size()>0)
 						{
@@ -48,7 +48,7 @@ public class ChannelLeftMenuTag extends SimpleTagSupport {
 							for(Channel s:subs)
 							{
 								sb.append("<li class=\"sub_menu\"><span class=\"fa fa-file-image-o\"></span> ");
-								sb.append("<a href=\"admin/article?action=list&pageNo=1&channel_id="+s.getId()+"\">");
+								sb.append("<a href=\"admin/article?pageNo=1&channelId="+s.getId()+"\">");
 								sb.append(s.getName());
 								sb.append("</a>");
 								sb.append("</li>");

@@ -195,7 +195,7 @@
                      }else
                      {
                     	 %>
-                    	  <img src="img/upload.jpg" width="68" height="57" style="cursor: pointer;" id="${mis.field}_id" />
+                    	  <img src="img/upload.png" width="68" height="57" style="cursor: pointer;" id="${mis.field}_id" />
                     	 <%
                      }
 				     %>

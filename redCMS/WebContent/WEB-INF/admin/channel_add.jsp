@@ -148,7 +148,8 @@
        
                      <input  type="hidden"  value="" name="${mis.field}" id="${mis.field}_field"/>
 
-				     <img src="img/upload.jpg" width="68" height="57" style="cursor: pointer;" id="${mis.field}_id" />
+				     <img src="img/upload.png" width="68" height="57" style="cursor: pointer;" id="${mis.field}_id" />
+                     
                      <!-- <label class="laydate-icon col-sm-1"></label>-->
 		<script type="text/javascript">
         KindEditor.ready(function(K) {
