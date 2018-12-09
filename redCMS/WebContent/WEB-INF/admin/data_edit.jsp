@@ -1,22 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="java.util.*,com.redcms.beans.*" %>
+
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@ taglib prefix="red" uri="/redcms/tags" %>
+
 <!DOCTYPE html>
 <head>
 <%@include file="header.jsp" %>
+
 <title>修改内容</title>
 	<link rel="stylesheet" href="css/plugins/webuploader/webuploader.css" />
- <script charset="utf-8" src="kindeditor/kindeditor-all-min.js"></script>
-<script charset="utf-8" src="kindeditor/lang/zh-CN.js"></script>
+ 	<script charset="utf-8" src="kindeditor/kindeditor-all-min.js"></script>
+	<script charset="utf-8" src="kindeditor/lang/zh-CN.js"></script>
     <script src="js/jquery.min.js?v=2.1.4"></script>
 	<script type="text/javascript" src="js/plugins/webuploader/webuploader.min.js" ></script>
 </head>
+
 <%
 Data chl=(Data)request.getAttribute("data");
 Class chlclazz=chl.getClass();
 %>
+
 <body class="gray-bg" style="font-family:微软雅黑;">
    
     <div class="wrapper wrapper-content">
@@ -34,39 +40,14 @@ Class chlclazz=chl.getClass();
                     
                     
                      <div class="ibox-content">
-                       <!--面板开始-->   
+
+<!--面板开始-->   
 <form class="form-horizontal" action="admin/article" method="post">
-        <input type="hidden" name="action" value="editsave"/>
+        		   <input type="hidden" name="action" value="editSave"/>
                    <input type="hidden" name="channel_id" value="${channel.id}"/>
                    <input type="hidden" name="id" value="${data.id}"/>
                    <input type="hidden" name="t_name" value="${data.t_name}"/>
-      <!--        <div class="form-group col-sm-4">
-				    <label  class="col-sm-5 col-md-4 control-label">栏目名:</label>
-				    <div class="col-sm-7 col-md-8">
-				      <input type="text" name="name" class="form-control" id="inputEmail3" placeholder="请输入模型名">
-				    </div>
-		      </div> -->
-		      
-		   <%--    <div class="form-group col-sm-4">
-				    <label  class="col-sm-5 col-md-4 control-label">栏目名:</label>
-				    <div class="col-sm-7 col-md-8">
-				    <input type="hidden" name="channelId" value="${channel.id}"/>
-				    ${channel.name}
-				    </div>
-		      </div> --%>
-		      
-		    <%--    <div class="form-group col-sm-4">
-				    <label  class="col-sm-5 col-md-4 control-label">父栏目:</label>
-				    <div class="col-sm-7 col-md-8">
-				    
-				     <select name="parentId">
-				      <option value="0">顶层栏目</option>
-				       <c:forEach items="${parentchannel}" var="p">
-				         <option value="${p.id}">${p.name}</option>
-				       </c:forEach>
-				     </select>
-				    </div>
-		      </div> --%>
+    
 <c:forEach items="${modelItems}" var="mis">
 
 
@@ -79,15 +60,15 @@ Class chlclazz=chl.getClass();
         	     java.lang.reflect.Field cfield=chlclazz.getDeclaredField(field);
   		         if(null!=cfield)
   		         {
-  		       cfield.setAccessible(true);
-  		       result=cfield.get(chl); 
+		  		       cfield.setAccessible(true);
+		  		       result=cfield.get(chl); 
   		         }
-          }catch(Exception e)
-          {
+             }catch(Exception e)
+            {
         	  
-          }
+            }
 		  
-		      %>
+		  %>
 
               <c:if test="${mis.is_single==0}">
 	              <div class="form-group col-sm-4">
@@ -101,6 +82,7 @@ Class chlclazz=chl.getClass();
 	             <div class="col-sm-8 col-md-10" >
 					  
               </c:if>
+              
 <c:choose>
     <c:when test="${mis.data_type==1||(mis.is_custom==1)}">
 		   <c:choose>
@@ -108,18 +90,20 @@ Class chlclazz=chl.getClass();
 			   
 			        <red:tempFiles temType="content" fieldName="${mis.field}" defVal="${data.content_tem}"/>
 			    </c:when>
-		 <c:when test="${mis.is_custom==1}"> 
-		      <%
-		      String cosvalue="";
-		         Map<String,String> map=(Map<String,String>)request.getAttribute("dataattr");
-		         if(null!=map)
-		         {
-		        	 cosvalue=map.get(field);
-		         }
-		      %>
-		   
-		         <input type="text" name="${mis.field}"  class="form-control" value="<%=cosvalue%>"  placeholder="${mis.field_dis}" >
-		    </c:when>
+			    
+			 	<c:when test="${mis.is_custom==1}"> 
+			      <%
+			      	 String cosvalue="";
+			         Map<String,String> map=(Map<String,String>)request.getAttribute("dataattr");
+			         if(null!=map)
+			         {
+			        	 cosvalue=map.get(field);
+			         }
+			      %>
+			   
+			         <input type="text" name="${mis.field}"  class="form-control" value="<%=cosvalue%>"  placeholder="${mis.field_dis}" >
+			    </c:when>
+			    
 			    <c:otherwise>
 			       <input type="text" name="${mis.field}"  class="form-control" value="<%=result%>" placeholder="${mis.field_dis}">
 			    </c:otherwise>
@@ -127,6 +111,9 @@ Class chlclazz=chl.getClass();
 		
 
     </c:when>
+    
+    
+   
     <c:when test="${mis.data_type==2 &&(mis.is_custom==0)}">
         <c:if test="${mis.field=='level'}">
 		   <select name="level">
@@ -141,46 +128,51 @@ Class chlclazz=chl.getClass();
 		       %>
 		       </select>
 		    </c:if>
-     <c:if test="${mis.field!='level'}">
-       <input type="number" name="${mis.field}"  class="form-control" value="<%=result%>"   placeholder="${mis.field_dis}">
+       <c:if test="${mis.field!='level'}">
+       		<input type="number" name="${mis.field}"  class="form-control" value="<%=result%>"   placeholder="${mis.field_dis}">
        </c:if>
     </c:when>
+    
+    
+    
     <c:when test="${mis.data_type==3 &&(mis.is_custom==0)}">
      		    <textarea col=23 rows="5" name="${mis.field}" id="${mis.field}_id" class="control-label" style="width:100%;height:300px;" ><%=result%></textarea>
-<script type="text/javascript">
-				    	
-        KindEditor.ready(function(K) {
-                window.editor = K.create('#${mis.field}_id',{			
-                	uploadJson : 'admin/uploadpic/imgupload',
-    					allowFileManager : false,
-				fileManagerJson : '../jsp/file_manager_json.jsp'
-                });
-        });
-</script>
+				<script type="text/javascript">
+								    	
+				        KindEditor.ready(function(K) {
+				                window.editor = K.create('#${mis.field}_id',{			
+				                	uploadJson : 'admin/uploadpic/imgupload',
+				    				allowFileManager : false,
+				                });
+				        });
+				</script>
     </c:when>
-     <c:when test="${mis.data_type==4 &&(mis.is_custom==0)}">
+    
+       
+    <c:when test="${mis.data_type==4 &&(mis.is_custom==0)}">
         <input  class="form-control layer-date" name="${mis.field}" value="<%=result%>"  placeholder="YYYY-MM-DD hh:mm:ss" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
     </c:when>
+    
+    
     <c:when test="${mis.data_type==5 &&(mis.is_custom==0)}">
        
                      <input  type="hidden"  value="<%=result%>" name="${mis.field}" id="${mis.field}_field"/>
-                        <%
+                     
+                     <%
                      if(null!=result&&(!"null".equals(result))&&(!"".equals(result)))
                      {
                      %>
-				     <img src="<%=result%>" width="68" height="57" style="cursor: pointer;" id="${mis.field}_id" />
+				     	<img src="<%=result%>" width="68" height="57" style="cursor: pointer;" id="${mis.field}_id" />
 				     <%
                      }else
                      {
                     	 %>
-                    	  <img src="img/upload.jpg" width="68" height="57" style="cursor: pointer;" id="${mis.field}_id" />
+                    	  <img src="img/upload.png" width="68" height="57" style="cursor: pointer;" id="${mis.field}_id" />
                     	 <%
                      }
 				     %>
                      
-                     
-				  
-                     <!-- <label class="laydate-icon col-sm-1"></label>-->
+                    
 		<script type="text/javascript">
         KindEditor.ready(function(K) {
 				var editor = K.editor({
@@ -203,6 +195,8 @@ Class chlclazz=chl.getClass();
 			});
 		</script>
     </c:when>
+    
+    
     <c:when test="${mis.data_type==6 &&(mis.is_custom==0)}">
         <div id="pics_${mis.field}">${mis.field_dis}</div>
         <ul id="shows_${mis.field}">
@@ -227,7 +221,8 @@ Class chlclazz=chl.getClass();
 	              </li>
 	            </c:forEach>
            </c:if>
-                 <c:if test="${mis.field=='pics2'}">
+           
+           <c:if test="${mis.field=='pics2'}">
 	           <c:forEach items="${pics2}" var="pics">
 	               <li>
 	              <img src="${pics.path}" width="30" height="30"/>
@@ -288,6 +283,8 @@ uploader${mis.field}.on( 'uploadError', function( file ) {
 
 
     </c:when>
+    
+    
     <c:otherwise>
        
     </c:otherwise>
@@ -317,8 +314,8 @@ uploader${mis.field}.on( 'uploadError', function( file ) {
     
     <!-- 全局js -->
 
-    <script src="js/bootstrap.min.js?v=3.3.6"></script>
- <script src="js/plugins/layer/laydate/laydate.js"></script>
+<script src="js/bootstrap.min.js?v=3.3.6"></script>
+<script src="js/plugins/layer/laydate/laydate.js"></script>
  
 
 </body>
