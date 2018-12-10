@@ -173,16 +173,13 @@
 			});
 		</script>
     </c:when>
-<<<<<<< HEAD
     
     
 
-      <c:when test="${mis.data_type==6}">
-=======
   
   
-    <c:when test="${mis.data_type==6}">
->>>>>>> dev
+  <c:when test="${mis.data_type==6}">
+
         <div id="pics_${mis.field}">${mis.field_dis}</div>
         <ul id="shows_${mis.field}"></ul>
       
@@ -224,12 +221,11 @@ uploader${mis.field}.on( 'uploadError', function( file ) {
 
 
     </c:when>
-<<<<<<< HEAD
-=======
+    
    <c:otherwise>
        
-    </c:otherwise>
->>>>>>> dev
+   </c:otherwise>
+
 </c:choose>
                        
                         
