@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@page import="java.util.*,com.redcms.beans.*" %>
+    
 <!DOCTYPE html>
 <html>
 
@@ -21,6 +23,7 @@
 
 </head>
 
+
 <body class="gray-bg">
     <div class="wrapper wrapper-content  animated fadeInRight article">
         <div class="row">
@@ -35,9 +38,26 @@
                         </div>
                       ${data.dis}
                         <hr>
-
-
-
+					  ${data.tags}&nbsp;&nbsp;${data.author}<hr> 
+					  ${data.pic1} <br/>
+		 
+		 
+		 <%
+				List<Pictures> pic1=(List<Pictures>)request.getAttribute("pics1");
+				if(null != pic1 && pic1.size()>0)
+				{
+					for(int i=0;i<pic1.size();i++)
+					{
+					 %>	
+					 	 
+	<img class="img-responsive" src="<%= pic1.get(i).getPath() %>" width="200" height="100"><br/>
+	 				
+	 				 <%
+					}
+				}
+	 %>
+	 
+	 
                     </div>
                 </div>
             </div>
@@ -50,7 +70,6 @@
     <script src="js/bootstrap.min.js?v=3.3.6"></script>
 
 
-
     <!-- 自定义js -->
     <script src="js/content.js?v=1.0.0"></script>
 
@@ -61,3 +80,4 @@
 </body>
 
 </html>
+reu

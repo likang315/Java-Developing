@@ -365,6 +365,79 @@ public class ArticleServlet extends Action {
 		index();
 	}
 	
+    //批量删除
+	public void deleteBatch() throws ServletException, IOException
+	{
+		String[] dataId=this.getStringArray("dataId");
+  		try {
+			if(null!=dataId&&dataId.length>0)
+			{
+				
+				for(int i=0;i<dataId.length;i++)
+				{
+				   //把dataid截取出id和表名
+				   String allids[]=dataId[i].split("_");
+				  
+				   //删除数据扩展字段
+			  	   Db.update("delete from data_attr where data_id=?",Long.parseLong(allids[0]));
+				   //删除图集
+				   Db.update("delete from pictures where data_id=?",Long.parseLong(allids[0]));
+					
+				
+					String sql="delete from "+allids[1]+" where id=?";	
+					Db.update(sql,Long.parseLong(allids[0]));
+					
+				    setAttr("channelId",this.getInt("channelId"));
+				}
+				
+				setAttr("msg", "批量删除成功!");
+			}
+			
+		} catch (Exception e) {
+			setAttr("err","批量删除失败！");
+			e.printStackTrace();
+		} 
+ 
+  		index();
+	}
 	
-	
+	//显示页面内容
+	public void show() throws ServletException, IOException
+	{
+		String tName=this.getString("tName");
+		long dataId=this.getLong("dataId");
+
+		try {
+			 Data data=Db.query("select * from "+tName+" where id=?", new BeanHandler<Data>(Data.class),dataId);
+			 data.setT_name(tName);
+     
+			 Channel channel=Db.query("select * from channel where id=?", new BeanHandler<Channel>(Channel.class),data.getChannel_id());
+			 //额外字段
+			 List<DataAttr>  mapattr=Db.query("select * from data_attr where data_id=?",new BeanListHandler<DataAttr>(DataAttr.class),dataId);
+    
+			 Map<String,String> dataattr=new HashMap<String,String>();
+			 if(null!=mapattr)
+			 for(DataAttr ca:mapattr)
+			 {
+			 	dataattr.put(ca.getField_name(), ca.getField_value());
+			 }
+			
+			//图集一
+			List<Pictures> pics1=Db.query("select * from pictures where data_id=? and sequ=1", new BeanListHandler<Pictures>(Pictures.class),dataId);
+			//图集二
+			List<Pictures> pics2=Db.query("select * from pictures where data_id=? and sequ=2", new BeanListHandler<Pictures>(Pictures.class),dataId);
+			
+			setAttr("dataattr", dataattr);
+			setAttr("pics1", pics1);
+			setAttr("pics2", pics2);
+			setAttr("channel",channel);
+			setAttr("data", data);
+			forword("admin/data_show.jsp");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+  		index();
+	}
+
 }
