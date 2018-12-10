@@ -63,7 +63,7 @@
 				    	
 				    	<td>${datastat.count}</td>
 				    	
-				    	<td><a href="web/articleshow?dataId=${data.id}&tName=${data.t_name}">${data.title}</a></td>
+				    	<td><a href="admin/article?action=show&dataId=${data.id}&tName=${data.t_name}">${data.title}</a></td>
 				    	
 				    	<td>${data.channel_name}</td>
 				    	
@@ -121,7 +121,7 @@
   
     
     
-    	$(function(){
+    $(function(){
     		
     		$(".parent_menu:has('ul')>span").click(function(){
     			var ultart=$(this).parent().find("ul");
@@ -139,52 +139,61 @@
     			
     		});
     		
-/*     		 $("#allselect").click(function(){
-    	    	 
+    		
+    		
+    		
+    		 <%-- 设置所有input name是dis的checked 为选上--%>
+    		 $("#allselect").click(function(){
+    	    	 <%--prop用于获取当前元素的值 --%>
     		       if($(this).prop("checked"))
     		    	   {
     		    	     $("input[name='ids']").prop("checked",true);
     		    	   }else
-    		    		   {
+    		    	   {
     		    		   $("input[name='ids']").prop("checked",false);
-    		    		   }
-    		     }); */
-   /*  		 
+    		    	   }
+    		     }); 
+    		
+   		 
     		 $("#delall").click(function(){
 
-    			  var temp = document.createElement("form");
-    			    temp.action = "admin/data/deleteBatch";
+    			    var temp = document.createElement("form");
+    			    temp.action = "admin/article";
     			    temp.method = "post";
     			    temp.style.display = "none";
+    			    
+    			    var action=document.createElement("input");
+    			    action.name = "action";
+    			    action.value ="deleteBatch";
+    			    temp.appendChild(action);
+    			    
     			    var opt = document.createElement("input");
     		        opt.name = "channelId";
     		        opt.value =${channelId};
     		 
     		        temp.appendChild(opt);
     	    	
-    	    	 var ids="";
+    	    	 	var ids="";
     	    	
     	    	 $("input[name='ids']").each(function () {
     	    		 if($(this).prop("checked"))
     	    			 {
-
-    	    			 var topt = document.createElement("input");
-    	    		       topt.name = "dataId";
+    	    			 	var topt = document.createElement("input");
+    	    		        topt.name = "dataId";
     	    		        topt.value =$(this).val();
-    	    		        // alert(opt.name)
     	    		        temp.appendChild(topt);
     	    			 }
     	         });
     	    	 document.body.appendChild(temp);
-    	 	    temp.submit();
+    	 	     temp.submit();
     	    	 return temp;
- 
-	    
-    	     }); */
+    	    	 
+    	     }); 
     		 
-    		
     	});
     	
+    
+    
     	
     	  function post(URL, PARAMS)
     		{
@@ -203,6 +212,7 @@
     		    temp.submit();
     		    return temp;
     		}
+    	  
     </script>
    
 	</body>
