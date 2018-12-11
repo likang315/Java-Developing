@@ -16,7 +16,11 @@ import com.redcms.beans.Attachs;
 import com.redcms.db.Db;
 import com.redcms.db.PageDiv;
 import com.redcms.servelt.core.Action;
-
+/**
+ * 附件管理
+ * @author likang
+ *
+ */
 @WebServlet("/admin/attach")
 public class AttachedServlet extends Action {
 
