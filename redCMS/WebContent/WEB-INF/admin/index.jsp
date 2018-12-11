@@ -71,6 +71,10 @@
                             <li>
                                 <a class="J_menuItem" href="admin/channel">管理栏目</a>   
                             </li>
+                            
+                            <li>
+                                <a class="J_menuItem" href="admin/channel/pubAllchannel?pageSize=20">生成静态</a>
+                            </li>
                         </ul>
                     </li>
                     
@@ -91,7 +95,7 @@
                                 <a class="J_menuItem" href="admin/attach">附件管理</a>
                             </li>
                               <li>
-                                <a class="J_menuItem" href="admin/druid">数据库监控</a>
+                                <a class="J_menuItem" href="admin/druid/index">数据库监控</a>
                             </li>
                             
                             <li>
