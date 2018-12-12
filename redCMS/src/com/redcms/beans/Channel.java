@@ -1,6 +1,7 @@
 package com.redcms.beans;
 
 import java.util.Date;
+import java.util.HashMap;
 
 /**
  * 栏目
@@ -108,7 +109,17 @@ public class Channel {
      * 扩展01
      */
     private String date2;
+   
+    //用于存入当前栏目的扩展字段的值
+    private HashMap<String,String> attrs=new HashMap<String,String>();
     
+    public HashMap<String, String> getAttrs() {
+		return attrs;
+	}
+	public void setAttrs(HashMap<String, String> attrs) {
+		this.attrs = attrs;
+	}
+	
 	public Long getId() {
 		return id;
 	}
