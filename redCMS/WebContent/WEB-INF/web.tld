@@ -69,6 +69,55 @@
         </attribute>
     </tag>
     
+   <!-- 取文章信息 -->
+   <tag>
+        <description>article info</description>
+        <name>articleList</name>
+        <tag-class>com.redcms.web.tag.ArticleListTag</tag-class>
+        <body-content>scriptless</body-content>
+      
+        <attribute>
+            <name>top</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>channelId</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+          <attribute>
+            <name>pageNo</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+          <attribute>
+            <name>pageSize</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    
+  <!--分页显示标签 -->
+        <tag>
+        <description>pager</description>
+        <name>pager</name>
+        <tag-class>com.redcms.web.tag.PagerTag</tag-class>
+        <body-content>empty</body-content>
+      
+        <attribute>
+            <name>url</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+       <attribute>
+            <name>param</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+          
+    </tag>
+    
     
    
    <!-- 文件模版 -->
