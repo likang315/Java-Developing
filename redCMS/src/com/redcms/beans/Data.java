@@ -2,8 +2,7 @@ package com.redcms.beans;
 
 
 import java.util.Date;
-
-import java.io.Serializable;
+import java.util.HashMap;
 
 /**
  * 数据
@@ -104,7 +103,15 @@ public class Data {
     
     private String t_name;//表名
     private String channel_name;//栏目名
+    private HashMap<String,String> attrs=new HashMap<String,String>();//data额外字段
     
+	public HashMap<String, String> getAttrs() {
+		return attrs;
+	}
+	public void setAttrs(HashMap<String, String> attrs) {
+		this.attrs = attrs;
+	}
+	
 	public Long getId() {
 		return id;
 	}
