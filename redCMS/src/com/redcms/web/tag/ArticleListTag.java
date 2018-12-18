@@ -18,16 +18,13 @@ import com.redcms.beans.DataAttr;
 import com.redcms.db.Db;
 import com.redcms.db.PageDiv;
 /**
- * 显示文章列表,SQl 语句有问题
- * @author Administrator
+ * 显示文章列表
  *
  */
 public class ArticleListTag extends TagSupport
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
+	
 	private int top;//显示前几条
 	private int channelId;//栏目id
 	private int pageNo;
@@ -139,7 +136,7 @@ public class ArticleListTag extends TagSupport
     	return Tag.EVAL_PAGE;
     }
 
-   //填充 data_attr的扩展字段
+    //填充 data_attr的扩展字段
     public void fillAttr(Data current) 
     {
     	try {
