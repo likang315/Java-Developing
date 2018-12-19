@@ -67,7 +67,7 @@
 	                  <div class="col-sm-7 col-md-8">
 					 
               </c:if>
-               <c:if test="${mis.is_single==1}">
+              <c:if test="${mis.is_single==1}">
 	              <div class="form-group col-sm-12 ">
 					   <label  class="col-sm-2 col-md-1 control-label">${mis.field_dis}:</label>
 	             <div class="col-sm-8 col-md-10" >
@@ -76,7 +76,7 @@
 <c:choose>
     <c:when test="${mis.data_type==1}">
     
-		    <c:choose>
+	  <c:choose>
 		    <c:when test="${mis.field=='index_tem'}">
 		        <red:tempFiles temType="index" fieldName="${mis.field}"/>
 		    </c:when>

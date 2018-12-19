@@ -3,7 +3,7 @@
 
 <!DOCTYPE html>
 <head>
-
+<%@include file="header.jsp" %>
 <title>RedCMS后台系统</title>
 </head>
 
@@ -64,5 +64,6 @@
             </div>
        </div>
    </div>
+   <%@include file="booter.jsp" %>
 </body>
 </html>

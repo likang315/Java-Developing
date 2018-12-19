@@ -18,7 +18,7 @@ import com.redcms.beans.DataAttr;
 import com.redcms.db.Db;
 import com.redcms.db.PageDiv;
 /**
- * 显示文章列表
+ * 显示 指定栏目文章列表
  *
  */
 public class ArticleListTag extends TagSupport
@@ -51,7 +51,7 @@ public class ArticleListTag extends TagSupport
     				  //你要分页显示
     				  dataList=Db.query("select d.*,c.name as channel_name,(select inc.t_name from channel  inc where d.channel_id=inc.id) as t_name from alldata d inner join channel c on  (d.channel_id=? and d.channel_id=c.id) order by d.id desc limit ?,?", new BeanListHandler<Data>(Data.class),channelId,(pageNo-1)*pageSize,pageSize);
     			      Object obj=Db.query("select count(id) from alldata where channel_id=?", new ArrayHandler(),channelId)[0];
-    					   
+    			         
     					Long total=0l;
     					if(obj instanceof Long)
     					{
@@ -60,7 +60,7 @@ public class ArticleListTag extends TagSupport
     					{
     						total=((BigInteger)obj).longValue();
     					}
-    					
+    				
     					pd=new PageDiv<Data>(pageNo, pageSize, total.intValue(), dataList);
     			  }
     		 }else

@@ -10,7 +10,7 @@ import com.redcms.beans.Channel;
 import com.redcms.beans.Data;
 
 /**
- * 根据栏目字段的名字，取相应的值
+ * 根据栏目或文章的字段的名字，取相应的值
  * @author likang
  *
  */
@@ -43,23 +43,28 @@ public class PropertyTag extends TagSupport
 					      Class clazz=curr.getClass();
 					      Field field=clazz.getDeclaredField(name);
 	
-						  field.setAccessible(true);
-						  result=field.get(curr).toString();
+					      if(null!=field)
+						  {
+							  field.setAccessible(true);
+							  result=field.get(curr).toString();
+						  }
 					  }
 					  
 				  }else if(parenttag instanceof ArticleListTag)
 				  {
 					  ArticleListTag parent=(ArticleListTag)parenttag;
 					  Data curr=parent.getCurrent();
-	            
+					 
 					  result=curr.getAttrs().get(name);
 					  if(null==result||"".equals(result))
 					  {
 					     Class clazz=curr.getClass();
 					     Field field=clazz.getDeclaredField(name);
-					 
-						 field.setAccessible(true);
-						 result=field.get(curr).toString();
+					     if(null!=field)
+					     {
+							 field.setAccessible(true);
+							 result=field.get(curr).toString();
+						 }
 					  }
 				  }
 				  

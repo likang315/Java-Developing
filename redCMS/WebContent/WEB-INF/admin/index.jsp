@@ -39,7 +39,7 @@
                         </a>
                     </li>
                          <li>
-                        <a class="J_menuItem" href="admin/article/createIndexHtml">
+                        <a class="J_menuItem" href="admin/createIndexHtml">
                             <i class="glyphicon glyphicon-file"></i>
                             <span class="nav-label">生成首页</span>
                         </a>

@@ -7,6 +7,8 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
+import org.apache.log4j.helpers.SyslogWriter;
+
 import com.redcms.util.TemplateFileFilter;
 
 
@@ -17,6 +19,7 @@ import com.redcms.util.TemplateFileFilter;
  */
 public class TemplateListTag extends SimpleTagSupport 
 {
+	
     private String temType;   //模板的类型，只能中index list content
     private String fieldName; //表单项的名字
     private String defVal;    //哪一项默认选中
@@ -38,8 +41,7 @@ public class TemplateListTag extends SimpleTagSupport
 		sb.append("<select   name='"+fieldName+"'>");
 		if(!"content".equals(temType))
 		{
-			sb.append("<option value='-1'>不需要"+("list".equals(temType)?"列表":"首页")+"模板</option>");
-			
+			sb.append("<option value='-1'>不需要"+("list".equals(temType)?"列表":"首页")+"模板</option>");	
 		}
 		//模板从硬盘目录中取出来
 		PageContext pc=(PageContext)this.getJspContext();
@@ -47,16 +49,17 @@ public class TemplateListTag extends SimpleTagSupport
 		String realpath=sc.getRealPath("WEB-INF/template");
 		
 		String alltem[]=TemplateFileFilter.getTemplateFiles(realpath, temType);
+		
 		if(null!=alltem&&alltem.length>0)
 		{
 			for(String temfile:alltem)
 			{
-				if(temfile.equals(defVal))
-				{	
+				if(temfile.substring(0,temfile.lastIndexOf(".")).equals(defVal))
+				{
 					sb.append("<option  selected='selected' value='"+temfile.substring(0,temfile.lastIndexOf("."))+"'>"+temfile+"</option>");	
 				}else
 				{
-				sb.append("<option value='"+temfile.substring(0,temfile.lastIndexOf("."))+"'>"+temfile+"</option>");
+				    sb.append("<option value='"+temfile.substring(0,temfile.lastIndexOf("."))+"'>"+temfile+"</option>");
 				}
 			}
 		}
