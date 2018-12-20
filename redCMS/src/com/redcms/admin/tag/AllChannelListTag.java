@@ -45,7 +45,7 @@ public class AllChannelListTag extends SimpleTagSupport
 					sb.append("<td>"+c.getPriority()+"</td>");
 					sb.append("<td>  <a class='btn btn-primary btn-sm' href='admin/channel?action=channelEdit&id="+c.getId()+"'>修改</a>");
 					sb.append("&nbsp;<a class='btn btn-sm btn-danger'  href='admin/channel?action=channelDel&id="+c.getId()+"' >删除</a>");
-					sb.append("&nbsp;<a class='btn btn-sm btn-success' href='admin/channel?action=pubChannel&id="+c.getId()+"&pageSize=20' >发布</a>");
+					sb.append("&nbsp;<a href='admin/channel?action=pubchannel&cid="+c.getId()+"&pageSize=20' class='btn btn-sm btn-success'>发布</a>");
 					sb.append("</td>");
 					sb.append("</tr>");
 					
@@ -67,8 +67,7 @@ public class AllChannelListTag extends SimpleTagSupport
 							sb.append("<td><a   class='btn btn-info btn-xs' href='admin/channel?action=channelEdit&id="+s.getId()+"'>修改</a>");
 							sb.append("&nbsp;<a class='btn btn-xs btn-warning' href='admin/channel?action=channelDel&id="+s.getId()+"'>删除</a>");
 							
-							sb.append("&nbsp;<a href='admin/channel?action=pubChannel&cid="+s.getId()+"&pageSize=20' class='btn btn-xs btn-primary'>发布</a>");
-							sb.append("</td>");
+							sb.append("&nbsp;<a href='admin/channel?action=pubchannel&cid="+s.getId()+"&pageSize=20' class='btn btn-xs btn-primary'>发布</a>");				sb.append("</td>");
 							
 							sb.append("</tr>");
 						}

@@ -439,5 +439,107 @@ public class ArticleServlet extends Action {
 		}
   		index();
 	}
+	
+	
+
+	//批量生成静态页面
+	/**
+	 * 批量生成html
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	public void createhtmlall()throws ServletException, IOException 
+	{
+	
+		String [] all=this.getStringArray("ids");
+		
+		Integer cid=null;
+		if(null!=all&&all.length>0)
+		{
+			for(String tem:all)
+			{
+				String []params=tem.split("_");
+				if(null!=params&&params.length==3)
+				{
+					
+					try {
+			            htmlutil(Long.parseLong(params[0]), Integer.parseInt(params[2]), params[1]);
+						//delger(Integer.parseInt(params[1]), Integer.parseInt(params[2]), params[0]);
+					
+					} catch (Exception e) {
+						
+						setAttr("err", "发布文章出错!");
+						
+					}
+				}
+			}
+		}
+		setAttr("msg", "发布完成");
+		if(null==cid)req.removeAttribute("cid");
+		index();
+		
+	}  
+	
+	/**
+	 * 生成静态html
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	public void createHtml() throws ServletException, IOException 
+	{
+		long id=this.getLong("dataId");
+		int channelId=this.getInt("channelId");
+		String t_name=this.getString("t_name");
+		htmlutil(id,channelId,t_name);
+		 setAttr("cid", channelId);
+         setAttr("msg","发布成功");
+		index();
+	}
+	/**
+	 * 生成首页静态文件
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+/*	public void createIndexHtml() throws ServletException, IOException 
+	{
+		 String basePath=req.getScheme()+"://"+req.getServerName()+":"+req.getServerPort()+req.getContextPath()+"/web";
+		 
+		 String realpath=req.getServletContext().getRealPath("html");
+		 
+		   HtmlGenerator.createHtmlPage(basePath, realpath+"/index.html");
+		   setAttr("msg","生成首页成功");
+         this.forward("admin/welcome.jsp");
+		
+	}*/
+	/**
+	 * 生成网页的工具方法
+	 * @param id
+	 * @param channelId
+	 * @param t_name
+	 */
+	public void htmlutil(long id,int channelId,String t_name)
+	{
+		System.out.println("*******"+id+"************"+channelId+"**************"+t_name);
+		if(channelId>0&&id>0)
+		{
+			
+			 String basePath=req.getScheme()+"://"+req.getServerName()+":"+req.getServerPort()+req.getContextPath()+"/";
+		      String allpath=basePath+"web/channelContent?dataId="+id+"&channel_id="+channelId+"&t_name="+t_name;
+		      String tartpath=req.getServletContext().getRealPath("html/c"+channelId);
+		       File f=new File(tartpath);
+		       if(!f.exists())f.mkdir();//栏目对应的目录不存在就创建
+		       
+		       File f1=new File(f,"art_"+channelId+"_"+id+".html");
+		       try {
+				if(!f1.exists())f1.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		       HtmlGenerator.createHtmlPage(allpath, f1.toString());
+		       
+		      
+		}
+	}
+	
 
 }

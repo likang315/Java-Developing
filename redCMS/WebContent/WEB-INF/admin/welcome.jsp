@@ -28,7 +28,7 @@
 
 <h3>用到的框架技术</h3>
 
-<P>java，servlet，bootstrap3，kindeditor,hadmin,mysql，jquery，jquery-validation，layer，My97DatePicker，ueditor，zTree等等</P>            
+<P>java，servlet，bootstrap3，kindeditor,mysql,jquery,druid,dbutils等等</P>            
 <h3>模版文件夹</h3>
 <p>
   /WEB-INF/admin目录下：<br/>
@@ -49,9 +49,9 @@
   <li>channelInfo:栏目信息</li>
   <li>channelList:栏目列表</li>
   <li>property:栏目或内容的属性</li>
-  <li>articleInfo:内容页详情</li>
+  <li>articleInfo:内容页信息</li>
   <li>articleList:内容列表</li>
-  <li>showPage:分页</li>
+  <li>PaperTag:分页</li>
 </ul>
 </p>
 <h3>截图</h3>

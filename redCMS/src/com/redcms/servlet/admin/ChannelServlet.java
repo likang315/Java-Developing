@@ -306,5 +306,95 @@ public class ChannelServlet extends Action {
 		index();
 	}
 	
+	/**
+	 * 发布一个目录
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	public void pubchannel()throws ServletException, IOException 
+	{
+		int cid=this.getInt("cid");
+		int pageSize=20;
+		if(this.getInt("pageSize")>0)pageSize=this.getInt("pageSize");
+		 try {
+			pubutils(cid,pageSize);
+			setAttr("msg", "发布成功");
+		} catch (Exception e) 
+		 {
+			setAttr("err", "发布失败");
+			
+		}
+			index();
+	}
+	/**
+	 * 发布的工具的类
+	 */
+	public void pubutils(int cid,int pageSize)throws SQLException
+	{
+		 String basePath=req.getScheme()+"://"+req.getServerName()+":"+req.getServerPort()+req.getContextPath()+"/";
+			Channel channel=null;
+			 
+				
+					if(cid>0)
+					{
+						 
+						 String indexPath=basePath+"web/channelindex?channelId="+cid;
+						 channel=Db.query("select * from channel where id=?", new BeanHandler<Channel>(Channel.class),cid);
+						 if(null!=channel.getIndex_tem()&&channel.getIndex_tem().endsWith("index"))
+						 {
+							 //有首页文件
+							 String targfile=req.getServletContext().getRealPath("html/c"+cid);
+							 File f=new File(targfile);
+							 if(!f.exists())f.mkdirs();
+							 
+							 HtmlGenerator.createHtmlPage(indexPath, targfile+"/index.html");
+						 }
+						 if(null!=channel.getList_tem()&&channel.getList_tem().endsWith("list"))
+						 {
+							 //有列表文件
+							 //求出有多少页
+							 String sql="select count(id) from "+channel.getT_name()+" where channel_id=?";
+							 Long totalcount=(Long)Db.query(sql, new ArrayHandler(),cid)[0];
+							 int totalPage=(totalcount.intValue()+pageSize-1)/pageSize;
+							 
+							 String targfile=req.getServletContext().getRealPath("html/c"+cid);
+							 File f=new File(targfile);
+							 if(!f.exists())f.mkdirs();
+							 
+							 for(int i=1;i<=totalPage;i++)
+							 {
+								 String listpath=basePath+"web/channelList?channelId="+cid+"&pageNo="+i;
+								 HtmlGenerator.createHtmlPage(listpath, targfile+"/list_"+i+".html");
+							 }
+							
+						 }
+						 setAttr("msg", "发布成功");
+					}
+			
+	}
+	/**
+	 * 发布所有栏目
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	public void pubAllchannel()throws ServletException, IOException 
+	{
+	  try {
+		  int pageSize=20;
+			if(this.getInt("pageSize")>0)pageSize=this.getInt("pageSize");
+		List<Object[]> allc=Db.query("select id from channel",new ArrayListHandler());
+		for(Object[] tem:allc)
+		{
+			System.out.println(tem[0].getClass()+"------------------>");
+			BigInteger cid=(BigInteger)tem[0];
+			pubutils(cid.intValue(),pageSize);
+		}
+		setAttr("msg", "发布成功");
+	} catch (SQLException e) {
+		setAttr("err", "发布失败");
+		
+	}
+	  index();
+	}
 	
 }
