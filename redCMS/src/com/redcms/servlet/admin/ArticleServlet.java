@@ -1,5 +1,6 @@
 package com.redcms.servlet.admin;
 
+import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.sql.SQLException;
@@ -26,6 +27,7 @@ import com.redcms.db.Db;
 import com.redcms.db.PageDiv;
 import com.redcms.idcreater.IdWorker;
 import com.redcms.servelt.core.Action;
+import com.redcms.util.HtmlGenerator;
 
 /**内容的增删改，修改有两种方式，删除后增加，或者依据id修改
  * 
@@ -375,7 +377,7 @@ public class ArticleServlet extends Action {
 				
 				for(int i=0;i<dataId.length;i++)
 				{
-				   //把dataid截取出id和表名
+				   //把dataid截取出id和表名,第三个参数不用
 				   String allids[]=dataId[i].split("_");
 				  
 				   //删除数据扩展字段
@@ -442,15 +444,13 @@ public class ArticleServlet extends Action {
 	
 	
 
-	//批量生成静态页面
 	/**
-	 * 批量生成html
+	 * 批量生成所选静态页面,同个分隔成三个参数调用htmlutil
 	 * @throws ServletException
 	 * @throws IOException
 	 */
 	public void createhtmlall()throws ServletException, IOException 
 	{
-	
 		String [] all=this.getStringArray("ids");
 		
 		Integer cid=null;
@@ -458,27 +458,25 @@ public class ArticleServlet extends Action {
 		{
 			for(String tem:all)
 			{
-				String []params=tem.split("_");
+				String params[]=tem.split("_");
 				if(null!=params&&params.length==3)
-				{
-					
+				{	
 					try {
-			            htmlutil(Long.parseLong(params[0]), Integer.parseInt(params[2]), params[1]);
-						//delger(Integer.parseInt(params[1]), Integer.parseInt(params[2]), params[0]);
-					
+			            htmlUtil(Long.parseLong(params[0]), Integer.parseInt(params[2]), params[1]);
+			            
 					} catch (Exception e) {
-						
-						setAttr("err", "发布文章出错!");
-						
+						setAttr("err", "文章发布失败!");	
 					}
 				}
 			}
 		}
-		setAttr("msg", "发布完成");
-		if(null==cid)req.removeAttribute("cid");
-		index();
+		setAttr("msg", "文章发布完成");
+		if(null==cid)
+			req.removeAttribute("cid");
 		
+		index();
 	}  
+	
 	
 	/**
 	 * 生成静态html
@@ -490,53 +488,43 @@ public class ArticleServlet extends Action {
 		long id=this.getLong("dataId");
 		int channelId=this.getInt("channelId");
 		String t_name=this.getString("t_name");
-		htmlutil(id,channelId,t_name);
-		 setAttr("cid", channelId);
-         setAttr("msg","发布成功");
+		
+		htmlUtil(id,channelId,t_name);
+		setAttr("cid", channelId);
+        setAttr("msg","发布成功");
+         
 		index();
 	}
-	/**
-	 * 生成首页静态文件
-	 * @throws ServletException
-	 * @throws IOException
-	 */
-/*	public void createIndexHtml() throws ServletException, IOException 
-	{
-		 String basePath=req.getScheme()+"://"+req.getServerName()+":"+req.getServerPort()+req.getContextPath()+"/web";
-		 
-		 String realpath=req.getServletContext().getRealPath("html");
-		 
-		   HtmlGenerator.createHtmlPage(basePath, realpath+"/index.html");
-		   setAttr("msg","生成首页成功");
-         this.forward("admin/welcome.jsp");
-		
-	}*/
+	
 	/**
 	 * 生成网页的工具方法
 	 * @param id
 	 * @param channelId
 	 * @param t_name
 	 */
-	public void htmlutil(long id,int channelId,String t_name)
+	public void htmlUtil(long id,int channelId,String t_name)
 	{
-		System.out.println("*******"+id+"************"+channelId+"**************"+t_name);
 		if(channelId>0&&id>0)
 		{
-			
-			 String basePath=req.getScheme()+"://"+req.getServerName()+":"+req.getServerPort()+req.getContextPath()+"/";
+		      String basePath=req.getScheme()+"://"+req.getServerName()+":"+req.getServerPort()+req.getContextPath()+"/";
 		      String allpath=basePath+"web/channelContent?dataId="+id+"&channel_id="+channelId+"&t_name="+t_name;
-		      String tartpath=req.getServletContext().getRealPath("html/c"+channelId);
-		       File f=new File(tartpath);
-		       if(!f.exists())f.mkdir();//栏目对应的目录不存在就创建
+		      String tartpath=req.getServletContext().getRealPath("html/article_"+channelId);
+		      
+		      File f=new File(tartpath);
+		      if(!f.exists())
+		    	  f.mkdir();	//栏目对应的目录不存在就创建
 		       
-		       File f1=new File(f,"art_"+channelId+"_"+id+".html");
-		       try {
-				if(!f1.exists())f1.createNewFile();
+		      //在第一个参数目录下，创建第二个参数名的文件
+		      File f1=new File(f,"article_"+channelId+"_"+id+".html");
+		       
+		  try {
+			  if(!f1.exists())
+				  f1.createNewFile();
+				
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		       HtmlGenerator.createHtmlPage(allpath, f1.toString());
-		       
+		       HtmlGenerator.createHtmlPage(allpath, f1.toString());   
 		      
 		}
 	}

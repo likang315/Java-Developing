@@ -73,7 +73,7 @@
                             </li>
                             
                             <li>
-                                <a class="J_menuItem" href="admin/channel/pubAllchannel?pageSize=20">生成静态</a>
+                                <a class="J_menuItem" href="admin/channel?action=pubAllchannel&pageSize=20">生成静态</a>
                             </li>
                         </ul>
                     </li>

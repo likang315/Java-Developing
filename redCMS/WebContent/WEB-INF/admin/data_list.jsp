@@ -58,7 +58,8 @@
 				    	<c:forEach items="${page.list}" var="data" varStatus="datastat">
 				    	<tr>
 				    	<td>
-				    	  <input type="checkbox" value="${data.id}_${data.t_name}" name="ids"/>
+				    	   <input type="checkbox" class="i-checks" name="ids"  value="${data.id}_${data.t_name}_${data.channel_id}" >
+				    	</td>
 				    	</td>
 				    	
 				    	<td>${datastat.count}</td>
@@ -103,7 +104,7 @@
                             
                             
                             <div style="line-height: 36px; text-align: left;">
-                              <a href="#" class="btn btn-success">生成静态文件</a>&nbsp;&nbsp;<button  id="delall" class="btn btn-danger">批量删除</button>
+                            	<button type="button"  class="btn btn-success" id="puball">生成静态文件</button>&nbsp;&nbsp;<button  id="delall" class="btn btn-danger">批量删除</button>
                             </div>
                             
                     </div>
@@ -189,6 +190,39 @@
     	    	 return temp;
     	    	 
     	     }); 
+    		 
+    		
+    		 <%-- 发布所选文章--%>
+    		 $("#puball").click(function(){
+    			  
+    			var temp = document.createElement("form");
+  			    temp.action = "admin/article";
+  			    temp.method = "post";
+  			    temp.style.display = "none";
+  			    
+  			    var action=document.createElement("input");
+  			    action.name = "action";
+  			    action.value ="createhtmlall";
+  			    temp.appendChild(action);
+  			    
+  				 var ids="";
+     	    	
+    	    	 $("input[name='ids']").each(function () {
+    	    		 	if($(this).prop("checked"))
+    	    			 {
+    	    			 	var topt = document.createElement("input");
+    	    		       	topt.name = "ids";
+    	    		        topt.value =$(this).val();
+    	    		        temp.appendChild(topt);
+    	    			 }
+    	         });
+    	    	 document.body.appendChild(temp);
+    	 	     temp.submit();
+    	    	 return temp;
+  			 
+    			
+    	     });
+    		 
     		 
     	});
     	

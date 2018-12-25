@@ -32,7 +32,6 @@ public class ChannelContentServlet extends Action {
 		try {
 			if(dataId>0)
 			{
-				
 				Data data=Db.query("select * from alldata where id=?", new BeanHandler<Data>(Data.class),dataId);
 				fillAttr(data);
 				

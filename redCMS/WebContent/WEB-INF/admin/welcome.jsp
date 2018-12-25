@@ -24,37 +24,43 @@
                     <div class="ibox-content" style="font-size:12px;">
 <!-- 内容开始 -->
        <h3>简介</h3>
-       <p>RedCMS使用最简单性能最高的框架，将cms系统简单到极致，灵活的栏目扩展，快速的构建普通网站 生成的静态演示站（测试）： www.zpcgxx.com</p>
+       <p>使用最简单性能最高的框架，将CMS(内容管理系统)系统简单到极致，灵活的栏目扩展，快速的构建网站的后台管理系统
+		     演示站（测试）： www.zpcgxx.com </p>
 
-<h3>用到的框架技术</h3>
+<h3>使用的框架技术：</h3>
 
-<P>java，servlet，bootstrap3，kindeditor,mysql,jquery,druid,dbutils等等</P>            
-<h3>模版文件夹</h3>
+<P>java，servlet，bootstrap3，kindeditor,mysql,jquery,druid,dbutils</P>            
+
+<h3>WEB显示架构介绍</h3>
 <p>
-  /WEB-INF/admin目录下：<br/>
+WebContent/WEB-INF/admin目录下：存放所有的后台显示页面
+WebContent/WEB-INF/template目录下：存放所有的前端显示页面	
+
+<br/>
 <ul>
- <li>首页  -->index.jsp</li>
+ <li>站点首页 -->index.jsp</li>
  <li>栏目首页  -->xxx_index.jsp</li>
- <li>栏目列表  -->xxx_list.jsp</li>
+ <li>栏目列表页  -->xxx_list.jsp</li>
  <li>内容页  -->xxx_content.jsp</li>
 </ul>
-
 </p>
 
-<h3>常用标签</h3>
 <p>
-	标签uri:/redcms/web/tags<br/>
+	
+标签uri:/com/redcms/web/tag<br/>
 <ul>
-  <li>rootpath:取站点根目录</li>
-  <li>channelInfo:栏目信息</li>
-  <li>channelList:栏目列表</li>
-  <li>property:栏目或内容的属性</li>
+  <li>WebRootTag:取站点根目录</li>
+  <li>channelInfoTag:栏目信息</li>
+  <li>channelListTag:栏目列表</li>
+  <li>propertyTag:栏目或内容的属性值</li>
   <li>articleInfo:内容页信息</li>
-  <li>articleList:内容列表</li>
-  <li>PaperTag:分页</li>
+  <li> articleList:内容列表</li>
+  <li>PagerTag:分页</li>
 </ul>
 </p>
-<h3>截图</h3>
+<br/>
+<h3>网站效果</h3>
+<img src="img/index.png" width="200px" height="500px">
 <p>
 
 <p>

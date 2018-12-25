@@ -39,7 +39,7 @@ public class HtmlGenerator{
 			        InputStream instream = entity.getContent();
 			        FileOutputStream fo= new FileOutputStream(filename);
 			        try {
-			            // do something useful
+			        	// do something useful
 			        	StreamUtils.copy(instream,fo);
 			  
 			        } finally {

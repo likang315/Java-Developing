@@ -18,46 +18,13 @@
 </head>
 <body>
 
-<h2><cms:rootpath/></h2>
 
-<h2>栏目列表</h2>
-<ul>
-	<cms:channelList parentId="0" top="3">
-	  <li><cms:property name="id"/>---><cms:property name="name"/>---><cms:property name="title"/>---><cms:property name="price"/></li> 
-	  <img src="<cms:property name="pic01"/>">
-		
-	</cms:channelList>
-</ul>
-
-<h2>取一个栏目的信息</h2>
-  <cms:channelInfo id="3" name="name"/>--> <cms:channelInfo id="3" name="title"/>
-
-<h2>取内容列表:</h2>
-<ul>
-  <%
-   int pageNo=null!=request.getParameter("pageNo")?Integer.parseInt(request.getParameter("pageNo")):1;
-  %>
-  <cms:articleList channelId="11" pageNo="1" pageSize="1">
-     <li><cms:property name="title"/>----<cms:property name="createtime"/></li>
-  </cms:articleList>
-  
-  <cms:pager url="web/index" param="userid=10&uname=lisi"/>
-</ul> 
-
-
-  <%--跳转显示指定栏目的所有信息 --%> 
-  <hr/>
-  <h2><cms:channelInfo name="name" id="3"/><a href="#"> 更多>></a></h2>
-  
-  <%--取指定文章内容 --%>
-  <hr/>
-  <cms:article dataId="1071588772090499072" name="pic1" />
-  
-  
-  <hr/> <br/>
-  <h1>这里是首页面</h1>
+  <hr/><br/>
+  <h1>首页</h1>
   <center>
-    <a href="web/channelindex?channelId=3">通信与信息工程学院</a>
+    <a href="web/channelindex?channelId=3">通信与信息工程学院</a>&nbsp;&nbsp;
+      <a href="web/channelindex?channelId=4">自动化学院</a>&nbsp;&nbsp;
+        <a href="web/channelindex?channelId=6">电子与信息工程学院</a>
   </center>
 
 

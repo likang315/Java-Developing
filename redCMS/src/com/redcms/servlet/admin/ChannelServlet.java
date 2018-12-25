@@ -1,5 +1,6 @@
 package com.redcms.servlet.admin;
 
+import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.sql.SQLException;
@@ -13,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 
 import org.apache.commons.dbutils.handlers.ArrayHandler;
+import org.apache.commons.dbutils.handlers.ArrayListHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
@@ -23,20 +25,25 @@ import com.redcms.beans.ModelItem;
 import com.redcms.beans.Pictures;
 import com.redcms.db.Db;
 import com.redcms.servelt.core.Action;
+import com.redcms.util.HtmlGenerator;
 
 /**
  * 增加栏目,以及栏目的修改，删除，发布（后续功能）
  * @author likang
- *
  */
 @WebServlet("/admin/channel")
 public class ChannelServlet extends Action {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+
 	//跳转栏目首页
 	@Override
 	public void index() throws ServletException, IOException
-	{
-		try {
+	{		try {
 			List<Model> models=Db.query("select * from model order by priority", new BeanListHandler<Model>(Model.class));
 			setAttr("models", models);
 		} catch (SQLException e) {
@@ -306,8 +313,9 @@ public class ChannelServlet extends Action {
 		index();
 	}
 	
+	
 	/**
-	 * 发布一个目录
+	 * 发布一个目录下的文章
 	 * @throws ServletException
 	 * @throws IOException
 	 */
@@ -315,86 +323,97 @@ public class ChannelServlet extends Action {
 	{
 		int cid=this.getInt("cid");
 		int pageSize=20;
-		if(this.getInt("pageSize")>0)pageSize=this.getInt("pageSize");
-		 try {
-			pubutils(cid,pageSize);
+		if(this.getInt("pageSize")>0)
+			pageSize=this.getInt("pageSize");
+		
+		try {
+			pubUtils(cid,pageSize);
 			setAttr("msg", "发布成功");
+			
 		} catch (Exception e) 
-		 {
-			setAttr("err", "发布失败");
-			
+		{
+			setAttr("err", "发布失败");		
 		}
-			index();
+		
+		index();
 	}
+	
 	/**
-	 * 发布的工具的类
-	 */
-	public void pubutils(int cid,int pageSize)throws SQLException
-	{
-		 String basePath=req.getScheme()+"://"+req.getServerName()+":"+req.getServerPort()+req.getContextPath()+"/";
-			Channel channel=null;
-			 
-				
-					if(cid>0)
-					{
-						 
-						 String indexPath=basePath+"web/channelindex?channelId="+cid;
-						 channel=Db.query("select * from channel where id=?", new BeanHandler<Channel>(Channel.class),cid);
-						 if(null!=channel.getIndex_tem()&&channel.getIndex_tem().endsWith("index"))
-						 {
-							 //有首页文件
-							 String targfile=req.getServletContext().getRealPath("html/c"+cid);
-							 File f=new File(targfile);
-							 if(!f.exists())f.mkdirs();
-							 
-							 HtmlGenerator.createHtmlPage(indexPath, targfile+"/index.html");
-						 }
-						 if(null!=channel.getList_tem()&&channel.getList_tem().endsWith("list"))
-						 {
-							 //有列表文件
-							 //求出有多少页
-							 String sql="select count(id) from "+channel.getT_name()+" where channel_id=?";
-							 Long totalcount=(Long)Db.query(sql, new ArrayHandler(),cid)[0];
-							 int totalPage=(totalcount.intValue()+pageSize-1)/pageSize;
-							 
-							 String targfile=req.getServletContext().getRealPath("html/c"+cid);
-							 File f=new File(targfile);
-							 if(!f.exists())f.mkdirs();
-							 
-							 for(int i=1;i<=totalPage;i++)
-							 {
-								 String listpath=basePath+"web/channelList?channelId="+cid+"&pageNo="+i;
-								 HtmlGenerator.createHtmlPage(listpath, targfile+"/list_"+i+".html");
-							 }
-							
-						 }
-						 setAttr("msg", "发布成功");
-					}
-			
-	}
-	/**
-	 * 发布所有栏目
+	 * 生成静态功能，所有栏目下的文章
 	 * @throws ServletException
 	 * @throws IOException
 	 */
-	public void pubAllchannel()throws ServletException, IOException 
+	public void pubAllchannel() throws ServletException, IOException 
 	{
 	  try {
-		  int pageSize=20;
-			if(this.getInt("pageSize")>0)pageSize=this.getInt("pageSize");
+		  	int pageSize=20;
+			if(this.getInt("pageSize")>0)
+				pageSize=this.getInt("pageSize");
+			
 		List<Object[]> allc=Db.query("select id from channel",new ArrayListHandler());
 		for(Object[] tem:allc)
 		{
-			System.out.println(tem[0].getClass()+"------------------>");
 			BigInteger cid=(BigInteger)tem[0];
-			pubutils(cid.intValue(),pageSize);
+			pubUtils(cid.intValue(),pageSize);
 		}
 		setAttr("msg", "发布成功");
+		
 	} catch (SQLException e) {
 		setAttr("err", "发布失败");
 		
 	}
 	  index();
+	}
+	
+	
+	/**
+	 * 发布的栏目的工具类,参数为栏目id和页面大小
+	 */
+	public void pubUtils(int cid,int pageSize)throws SQLException
+	{
+		 String basePath=req.getScheme()+"://"+req.getServerName()+":"+req.getServerPort()+req.getContextPath()+"/";
+		 Channel channel=null;
+	
+		if(cid>0)
+		{	 
+			 String indexPath=basePath+"web/channelindex?channelId="+cid;
+			 channel=Db.query("select * from channel where id=?", new BeanHandler<Channel>(Channel.class),cid);
+			 
+			 //取一级栏目(栏目首页面)
+			 if(null!=channel.getIndex_tem()&&channel.getIndex_tem().endsWith("index"))
+			 {
+				 //有首页文件
+				 String targfile=req.getServletContext().getRealPath("html/channel_"+cid);
+				 File f=new File(targfile);
+				 if(!f.exists())
+					 f.mkdirs();
+				 
+				 HtmlGenerator.createHtmlPage(indexPath, targfile+"/index.html");
+			 }
+			 
+			 //栏目列表页，有分页查询
+			 if(null!=channel.getList_tem()&&channel.getList_tem().endsWith("list"))
+			 {
+				 String sql="select count(id) from "+channel.getT_name()+" where channel_id=?";
+				 Long totalcount=(Long)Db.query(sql, new ArrayHandler(),cid)[0];
+				 
+				 int totalPage=(totalcount.intValue()+pageSize-1)/pageSize;
+				 
+				 String targfile=req.getServletContext().getRealPath("html/channel_"+cid);
+				 File f=new File(targfile);
+				 if(!f.exists())
+					 f.mkdirs();
+				 
+				 for(int i=1;i<=totalPage;i++)
+				 {
+					 String listpath=basePath+"web/channelList?channelId="+cid+"&pageNo="+i;
+					 HtmlGenerator.createHtmlPage(listpath, targfile+"/list_"+i+".html");
+				 }
+				
+			 }
+			 setAttr("msg", "发布成功");
+		}
+
 	}
 	
 }
