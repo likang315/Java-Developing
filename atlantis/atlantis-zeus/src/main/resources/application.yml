@@ -1,0 +1,12 @@
+spring:
+  aop:
+    proxy-target-class: true
+zeus:
+  datasource:
+    db:
+      namespace: ${datasource.druid.url}
+      username: ${datasource.druid.username}
+      password: ${datasource.druid.password}
+      dbName: ${datasource.druid.driver-class-name}
+      core-pool-size: 10
+      max-pool-size: 30

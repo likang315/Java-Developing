@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.atlantis.zeus.index.dao.rw.StudentInfoMapper">
+
+    <sql id="fields">
+        `id` as id,
+        `stu_global_key` as stuGlobalKey,
+        `name` as name,
+        `sex` as sex,
+        `age` as age,
+        `create_time` as createTime,
+        `update_time` as updateTime
+    </sql>
+
+    <insert id="insertStudentInfo" parameterType="com.atlantis.zeus.index.dto.StudentInfo">
+       INSERT INTO local_student_info(stu_global_key,name,sex,age)
+       VALUES (#{student.stuGlobalKey}, #{student.name}, #{student.sex}, #{student.age})
+    </insert>
+
+</mapper>
