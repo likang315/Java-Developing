@@ -1,5 +1,6 @@
 package com.atlantis.zeus.index.controller;
 
+import com.atlantis.zeus.base.annotation.ElapsedTime;
 import com.atlantis.zeus.index.dto.StudentInfo;
 import com.atlantis.zeus.index.service.impl.IndexStudentInfoImpl;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,7 @@ public class StudentInfoController {
     @Resource
     private IndexStudentInfoImpl indexStudentInfo;
 
+    @ElapsedTime
     @RequestMapping("/studentById")
     public StudentInfo init() {
         return indexStudentInfo.getStudentInfo(1);
