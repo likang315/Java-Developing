@@ -1,6 +1,7 @@
-package com.atlantis.zeus.index.dto;
+package com.atlantis.zeus.index.pojo;
 
 import lombok.Data;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 
 import java.time.LocalDateTime;
@@ -11,11 +12,12 @@ import java.time.LocalDateTime;
  */
 @Data
 @Accessors(chain = true)
-public class StudentInfo {
+@ToString
+public class StudentInfoDO {
     /**
      * 学生唯一标识
      */
-    private String stuGlobalKey;
+    public String stuGlobalKey;
 
     /**
      * name
@@ -35,10 +37,10 @@ public class StudentInfo {
     /**
      * 创建时间
      */
-    private LocalDateTime create_time;
+    private LocalDateTime createTime;
 
     /**
      * 更新时间
      */
-    private LocalDateTime update_time;
+    private LocalDateTime updateTime;
 }

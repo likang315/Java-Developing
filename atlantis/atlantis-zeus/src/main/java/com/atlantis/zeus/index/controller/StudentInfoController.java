@@ -1,12 +1,14 @@
 package com.atlantis.zeus.index.controller;
 
 import com.atlantis.zeus.base.annotation.ElapsedTime;
-import com.atlantis.zeus.index.dto.StudentInfo;
+import com.atlantis.zeus.base.utils.ApiResult;
 import com.atlantis.zeus.index.service.impl.IndexStudentInfoImpl;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 学生信息Controller层
@@ -22,13 +24,22 @@ public class StudentInfoController {
     private IndexStudentInfoImpl indexStudentInfo;
 
     @ElapsedTime
-    @RequestMapping("/studentById")
-    public StudentInfo init() {
-        return indexStudentInfo.getStudentInfo(1);
+    @RequestMapping("/querySingle")
+    public ApiResult querySingle() {
+        return ApiResult.success(indexStudentInfo.getStudentInfo(1));
+    }
+
+    @RequestMapping("/queryBatch")
+    public ApiResult queryBatch() {
+        List<String> list = new ArrayList<>();
+        return ApiResult.success(indexStudentInfo.queryStudentInfoById(list));
     }
 
     @RequestMapping("/insert")
-    public boolean insert() {
-        return indexStudentInfo.insertOneStudentInfo();
+    public ApiResult insert() {
+        return ApiResult.success(indexStudentInfo.insertOneStudentInfo());
     }
+
+
+
 }

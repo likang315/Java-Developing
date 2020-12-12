@@ -1,6 +1,6 @@
 package com.atlantis.zeus.index.dao.rw;
 
-import com.atlantis.zeus.index.dto.StudentInfo;
+import com.atlantis.zeus.index.pojo.StudentInfoDO;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -19,5 +19,5 @@ public interface StudentInfoMapper {
      * @param studentInfo
      * @return
      */
-    int insertStudentInfo(@Param("student") StudentInfo studentInfo);
+    int insertStudentInfo(@Param("student") StudentInfoDO studentInfo);
 }

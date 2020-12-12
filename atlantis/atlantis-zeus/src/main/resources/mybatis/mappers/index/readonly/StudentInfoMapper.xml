@@ -6,7 +6,6 @@
 <mapper namespace="com.atlantis.zeus.index.dao.readonly.StudentInfoReadMapper">
 
     <sql id="fields">
-        `id` as id,
         `stu_global_key` as stuGlobalKey,
         `name` as name,
         `sex` as sex,
@@ -15,11 +14,26 @@
         `update_time` as updateTime
     </sql>
 
-    <select id="queryById" resultType="com.atlantis.zeus.index.dto.StudentInfo" parameterType="java.lang.Integer">
+    <select id="queryById" resultType="com.atlantis.zeus.index.pojo.StudentInfoDO" parameterType="java.lang.Integer">
         SELECT <include refid="fields"/>
         FROM local_student_info
         WHERE id = #{id}
     </select>
+
+
+    <select id="queryStudentInfoById" resultType="java.util.Map" parameterType="java.util.List">
+        SELECT <include refid="fields"/>
+        FROM local_student_info
+        <where>
+            <if test="ids != null and ids.size() > 0">
+                stu_global_key IN
+                <foreach collection="ids" separator="," open="(" close=")" item="item">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+    </select>
+
 
 
 </mapper>

@@ -1,6 +1,9 @@
 package com.atlantis.zeus.index.service;
 
-import com.atlantis.zeus.index.dto.StudentInfo;
+import com.atlantis.zeus.index.pojo.StudentInfoDO;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * 学生信息服务
@@ -15,7 +18,15 @@ public interface IndexStudentInfo {
      * @param id
      * @return
      */
-    StudentInfo getStudentInfo(int id);
+    StudentInfoDO getStudentInfo(int id);
+
+    /**
+     * 批量查询学生信息
+     *
+     * @param ids
+     * @return
+     */
+    Map<String, String> queryStudentInfoById(List<String> ids);
 
     /**
      * 插入一个学生信息

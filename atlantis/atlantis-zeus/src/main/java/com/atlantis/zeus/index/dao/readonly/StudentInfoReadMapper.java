@@ -1,8 +1,12 @@
 package com.atlantis.zeus.index.dao.readonly;
 
-import com.atlantis.zeus.index.dto.StudentInfo;
+import com.atlantis.zeus.index.pojo.StudentInfoDO;
+import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * 学生信息表 只读 dao
@@ -19,5 +23,15 @@ public interface StudentInfoReadMapper {
      * @param id
      * @return
      */
-    StudentInfo queryById(@Param("id") int id);
+    StudentInfoDO queryById(@Param("id") int id);
+
+    /**
+     * 通过GlobalKey获取学生信息
+     * 若是Key有重复的会被替换掉
+     *
+     * @param ids
+     * @return
+     */
+    @MapKey("stuGlobalKey")
+    Map<String, String>  queryStudentInfoById(@Param("ids") List<String> ids);
 }

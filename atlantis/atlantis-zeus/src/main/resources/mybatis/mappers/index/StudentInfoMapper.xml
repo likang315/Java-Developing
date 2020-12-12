@@ -15,7 +15,7 @@
         `update_time` as updateTime
     </sql>
 
-    <insert id="insertStudentInfo" parameterType="com.atlantis.zeus.index.dto.StudentInfo">
+    <insert id="insertStudentInfo" parameterType="com.atlantis.zeus.index.pojo.StudentInfoDO">
        INSERT INTO local_student_info(stu_global_key,name,sex,age)
        VALUES (#{student.stuGlobalKey}, #{student.name}, #{student.sex}, #{student.age})
     </insert>
