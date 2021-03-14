@@ -9,5 +9,6 @@
         <module name="atlantis-zeus" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel target="11" />
   </component>
 </project>
