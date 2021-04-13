@@ -6,4 +6,8 @@
         <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
 
+    <typeHandlers>
+        <package name="com.atlantis.zeus.index.dao.typehandler"/>
+    </typeHandlers>
+
 </configuration>

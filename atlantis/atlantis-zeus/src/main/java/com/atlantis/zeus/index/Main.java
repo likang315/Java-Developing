@@ -1,6 +1,10 @@
 package com.atlantis.zeus.index;
 
-import java.time.LocalDate;
+import lombok.extern.slf4j.Slf4j;
+
+import java.util.ArrayDeque;
+import java.util.Queue;
+import java.util.Stack;
 
 /**
  * 测试平常case
@@ -8,19 +12,26 @@ import java.time.LocalDate;
  * @author kangkang.li@qunar.com
  * @date 2020-11-09 12:02
  */
+@Slf4j
 public class Main {
 
-    public static void main(String[] args) {
-        LocalDate date = LocalDate.now();
-        System.out.println(date);
-        System.out.println(date.plusDays(-1));
-
-
+    private static void solution(int[] array) {
+        System.out.println(6%5);
 
 
     }
 
 
 
+
+
+    public static void main(String[] args) {
+        try {
+            int[] array = {1, 2, 5, 7, 3};
+            solution(array);
+        } catch (Exception e) {
+            log.info("Main_main: ", e);
+        }
+    }
 
 }
