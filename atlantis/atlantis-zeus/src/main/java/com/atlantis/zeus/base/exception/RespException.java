@@ -8,6 +8,8 @@ package com.atlantis.zeus.base.exception;
  */
 public class RespException extends AbstractBizException {
 
+    private static final long serialVersionUID = -811978166747052567L;
+
     public RespException(String msg, Throwable cause) {
         super(msg, cause);
     }

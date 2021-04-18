@@ -8,6 +8,8 @@ package com.atlantis.zeus.base.exception;
  */
 public abstract class AbstractBizException extends RuntimeException {
 
+    private static final long serialVersionUID = 3630342547460796046L;
+
     public AbstractBizException() {
         super();
     }

@@ -1,5 +1,6 @@
 package com.atlantis.zeus.index.service.impl;
 
+import com.atlantis.zeus.base.exception.RespException;
 import com.atlantis.zeus.index.dao.readonly.StudentInfoReadMapper;
 import com.atlantis.zeus.index.dao.rw.StudentInfoMapper;
 import com.atlantis.zeus.index.pojo.StudentInfoDO;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @author kangkang.li@qunar.com
@@ -41,6 +43,10 @@ public class IndexStudentInfoImpl implements IndexStudentInfo {
     @Override
     public Map<String, String> queryStudentInfoById(List<String> ids) {
         Map<String, String> map =  studentInfoReadMapper.queryStudentInfoById(ids);
+        if (Objects.isNull(map) || map.isEmpty()) {
+            throw new RespException("IndexStudentInfoImpl_queryStudentInfoById", ids.toString());
+        }
+
         log.info(map.toString());
         return map;
     }

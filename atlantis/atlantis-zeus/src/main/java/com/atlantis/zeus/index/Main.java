@@ -2,9 +2,8 @@ package com.atlantis.zeus.index;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayDeque;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * 测试平常case
@@ -16,7 +15,7 @@ import java.util.Stack;
 public class Main {
 
     private static void solution(int[] array) {
-        System.out.println(6%5);
+        Map<String, String> map = new TreeMap<>();
 
 
     }
