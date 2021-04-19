@@ -2,9 +2,6 @@ package com.atlantis.zeus.index;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Map;
-import java.util.TreeMap;
-
 /**
  * 测试平常case
  *
@@ -15,7 +12,6 @@ import java.util.TreeMap;
 public class Main {
 
     private static void solution(int[] array) {
-        Map<String, String> map = new TreeMap<>();
 
 
     }
