@@ -1,5 +1,6 @@
 package com.atlantis.zeus.index.service;
 
+import com.atlantis.zeus.index.pojo.Score;
 import com.atlantis.zeus.index.pojo.StudentInfoDO;
 
 import java.util.List;
@@ -34,4 +35,11 @@ public interface IndexStudentInfo {
      * @return
      */
     boolean insertOneStudentInfo();
+
+    /**
+     * 通过学生ID 查询学生对应成绩
+     *
+     * @return
+     */
+    Score queryStuScoreById(String globalKey);
 }

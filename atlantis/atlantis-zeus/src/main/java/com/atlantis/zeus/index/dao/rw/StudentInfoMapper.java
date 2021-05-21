@@ -4,6 +4,8 @@ import com.atlantis.zeus.index.pojo.StudentInfoDO;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * 学生信息表 只写dao
  *
@@ -20,4 +22,12 @@ public interface StudentInfoMapper {
      * @return
      */
     int insertStudentInfo(@Param("student") StudentInfoDO studentInfo);
+
+    /**
+     * 批量学生插入
+     *
+     * @param studentInfoList
+     * @return
+     */
+    int batchInsertStudent(@Param("list") List<StudentInfoDO> studentInfoList);
 }

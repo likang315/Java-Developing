@@ -3,6 +3,7 @@ package com.atlantis.zeus.index.service.impl;
 import com.atlantis.zeus.base.exception.RespException;
 import com.atlantis.zeus.index.dao.readonly.StudentInfoReadMapper;
 import com.atlantis.zeus.index.dao.rw.StudentInfoMapper;
+import com.atlantis.zeus.index.pojo.Score;
 import com.atlantis.zeus.index.pojo.StudentInfoDO;
 import com.atlantis.zeus.index.service.IndexStudentInfo;
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +35,7 @@ public class IndexStudentInfoImpl implements IndexStudentInfo {
 
     @Override
     public boolean insertOneStudentInfo() {
-        StudentInfoDO studentInfo = new StudentInfoDO().setStuGlobalKey("beijing_003").setName("lisi").setAge(0).setSex(1);
+        StudentInfoDO studentInfo = new StudentInfoDO().setStuGlobalKey("xian_006").setName("lihui").setAge(12).setSex(1);
         // 调试数据库也会执行
         int count = studentInfoMapper.insertStudentInfo(studentInfo);
         return count > 0;
@@ -49,6 +50,18 @@ public class IndexStudentInfoImpl implements IndexStudentInfo {
 
         log.info(map.toString());
         return map;
+    }
+
+    @Override
+    public Score queryStuScoreById(String globalKey) {
+        Score result = null;
+        try {
+            result = studentInfoReadMapper.queryStuScoreById(globalKey);
+        } catch (Exception e) {
+            log.error("IndexStudentInfoImpl_queryStuScoreById: ", e);
+        }
+
+        return result;
     }
 
 

@@ -14,6 +14,20 @@
         `update_time` as updateTime
     </sql>
 
+    <resultMap id="stu" type="com.atlantis.zeus.index.pojo.StudentInfoDO">
+        <result property="stuGlobalKey" column="stu_global_key"/>
+        <result property="name" column="name"/>
+        <result property="sex" column="sex"/>
+        <result property="age" column="age"/>
+    </resultMap>
+
+    <resultMap id="score" type="com.atlantis.zeus.index.pojo.Score" extends="stu">
+        <result property="stuGlobalKey" column="stu_global_key"/>
+        <result property="math" column="math"/>
+        <result property="english" column="english"/>
+        <result property="chinese" column="chinese"/>
+    </resultMap>
+
     <select id="queryById" resultType="com.atlantis.zeus.index.pojo.StudentInfoDO" parameterType="java.lang.Integer">
         SELECT <include refid="fields"/>
         FROM local_student_info
@@ -30,6 +44,18 @@
                 <foreach collection="ids" separator="," open="(" close=")" item="item">
                     #{item}
                 </foreach>
+            </if>
+        </where>
+    </select>
+
+    <select id="queryStuScoreById" parameterType="java.lang.String" resultMap="score">
+        SELECT stu.`stu_global_key`, stu.`name`, `math`, `english`, `chinese`
+        FROM local_student_info as stu
+        LEFT JOIN local_student_score  as score
+        ON stu.stu_global_key = score.stu_global_key
+        <where>
+            <if test="globalKey != null and globalKey.length() > 0">
+                stu.stu_global_key = #{globalKey}
             </if>
         </where>
     </select>

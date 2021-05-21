@@ -2,6 +2,11 @@ package com.atlantis.zeus.index;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 /**
  * 测试平常case
  *
@@ -9,9 +14,12 @@ import lombok.extern.slf4j.Slf4j;
  * @date 2020-11-09 12:02
  */
 @Slf4j
-public class Main {
+public class Main extends ClassLoader {
 
     private static void solution(int[] array) {
+        Queue<String> queue = new LinkedList<>();
+        Lock lock = new ReentrantLock();
+
 
 
     }
@@ -28,5 +36,4 @@ public class Main {
             log.info("Main_main: ", e);
         }
     }
-
 }

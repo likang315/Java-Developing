@@ -16,8 +16,44 @@
     </sql>
 
     <insert id="insertStudentInfo" parameterType="com.atlantis.zeus.index.pojo.StudentInfoDO">
-       INSERT INTO local_student_info(stu_global_key,name,sex,age)
-       VALUES (#{student.stuGlobalKey}, #{student.name}, #{student.sex}, #{student.age})
+       INSERT INTO local_student_info
+       <trim prefix = "(" suffix = ")" suffixOverrides = ",">
+            <if test = "student.stuGlobalKey != null and student.stuGlobalKey != ''">
+                stu_global_key,
+            </if>
+            <if test = "student.name != null and student.name != ''">
+                `name`,
+            </if>
+            <if test = "student.sex != null">
+                sex,
+            </if>
+            <if test = "student.age != null">
+                age,
+            </if>
+       </trim>
+       VALUES
+       <trim prefix = "(" suffix = ")" suffixOverrides = ",">
+           <if test = "student.stuGlobalKey != null and student.stuGlobalKey != ''">
+               #{student.stuGlobalKey},
+           </if>
+           <if test = "student.name != null and student.name != ''">
+               #{student.name},
+           </if>
+           <if test = "student.sex != null">
+               #{student.sex},
+           </if>
+           <if test = "student.age != null">
+               #{student.age},
+           </if>
+       </trim>
+    </insert>
+
+    <insert id="batchInsertStudent" parameterType="java.util.List">
+        INSERT INTO local_student_info (stu_global_key, `name`, sex, age)
+        VALUES
+        <foreach index = "index" item = "item" collection = "list" separator = ",">
+            (#{student.stuGlobalKey}, #{student.name}, #{student.sex}, #{sutdnet.age})
+        </foreach>
     </insert>
 
 </mapper>

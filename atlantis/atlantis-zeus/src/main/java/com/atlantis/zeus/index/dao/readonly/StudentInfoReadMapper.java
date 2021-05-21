@@ -1,5 +1,6 @@
 package com.atlantis.zeus.index.dao.readonly;
 
+import com.atlantis.zeus.index.pojo.Score;
 import com.atlantis.zeus.index.pojo.StudentInfoDO;
 import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Param;
@@ -34,4 +35,12 @@ public interface StudentInfoReadMapper {
      */
     @MapKey("stuGlobalKey")
     Map<String, String>  queryStudentInfoById(@Param("ids") List<String> ids);
+
+    /**
+     * 通过学生ID查询学生对应成绩
+     *
+     * @param globalKey
+     * @return
+     */
+    Score queryStuScoreById(@Param("globalKey") String globalKey);
 }
