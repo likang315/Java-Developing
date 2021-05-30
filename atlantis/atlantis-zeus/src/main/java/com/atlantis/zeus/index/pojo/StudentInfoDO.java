@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 /**
@@ -17,6 +18,7 @@ public class StudentInfoDO {
     /**
      * 学生唯一标识
      */
+    @NotNull(message = "#{stuGlobalKey property is null !!!}")
     public String stuGlobalKey;
 
     /**

@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * 测试平常case
@@ -15,6 +16,7 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 @Slf4j
 public class Main extends ClassLoader {
+    ReentrantReadWriteLock
 
     private static void solution(int[] array) {
         Queue<String> queue = new LinkedList<>();

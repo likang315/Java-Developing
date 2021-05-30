@@ -2,14 +2,17 @@ package com.atlantis.zeus.index.controller;
 
 import com.atlantis.zeus.base.annotation.ElapsedTime;
 import com.atlantis.zeus.base.utils.ApiResult;
+import com.atlantis.zeus.index.pojo.StudentInfoDO;
 import com.atlantis.zeus.index.service.impl.IndexStudentInfoImpl;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.Assert;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,8 +31,8 @@ public class StudentInfoController {
 
     @ElapsedTime
     @RequestMapping("/querySingle")
-    public ApiResult querySingle() {
-        return ApiResult.success(indexStudentInfo.getStudentInfo(1));
+    public ApiResult querySingle(Integer value) {
+        return ApiResult.success(indexStudentInfo.getStudentInfo(value));
     }
 
     @RequestMapping("/queryBatch")
@@ -46,8 +49,8 @@ public class StudentInfoController {
     }
 
     @RequestMapping("/insert")
-    public ApiResult insert() {
-        return ApiResult.success(indexStudentInfo.insertOneStudentInfo());
+    public ApiResult insert(@Valid @RequestBody StudentInfoDO info) {
+        return ApiResult.success(indexStudentInfo.insertOneStudentInfo(info));
     }
 
 

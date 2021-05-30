@@ -6,6 +6,7 @@ import com.atlantis.zeus.index.dao.rw.StudentInfoMapper;
 import com.atlantis.zeus.index.pojo.Score;
 import com.atlantis.zeus.index.pojo.StudentInfoDO;
 import com.atlantis.zeus.index.service.IndexStudentInfo;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -34,10 +35,9 @@ public class IndexStudentInfoImpl implements IndexStudentInfo {
     }
 
     @Override
-    public boolean insertOneStudentInfo() {
-        StudentInfoDO studentInfo = new StudentInfoDO().setStuGlobalKey("xian_006").setName("lihui").setAge(12).setSex(1);
+    public boolean insertOneStudentInfo(StudentInfoDO info) {
         // 调试数据库也会执行
-        int count = studentInfoMapper.insertStudentInfo(studentInfo);
+        int count = studentInfoMapper.insertStudentInfo(info);
         return count > 0;
     }
 

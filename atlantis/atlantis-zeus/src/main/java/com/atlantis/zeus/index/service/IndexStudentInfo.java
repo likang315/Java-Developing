@@ -34,7 +34,7 @@ public interface IndexStudentInfo {
      *
      * @return
      */
-    boolean insertOneStudentInfo();
+    boolean insertOneStudentInfo(StudentInfoDO info);
 
     /**
      * 通过学生ID 查询学生对应成绩
