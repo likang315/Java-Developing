@@ -28,12 +28,17 @@
         <result property="chinese" column="chinese"/>
     </resultMap>
 
+    <!-- 查询数量公共sql -->
+    <select id="studentCount" resultType="long">
+		SELECT count(*)
+		FROM local_student_info
+	</select>
+
     <select id="queryById" resultType="com.atlantis.zeus.index.pojo.StudentInfoDO" parameterType="java.lang.Integer">
         SELECT <include refid="fields"/>
         FROM local_student_info
         WHERE id = #{id}
     </select>
-
 
     <select id="queryStudentInfoById" resultType="java.util.Map" parameterType="java.util.List">
         SELECT <include refid="fields"/>
@@ -59,7 +64,5 @@
             </if>
         </where>
     </select>
-
-
 
 </mapper>

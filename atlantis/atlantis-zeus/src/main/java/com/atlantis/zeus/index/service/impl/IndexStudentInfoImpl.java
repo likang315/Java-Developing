@@ -6,7 +6,6 @@ import com.atlantis.zeus.index.dao.rw.StudentInfoMapper;
 import com.atlantis.zeus.index.pojo.Score;
 import com.atlantis.zeus.index.pojo.StudentInfoDO;
 import com.atlantis.zeus.index.service.IndexStudentInfo;
-import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

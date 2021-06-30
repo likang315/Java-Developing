@@ -2,12 +2,6 @@ package com.atlantis.zeus.index;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
-
 /**
  * 测试平常case
  *
@@ -16,24 +10,38 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  */
 @Slf4j
 public class Main extends ClassLoader {
-    ReentrantReadWriteLock
 
-    private static void solution(int[] array) {
-        Queue<String> queue = new LinkedList<>();
-        Lock lock = new ReentrantLock();
+    static class TreeNode {
+        private int val;
+        private TreeNode left;
+        private TreeNode right;
 
+        private TreeNode(int val) {
+            this.val = val;
+        }
+    }
 
+    static class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode(int x) {
+            val = x;
+        }
+    }
+
+    static void solution() {
 
     }
 
 
 
-
-
-    public static void main(String[] args) {
+    public  void main(String[] args) {
         try {
-            int[] array = {1, 2, 5, 7, 3};
-            solution(array);
+//            int[] array = {4, 2, 3, 1, 5, 6, 7};
+//            int[][] arr = {{917}, {558, 224, 24}, {691, 434, 234, 56}};
+            solution();
+
         } catch (Exception e) {
             log.info("Main_main: ", e);
         }

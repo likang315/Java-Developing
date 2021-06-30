@@ -43,4 +43,11 @@ public interface StudentInfoReadMapper {
      * @return
      */
     Score queryStuScoreById(@Param("globalKey") String globalKey);
+
+    /**
+     * 统计学生数量
+     *
+     * @return
+     */
+    Long studentCount();
 }

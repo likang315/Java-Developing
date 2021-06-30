@@ -29,5 +29,31 @@ public interface StudentInfoMapper {
      * @param studentInfoList
      * @return
      */
-    int batchInsertStudent(@Param("list") List<StudentInfoDO> studentInfoList);
+    int insertBatchStudent(@Param("list") List<StudentInfoDO> studentInfoList);
+
+    /**
+     * 更新
+     *
+     * @param studentInfo
+     * @return
+     */
+    int update(StudentInfoDO studentInfo);
+
+    /**
+     * 批量更新
+     *
+     * @param studentInfoList
+     * @return
+     */
+    int updateBatch(@Param("list") List<StudentInfoDO> studentInfoList);
+
+    /**
+     * 根据 ID 删除
+     *
+     * @param id
+     * @return
+     */
+    int delete(long id);
+
+
 }

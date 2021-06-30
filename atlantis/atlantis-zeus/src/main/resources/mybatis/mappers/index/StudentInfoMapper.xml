@@ -48,12 +48,76 @@
        </trim>
     </insert>
 
-    <insert id="batchInsertStudent" parameterType="java.util.List">
-        INSERT INTO local_student_info (stu_global_key, `name`, sex, age)
-        VALUES
+    <insert id="insertBatchStudent" parameterType="java.util.List">
+        INSERT INTO local_student_info
+        (
+            stu_global_key,
+            `name`,
+            sex,
+            age
+        ) VALUES
         <foreach index = "index" item = "item" collection = "list" separator = ",">
-            (#{student.stuGlobalKey}, #{student.name}, #{student.sex}, #{sutdnet.age})
+        (
+            #{student.stuGlobalKey},
+            #{student.name},
+            #{student.sex},
+            #{sutdnet.age}
+        )
         </foreach>
     </insert>
+
+    <update id="update" parameterType="com.atlantis.zeus.index.pojo.StudentInfoDO">
+        UPDATE local_student_info
+        <set>
+            <if test = "stuGlobalKey != null ">
+                stu_global_key = #{stuGlobalKey},
+            </if>
+            <if test = "name != null ">
+                `name` = #{name},
+            </if>
+            <if test = "classId != null ">
+                class_id = #{classId},
+            </if>
+            <if test = "sex != null ">
+                sex = #{sex},
+            </if>
+            <if test = "age != null ">
+                age = #{age},
+            </if>
+        </set>
+        WHERE id= #{id}
+    </update>
+
+    <!-- 批量编辑 -->
+    <update id="updateBatch" parameterType="com.atlantis.zeus.index.pojo.StudentInfoDO">
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            UPDATE local_student_info
+            <set>
+                <if test = "item.stuGlobalKey != null ">
+                    stu_global_key = #{item.stuGlobalKey},
+                </if>
+                <if test = "item.name != null ">
+                    `name` = #{item.name},
+                </if>
+                <if test = "item.classId != null ">
+                    class_id = #{item.classId},
+                </if>
+                <if test = "item.sex != null ">
+                    sex = #{item.sex},
+                </if>
+                <if test = "item.age != null ">
+                    age = #{item.age},
+                </if>
+            </set>
+            WHERE = #{item.id}
+        </foreach>
+    </update>
+
+    <delete id="delete" parameterType="long">
+        DELETE FROM local_student_info
+        <if test = "id != null ">
+            WHERE id= #{id}
+        </if>
+    </delete>
 
 </mapper>
