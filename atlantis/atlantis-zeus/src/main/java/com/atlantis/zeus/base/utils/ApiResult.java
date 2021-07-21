@@ -1,6 +1,5 @@
 package com.atlantis.zeus.base.utils;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
@@ -14,6 +13,11 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class ApiResult<T> implements Serializable {
     /**
+     * 版本号
+     */
+    private static final long serialVersionUID = 2704799687023929827L;
+
+    /**
      * 状态返回值
      */
     private boolean ret;
@@ -26,14 +30,12 @@ public class ApiResult<T> implements Serializable {
     /**
      * 后端具体传递给前端的消息
      */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     private T data;
 
     /**
-     * 错误码
+     * 状态码
      */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-    private Integer errcode;
+    private Integer code;
 
     /**
      * 为了保证符合规范，我们闭合构造权限
@@ -60,7 +62,7 @@ public class ApiResult<T> implements Serializable {
     public static ApiResult error(String message, Integer errcode) {
         ApiResult result = new ApiResult(false);
         result.msg = message;
-        result.errcode = errcode;
+        result.code = errcode;
         return result;
     }
 
@@ -192,7 +194,7 @@ public class ApiResult<T> implements Serializable {
 
     public static <T> ApiResult success(T object, String msg, Integer errcode) {
         ApiResult result = success(object, null);
-        result.errcode = errcode;
+        result.code = errcode;
         return result;
     }
 
@@ -260,7 +262,7 @@ public class ApiResult<T> implements Serializable {
         return ret;
     }
 
-    public Integer getErrcode() {
-        return errcode;
+    public Integer getCode() {
+        return code;
     }
 }
