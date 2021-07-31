@@ -15,7 +15,6 @@ import java.util.Map;
  * @author kangkang.li@qunar.com
  * @date 2020-10-11 20:51
  */
-@Repository
 public interface StudentInfoReadMapper {
 
     /**
@@ -34,7 +33,7 @@ public interface StudentInfoReadMapper {
      * @return
      */
     @MapKey("stuGlobalKey")
-    Map<String, String>  queryStudentInfoById(@Param("ids") List<String> ids);
+    Map<String, Map<String, String>>  queryStudentInfoById(@Param("ids") List<String> ids);
 
     /**
      * 通过学生ID查询学生对应成绩

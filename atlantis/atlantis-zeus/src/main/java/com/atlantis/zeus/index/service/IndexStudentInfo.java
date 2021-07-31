@@ -27,7 +27,7 @@ public interface IndexStudentInfo {
      * @param ids
      * @return
      */
-    Map<String, String> queryStudentInfoById(List<String> ids);
+    Map<String, Map<String, String>> queryStudentInfoById(List<String> ids);
 
     /**
      * 插入一个学生信息

@@ -41,13 +41,12 @@ public class IndexStudentInfoImpl implements IndexStudentInfo {
     }
 
     @Override
-    public Map<String, String> queryStudentInfoById(List<String> ids) {
-        Map<String, String> map =  studentInfoReadMapper.queryStudentInfoById(ids);
+    public Map<String, Map<String, String>> queryStudentInfoById(List<String> ids) {
+        Map<String, Map<String, String>> map =  studentInfoReadMapper.queryStudentInfoById(ids);
         if (Objects.isNull(map) || map.isEmpty()) {
             throw new RespException("IndexStudentInfoImpl_queryStudentInfoById", ids.toString());
         }
 
-        log.info(map.toString());
         return map;
     }
 

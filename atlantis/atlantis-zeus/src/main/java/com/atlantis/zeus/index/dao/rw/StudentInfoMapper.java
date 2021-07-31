@@ -12,7 +12,6 @@ import java.util.List;
  * @author kangkang.li@qunar.com
  * @date 2020-10-11 21:37
  */
-@Repository
 public interface StudentInfoMapper {
 
     /**

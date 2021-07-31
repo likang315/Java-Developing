@@ -17,12 +17,12 @@ import javax.sql.DataSource;
 
 /**
  * 配置数据源
+ * MapperScan 把指定包的mapper 实例化放到容器中
  *
  * @author kangkang.li@qunar.com
  * @date 2020-10-11 19:28
  */
-@MapperScan(basePackages = {"com.atlantis.zeus.index.dao.rw",
-        "com.atlantis.zeus.index.dao.readonly"},
+@MapperScan(basePackages = {"com.atlantis.zeus.index.dao"},
         sqlSessionTemplateRef = "writeSqlSessionTemplate")
 @Configuration
 public class DataSourceWriteConfig {

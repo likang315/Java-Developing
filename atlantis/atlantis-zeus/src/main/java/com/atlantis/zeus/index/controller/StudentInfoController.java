@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,9 +35,8 @@ public class StudentInfoController {
     }
 
     @RequestMapping("/queryBatch")
-    public ApiResult queryBatch() {
-        List<String> list = new ArrayList<>();
-        return ApiResult.success(indexStudentInfo.queryStudentInfoById(list));
+    public ApiResult queryBatch(@RequestBody List<String> globalKey) {
+        return ApiResult.success(indexStudentInfo.queryStudentInfoById(globalKey));
     }
 
     @RequestMapping("/queryScore")
@@ -52,7 +50,5 @@ public class StudentInfoController {
     public ApiResult insert(@Valid @RequestBody StudentInfoDO info) {
         return ApiResult.success(indexStudentInfo.insertOneStudentInfo(info));
     }
-
-
 
 }

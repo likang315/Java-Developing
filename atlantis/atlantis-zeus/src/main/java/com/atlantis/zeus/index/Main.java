@@ -30,17 +30,18 @@ public class Main extends ClassLoader {
         }
     }
 
-    static void solution() {
+    static void solution(String str) {
+        System.out.println(str.split("_")[1]);
 
     }
 
 
 
-    public  void main(String[] args) {
+    public static void main(String[] args) {
         try {
 //            int[] array = {4, 2, 3, 1, 5, 6, 7};
 //            int[][] arr = {{917}, {558, 224, 24}, {691, 434, 234, 56}};
-            solution();
+            solution("fsdfsdf_sdgg_gdsg");
 
         } catch (Exception e) {
             log.info("Main_main: ", e);
