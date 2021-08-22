@@ -4,6 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.atlantis.zeus.index.dao.readonly.StudentInfoReadMapper">
+    <!-- 指定namespace 开启二级缓存-->
+    <cache eviction="LRU" flushInterval="100000" size="1024" readOnly="true"/>
 
     <sql id="fields">
         `stu_global_key` as stuGlobalKey,
@@ -40,7 +42,7 @@
         WHERE id = #{id}
     </select>
 
-    <select id="queryStudentInfoById" resultType="java.util.Map" parameterType="java.util.List">
+    <select id="queryStudentInfoById" resultType="java.util.Map" parameterType="java.util.List" useCache="false">
         SELECT <include refid="fields"/>
         FROM local_student_info
         <where>

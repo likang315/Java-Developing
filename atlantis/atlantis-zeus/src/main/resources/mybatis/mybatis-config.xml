@@ -4,10 +4,13 @@
 <configuration>
     <settings>
         <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!--开启 sql 打印日志-->
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
     </settings>
 
     <typeHandlers>
         <package name="com.atlantis.zeus.index.dao.typehandler"/>
     </typeHandlers>
+    
 
 </configuration>
