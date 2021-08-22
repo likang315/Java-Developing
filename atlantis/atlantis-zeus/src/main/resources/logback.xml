@@ -9,7 +9,8 @@
     <property name="pattern"
               value="%d{yyyy-MM-dd HH:mm:ss.SSS}[%level][%thread] |  %C#%M:%L  |  %msg%n"/>
     <!--归档时间最小单位有关，保留时间-->
-    <property name="log.maxHistory" value="7"/>
+    <property name="log.hour.maxHistory" value="168"/>
+    <property name="log.day.maxHistory" value="7"/>
     <property name="log.level" value="info"/>
     <property name="log.maxSize" value="40GB" />
 
@@ -33,7 +34,7 @@
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <param name="fileNamePattern" value="${log.dir}/info-%d{yyyy-MM-dd_HH}.log"/>
-            <param name="maxHistory" value="${log.maxHistory}"/>
+            <param name="maxHistory" value="${log.hour.maxHistory}"/>
             <param name="totalSizeCap" value="${log.maxSize}"/>
         </rollingPolicy>
     </appender>
@@ -51,7 +52,7 @@
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <param name="fileNamePattern" value="${log.dir}/error-%d{yyyy-MM-dd_HH}.log"/>
-            <param name="maxHistory" value="${log.maxHistory}"/>
+            <param name="maxHistory" value="${log.hour.maxHistory}"/>
             <param name="totalSizeCap" value="${log.maxSize}"/>
         </rollingPolicy>
     </appender>
@@ -60,7 +61,7 @@
         <file>${log.dir}/dbsource.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <param name="fileNamePattern" value="${log.dir}/dbsource-%d{yyyy-MM-dd}.log"/>
-            <param name="maxHistory" value="${log.maxHistory}"/>
+            <param name="maxHistory" value="${log.day.maxHistory}"/>
         </rollingPolicy>
         <encoder>
             <pattern>${pattern}</pattern>
@@ -71,17 +72,35 @@
         <file>${log.dir}/redis.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <param name="fileNamePattern" value="${log.dir}/redis-%d{yyyy-MM-dd}.log"/>
-            <param name="maxHistory" value="${log.maxHistory}"/>
+            <param name="maxHistory" value="${log.day.maxHistory}"/>
         </rollingPolicy>
         <encoder>
             <pattern>${log.pattern}</pattern>
         </encoder>
     </appender>
 
+    <!-- 线程池监控日志 -->
+    <appender name="threadPoolAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/threadPool.log</file>
+        <encoder>
+            <pattern>${pattern}</pattern>
+            <charset>${encoding}</charset>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <param name="fileNamePattern" value="${log.dir}/threadPool-%d{yyyy-MM-dd_HH}.log"/>
+            <param name="maxHistory" value="${log.hour.maxHistory}"/>
+            <param name="totalSizeCap" value="${log.maxSize}"/>
+        </rollingPolicy>
+    </appender>
+
     <!--自定义logger-->
     <logger name="com.atlantis.zeus.base.db" level="warn" additivity="false">
         <level value="INFO" />
         <appender-ref ref="dbAccessAppender" />
+    </logger>
+
+    <logger name="threadPool" level="info" additivity="false">
+        <appender-ref ref="threadPoolAppender"/>
     </logger>
 
 <!--    <logger name="com.xupt.redis.storage" level="warn" additivity="false">-->
