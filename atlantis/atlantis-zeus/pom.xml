@@ -64,6 +64,12 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 		</dependency>
 
+		<!-- spring 重试组件 -->
+		<dependency>
+			<groupId>org.springframework.retry</groupId>
+			<artifactId>spring-retry</artifactId>
+		</dependency>
+
 		<!--mybatis-->
 		<dependency>
 			<groupId>mysql</groupId>

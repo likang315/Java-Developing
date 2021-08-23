@@ -26,7 +26,7 @@ public class IndexScheduled {
      * 异步每分钟执行一次
      */
     @Async("scheduledThreadPool")
-    @Scheduled(cron = "* * * * * ?")
+    @Scheduled(cron = "0 * * * * ?")
     public void execute() {
         try {
             Score score = indexStudentInfo.queryStuScoreById("beijing_001");

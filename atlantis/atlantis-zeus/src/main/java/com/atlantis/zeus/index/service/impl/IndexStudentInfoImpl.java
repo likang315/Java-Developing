@@ -7,6 +7,8 @@ import com.atlantis.zeus.index.pojo.Score;
 import com.atlantis.zeus.index.pojo.StudentInfoDO;
 import com.atlantis.zeus.index.service.IndexStudentInfo;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -40,6 +42,14 @@ public class IndexStudentInfoImpl implements IndexStudentInfo {
         return count > 0;
     }
 
+    /**
+     * 使用重试注解
+     * 指定异常重试，默认最大重试3次，@backoff 指定每次重试间隔3ms，每次增加2倍
+     *
+     * @param ids
+     * @return
+     */
+    @Retryable(value = {RespException.class}, backoff = @Backoff(delay = 3, multiplier = 2))
     @Override
     public Map<String, Map<String, String>> queryStudentInfoById(List<String> ids) {
         Map<String, Map<String, String>> map =  studentInfoReadMapper.queryStudentInfoById(ids);
