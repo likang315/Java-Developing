@@ -1,10 +1,11 @@
 package com.atlantis.zeus.index.service.impl;
 
+import com.atlantis.zeus.base.annotation.LogRecord;
 import com.atlantis.zeus.base.exception.RespException;
 import com.atlantis.zeus.index.dao.readonly.StudentInfoReadMapper;
 import com.atlantis.zeus.index.dao.rw.StudentInfoMapper;
 import com.atlantis.zeus.index.pojo.Score;
-import com.atlantis.zeus.index.pojo.StudentInfoDO;
+import com.atlantis.zeus.index.pojo.entity.StudentInfoDO;
 import com.atlantis.zeus.index.service.IndexStudentInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.retry.annotation.Backoff;
@@ -35,6 +36,7 @@ public class IndexStudentInfoImpl implements IndexStudentInfo {
         return studentInfoReadMapper.queryById(id);
     }
 
+    @LogRecord(biz = "#info")
     @Override
     public boolean insertOneStudentInfo(StudentInfoDO info) {
         // 调试数据库也会执行

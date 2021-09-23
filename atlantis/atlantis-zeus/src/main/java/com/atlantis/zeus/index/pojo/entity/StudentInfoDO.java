@@ -1,4 +1,4 @@
-package com.atlantis.zeus.index.pojo;
+package com.atlantis.zeus.index.pojo.entity;
 
 import lombok.Data;
 import lombok.ToString;

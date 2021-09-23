@@ -1,8 +1,7 @@
 package com.atlantis.zeus.index.dao.rw;
 
-import com.atlantis.zeus.index.pojo.StudentInfoDO;
+import com.atlantis.zeus.index.pojo.entity.StudentInfoDO;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 

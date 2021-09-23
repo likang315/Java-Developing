@@ -1,7 +1,7 @@
 package com.atlantis.zeus.index.service;
 
 import com.atlantis.zeus.index.pojo.Score;
-import com.atlantis.zeus.index.pojo.StudentInfoDO;
+import com.atlantis.zeus.index.pojo.entity.StudentInfoDO;
 
 import java.util.List;
 import java.util.Map;

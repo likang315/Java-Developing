@@ -15,7 +15,7 @@
         `update_time` as updateTime
     </sql>
 
-    <insert id="insertStudentInfo" parameterType="com.atlantis.zeus.index.pojo.StudentInfoDO">
+    <insert id="insertStudentInfo" parameterType="com.atlantis.zeus.index.pojo.entity.StudentInfoDO">
        INSERT INTO local_student_info
        <trim prefix = "(" suffix = ")" suffixOverrides = ",">
             <if test = "student.stuGlobalKey != null and student.stuGlobalKey != ''">
@@ -66,7 +66,7 @@
         </foreach>
     </insert>
 
-    <update id="update" parameterType="com.atlantis.zeus.index.pojo.StudentInfoDO">
+    <update id="update" parameterType="com.atlantis.zeus.index.pojo.entity.StudentInfoDO">
         UPDATE local_student_info
         <set>
             <if test = "stuGlobalKey != null ">
@@ -89,7 +89,7 @@
     </update>
 
     <!-- 批量编辑 -->
-    <update id="updateBatch" parameterType="com.atlantis.zeus.index.pojo.StudentInfoDO">
+    <update id="updateBatch" parameterType="com.atlantis.zeus.index.pojo.entity.StudentInfoDO">
         <foreach collection="list" item="item" index="index" open="" close="" separator=";">
             UPDATE local_student_info
             <set>

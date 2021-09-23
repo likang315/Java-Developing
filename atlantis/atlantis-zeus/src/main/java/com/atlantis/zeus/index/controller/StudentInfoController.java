@@ -2,7 +2,7 @@ package com.atlantis.zeus.index.controller;
 
 import com.atlantis.zeus.base.annotation.ElapsedTime;
 import com.atlantis.zeus.base.utils.ApiResult;
-import com.atlantis.zeus.index.pojo.StudentInfoDO;
+import com.atlantis.zeus.index.pojo.entity.StudentInfoDO;
 import com.atlantis.zeus.index.service.impl.IndexStudentInfoImpl;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.Assert;

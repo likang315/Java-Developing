@@ -14,4 +14,11 @@ public class AopOrderedConstant {
      * @RecordTime
      */
     public static final int ORDERED_RECORD_TIME = 1;
+
+    /**
+     * 顺序
+     *
+     * @RecordTime
+     */
+    public static final int ORDERED_RECORD_TWO = 2;
 }

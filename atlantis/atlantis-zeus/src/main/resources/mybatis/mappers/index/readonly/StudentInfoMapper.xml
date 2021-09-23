@@ -16,7 +16,7 @@
         `update_time` as updateTime
     </sql>
 
-    <resultMap id="stu" type="com.atlantis.zeus.index.pojo.StudentInfoDO">
+    <resultMap id="stu" type="com.atlantis.zeus.index.pojo.entity.StudentInfoDO">
         <result property="stuGlobalKey" column="stu_global_key"/>
         <result property="name" column="name"/>
         <result property="sex" column="sex"/>
@@ -36,7 +36,7 @@
 		FROM local_student_info
 	</select>
 
-    <select id="queryById" resultType="com.atlantis.zeus.index.pojo.StudentInfoDO" parameterType="java.lang.Integer">
+    <select id="queryById" resultType="com.atlantis.zeus.index.pojo.entity.StudentInfoDO" parameterType="java.lang.Integer">
         SELECT <include refid="fields"/>
         FROM local_student_info
         WHERE id = #{id}
