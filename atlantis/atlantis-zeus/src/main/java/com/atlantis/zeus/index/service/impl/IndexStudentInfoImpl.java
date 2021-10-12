@@ -36,7 +36,7 @@ public class IndexStudentInfoImpl implements IndexStudentInfo {
         return studentInfoReadMapper.queryById(id);
     }
 
-    @LogRecord(biz = "#info")
+    @LogRecord(operateTime = "new java.util.Date()", biz = "#info")
     @Override
     public boolean insertOneStudentInfo(StudentInfoDO info) {
         // 调试数据库也会执行
