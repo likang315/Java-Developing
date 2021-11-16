@@ -1,8 +1,8 @@
 package com.atlantis.zeus.base.threadpool;
 
 import com.atlantis.zeus.base.utils.NetworkUtil;
-import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -55,7 +55,7 @@ public class CustomThreadPool {
                 keepAliveTime,
                 TimeUnit.MILLISECONDS,
                 workQueue,
-                new ThreadFactoryBuilder().setNameFormat(ip + "-" + threadName + "-%d").build(),
+                new BasicThreadFactory.Builder().namingPattern(ip + "-" + threadName + "-%d").build(),
                 rejectedExecutionHandler);
 
         log.info("CustomThreadPool-buildThreadPoolExecutor: threadPool prefix: {} launch successful", threadName);
