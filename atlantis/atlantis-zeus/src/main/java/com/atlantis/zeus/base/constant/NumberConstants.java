@@ -25,6 +25,8 @@ public class NumberConstants {
 
     public final int FIVE = 5;
 
+    public final int TEN = 10;
+
     public final int ELEVEN = 11;
 
     public final int FIFTY = 50;

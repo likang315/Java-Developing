@@ -81,7 +81,7 @@
 
     <!-- 线程池监控日志 -->
     <appender name="threadPoolAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOG_HOME}/threadPool.log</file>
+        <file>${log.dir}/threadPool.log</file>
         <encoder>
             <pattern>${pattern}</pattern>
             <charset>${encoding}</charset>

@@ -22,7 +22,7 @@ public class ThreadPoolMonitor {
      * 业务线程池
      *
      */
-    private static final ConcurrentHashMap<String, ExecutorService> BUSINESS_THREAD_POOL = new ConcurrentHashMap<>();
+    public static final ConcurrentHashMap<String, ExecutorService> BUSINESS_THREAD_POOL = new ConcurrentHashMap<>();
 
     /**
      * 注册线程池到队列中
