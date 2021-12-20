@@ -36,15 +36,9 @@ public class Main extends ClassLoader {
     }
 
 
-
     public static void main(String[] args) {
-        try {
-//            int[] array = {4, 2, 3, 1, 5, 6, 7};
-//            int[][] arr = {{917}, {558, 224, 24}, {691, 434, 234, 56}};
-            solution("fsdfsdf_sdgg_gdsg");
-
-        } catch (Exception e) {
-            log.info("Main_main: ", e);
-        }
+        int[] array = {4, 2, 3, 1, 5, 6, 7};
+        int[][] arr = {{917}, {558, 224, 24}, {691, 434, 234, 56}};
+        solution("");
     }
 }
