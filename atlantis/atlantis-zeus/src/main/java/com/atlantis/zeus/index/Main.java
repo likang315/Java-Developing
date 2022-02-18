@@ -31,7 +31,6 @@ public class Main extends ClassLoader {
     }
 
     static void solution(String str) {
-        System.out.println(str.split("_")[1]);
 
     }
 

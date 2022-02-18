@@ -90,7 +90,7 @@ public class DownloadServiceImpl implements DownloadService {
         for (int i = 0; i < pageSum; i++) {
             // 字段顺序无法控制
             Map<String, Map<String, String>> result = commonReadMapper.query(tableName, fields, where, PAGE_SIZE, i * PAGE_SIZE);
-            ExcelUtil.buildExcelFile(convert(result), tableName + "_" + count, book,
+            ExcelUtil.writeExcel(convert(result), tableName + "_" + count, book,
                     !Objects.equals(i, NumberConstants.ZERO));
         }
 

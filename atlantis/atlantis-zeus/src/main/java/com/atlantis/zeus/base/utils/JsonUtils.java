@@ -24,6 +24,7 @@ import java.util.TimeZone;
 
 /**
  * Json 工具类
+ * org.json.JSONObject
  *
  * @author kangkang.li@qunar.com
  * @date 2021-01-24 18:39
@@ -183,7 +184,8 @@ public class JsonUtils {
     }
 
     /**
-     * 从Json串中获取树模型，处理大Json
+     * 从Json串中获取树模型
+     * 适用于不需要反序列化Json串，只想获取层级下一个节点的值 （findPath）
      *
      * @param jsonStr
      * @return
