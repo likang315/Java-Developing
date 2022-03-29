@@ -13,7 +13,9 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -28,6 +30,12 @@ import java.util.Objects;
  */
 @Slf4j
 public class ExcelUtil {
+
+    /**
+     * 文件路径
+     */
+    private static final String LOCATION = "data.xlsx";
+
     /**
      * 构造 多个sheet Excel 数据
      *
@@ -147,6 +155,42 @@ public class ExcelUtil {
                 }
             } catch (IOException e) {
                 log.error("ExcelExportUtils_readExcel: close IO error, e: ", e);
+            }
+        }
+    }
+
+    /**
+     * 将数据写入到 Excel 中
+     *
+     * @param book
+     * @return
+     */
+    public static Boolean writeDataToExcel(XSSFWorkbook book) {
+        FileOutputStream os = null;
+        try {
+            File file = new File(LOCATION);
+            // 不可重试性错误
+            if (file.exists() && !file.delete()) {
+                return Boolean.FALSE;
+            }
+            if (!file.createNewFile()) {
+                return Boolean.FALSE;
+            }
+            os = new FileOutputStream(file.getAbsolutePath());
+            book.write(os);
+            // 统一上传到静态资源服务器上
+
+            return Boolean.TRUE;
+        } catch (Exception e) {
+            log.error("ExcelDownloadService_writeDataToExcel: exp: ", e);
+            return Boolean.FALSE;
+        } finally {
+            try {
+                if (Objects.nonNull(os)) {
+                    os.close();
+                }
+            } catch (IOException e) {
+                log.error("ExcelDownloadService_writeDataToExcel: exp: ", e);
             }
         }
     }

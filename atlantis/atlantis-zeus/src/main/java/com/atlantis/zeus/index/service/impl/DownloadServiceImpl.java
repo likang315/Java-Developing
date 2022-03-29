@@ -39,12 +39,6 @@ public class DownloadServiceImpl implements DownloadService {
      */
     private static final int PAGE_SIZE = 5000;
 
-    /**
-     * 文件路径
-     */
-    private static final String LOCATION = "data.xlsx";
-
-
     @Resource
     private CommonReadMapper commonReadMapper;
 
@@ -65,7 +59,7 @@ public class DownloadServiceImpl implements DownloadService {
             int pageSum = (count + PAGE_SIZE - 1) / PAGE_SIZE;
 
             XSSFWorkbook book = pageQuery(tableName, fields, where, pageSum, count);
-            boolean result = writeDataToExcel(book);
+            boolean result = ExcelUtil.writeDataToExcel(book);
 
             return vo.setNosUrl(String.valueOf(result));
         } catch (Exception e) {
@@ -127,40 +121,4 @@ public class DownloadServiceImpl implements DownloadService {
         return Pair.of(title, rows);
     }
 
-
-    /**
-     * 将数据写入到 Excel 中
-     *
-     * @param book
-     * @return
-     */
-    private Boolean writeDataToExcel(XSSFWorkbook book) {
-        FileOutputStream os = null;
-        try {
-            File file = new File(LOCATION);
-            // 不可重试性错误
-            if (file.exists() && !file.delete()) {
-                return Boolean.FALSE;
-            }
-            if (!file.createNewFile()) {
-                return Boolean.FALSE;
-            }
-            os = new FileOutputStream(file.getAbsolutePath());
-            book.write(os);
-            // 统一上传到静态资源服务器上
-
-            return Boolean.TRUE;
-        } catch (Exception e) {
-            log.error("ExcelDownloadService_writeDataToExcel: exp: ", e);
-            return Boolean.FALSE;
-        } finally {
-            try {
-                if (Objects.nonNull(os)) {
-                    os.close();
-                }
-            } catch (IOException e) {
-                log.error("ExcelDownloadService_writeDataToExcel: exp: ", e);
-            }
-        }
-    }
 }
