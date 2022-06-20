@@ -113,6 +113,13 @@
                 <version>${commons-lang3.version}</version>
             </dependency>
 
+            <!--httpclients-->
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${httpclient.version}</version>
+            </dependency>
+
             <!-- poi excel -->
             <dependency>
                 <groupId>org.apache.poi</groupId>
