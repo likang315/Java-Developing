@@ -10,3 +10,12 @@ zeus:
       dbName: ${datasource.druid.driver-class-name}
       core-pool-size: 10
       max-pool-size: 30
+    redisson:
+      address: ${redis.address}
+      database: ${redis.database}
+      password: ${redis.password}
+      timeout: ${redis.timeout}
+      minIdle: ${redis.pool.minIdle}
+      maxIdle: ${redis.pool.maxIdle}
+      maxTotal: ${redis.pool.maxTotal}
+      maxWaitMillis: ${redis.pool.maxWaitMillis}
