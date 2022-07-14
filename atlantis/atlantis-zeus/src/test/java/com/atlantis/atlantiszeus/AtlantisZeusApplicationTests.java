@@ -15,14 +15,15 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @Slf4j
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes = AtlantisZeusApplicationTests.class)
 class AtlantisZeusApplicationTests {
 
 	/**
 	 * 单元测试
 	 */
 	@Test
-	void contextLoads() {
+	void contextLoads() throws InterruptedException {
+		Thread.sleep(10 * 1000);
 		log.warn("AtlantisZeusApplicationTests_contextLoads: test !!!");
 	}
 

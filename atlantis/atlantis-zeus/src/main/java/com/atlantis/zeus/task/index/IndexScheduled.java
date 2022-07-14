@@ -1,5 +1,7 @@
 package com.atlantis.zeus.task.index;
 
+import com.atlantis.zeus.base.utils.NetworkUtil;
+import com.atlantis.zeus.base.utils.RedissonUtil;
 import com.atlantis.zeus.index.pojo.Score;
 import com.atlantis.zeus.index.service.IndexStudentInfo;
 import lombok.extern.slf4j.Slf4j;
@@ -8,6 +10,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * 首页定时任务
@@ -19,8 +22,13 @@ import javax.annotation.Resource;
 @Component
 public class IndexScheduled {
 
+    private final String LOCK = "index:task:lock";
+
     @Resource
     private IndexStudentInfo indexStudentInfo;
+
+    @Resource
+    private RedissonUtil redissonUtil;
 
     /**
      * 异步每分钟执行一次
@@ -28,13 +36,22 @@ public class IndexScheduled {
     @Async("scheduledThreadPool")
     @Scheduled(cron = "0 * * * * ?")
     public void execute() {
+        // 分布式锁(可重入锁)
+        if (!redissonUtil.tryLock(LOCK, 0,  60 * 10)) {
+            return;
+        }
+        log.info("IndexScheduled_execute start, ip: {}", NetworkUtil.queryIpAddress());
         try {
             Score score = indexStudentInfo.queryStuScoreById("beijing_001");
+            CompletableFuture.runAsync(() -> {
+                System.out.println(redissonUtil.tryLock(LOCK, 0, 60 * 10));
+            });
             log.info("IndexSchedule_execute success: score: {}", score);
         } catch (Exception e) {
             log.error("IndexSchedule_execute fail: exp: ", e);
         }
-    }
 
+        log.info("IndexScheduled_execute end!!!");
+    }
 
 }

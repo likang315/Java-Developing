@@ -25,10 +25,18 @@ public class RedissonConfiguration {
         private String address;
         private String password;
         private int database;
+
+        /**
+         * redis命令超时时间
+         */
         private int timeout;
         private int maxIdle;
         private int minIdle;
         private int maxTotal;
+
+        /**
+         * 无用连接过期时间
+         */
         private int maxWaitMillis;
     }
 
@@ -60,8 +68,9 @@ public class RedissonConfiguration {
                 .setPassword(redissonConfig.password)
                 .setTimeout(redissonConfig.getTimeout())
                 .setDatabase(redissonConfig.getDatabase())
-                .setConnectionPoolSize(redissonConfig.getMaxIdle())
-                .setConnectionMinimumIdleSize(redissonConfig.getMinIdle());
+                .setConnectionPoolSize(redissonConfig.getMaxTotal())
+                .setConnectionMinimumIdleSize(redissonConfig.getMinIdle())
+                .setIdleConnectionTimeout(redissonConfig.getMaxWaitMillis());
 
         return Redisson.create(config);
     }
