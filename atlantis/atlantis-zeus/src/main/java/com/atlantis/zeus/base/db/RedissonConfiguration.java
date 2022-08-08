@@ -4,6 +4,7 @@ import lombok.Data;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
 import org.redisson.client.codec.StringCodec;
+import org.redisson.codec.JsonJacksonCodec;
 import org.redisson.config.Config;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -61,7 +62,7 @@ public class RedissonConfiguration {
     @Bean(name = "redissonClient", destroyMethod = "shutdown")
     RedissonClient initRedissonClient(@Qualifier("redissonConfig") RedissonConfig redissonConfig) {
         Config config = new Config();
-        config.setCodec(StringCodec.INSTANCE)
+        config.setCodec(JsonJacksonCodec.INSTANCE)
                 // 单点模式
                 .useSingleServer()
                 .setAddress(redissonConfig.getAddress())
