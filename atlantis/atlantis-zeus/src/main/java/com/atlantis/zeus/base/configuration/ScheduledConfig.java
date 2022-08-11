@@ -11,7 +11,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * @author likang02@corp.netease.com
  * @date 2021-08-22 16:33
  */
-@EnableAsync
 @EnableScheduling
 @Configuration
 public class ScheduledConfig {
