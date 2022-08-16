@@ -32,8 +32,8 @@ public class IndexScheduled {
 
     /**
      * 异步每分钟执行一次
+     * 注意：同一个任务依次执行
      */
-    @Async("scheduledThreadPool")
     @Scheduled(cron = "0 * * * * ?")
     public void execute() {
         // 分布式锁(可重入锁)
@@ -54,4 +54,13 @@ public class IndexScheduled {
         log.info("IndexScheduled_execute end!!!");
     }
 
+    /**
+     * 使用异步线程池，多个任务并发执行
+     * 注意：同一个任务也是并发执行
+     */
+    @Async("scheduledThreadPool")
+    @Scheduled(cron = "0 * * * * ?")
+    public void scheduleAsync() {
+        log.info("IndexScheduled_scheduleAsync: use scheduledThreadPool execute");
+    }
 }
