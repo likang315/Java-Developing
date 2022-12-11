@@ -16,7 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @Slf4j
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = AtlantisZeusApplicationTests.class)
-class AtlantisZeusApplicationTests {
+public class AtlantisZeusApplicationTests {
 
 	/**
 	 * 单元测试
