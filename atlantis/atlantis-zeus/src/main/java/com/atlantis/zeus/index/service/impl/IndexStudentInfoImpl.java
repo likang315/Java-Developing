@@ -8,6 +8,7 @@ import com.atlantis.zeus.index.pojo.Score;
 import com.atlantis.zeus.index.pojo.entity.StudentInfoDO;
 import com.atlantis.zeus.index.service.IndexStudentInfo;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,7 @@ public class IndexStudentInfoImpl implements IndexStudentInfo {
     @Resource
     private StudentInfoMapper studentInfoMapper;
 
+    @Cacheable(value = "studentInfoDO")
     @Override
     public StudentInfoDO getStudentInfo(int id) {
         return studentInfoReadMapper.queryById(id);
