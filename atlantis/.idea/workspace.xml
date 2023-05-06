@@ -8,8 +8,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b88aab76-233e-48b9-a066-dbc15c4ce812" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/atlantis-zeus/src/main/java/com/atlantis/zeus/base/configuration/CacheConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/atlantis-zeus/src/main/java/com/atlantis/zeus/index/service/impl/IndexStudentInfoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/atlantis-zeus/src/main/java/com/atlantis/zeus/index/service/impl/IndexStudentInfoImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/atlantis-zeus/src/main/java/com/atlantis/zeus/base/custom/SpringBootBannerCustom.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/atlantis-zeus/src/main/resources/spring/banner.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/atlantis-zeus/src/main/java/com/atlantis/zeus/AtlantisZeusApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/atlantis-zeus/src/main/java/com/atlantis/zeus/AtlantisZeusApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/atlantis-zeus/src/main/java/com/atlantis/zeus/base/db/RedissonConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/atlantis-zeus/src/main/java/com/atlantis/zeus/base/db/RedissonConfiguration.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/atlantis-zeus/src/main/resources.dev/config/default.properties" beforeDir="false" afterPath="$PROJECT_DIR$/atlantis-zeus/src/main/resources.dev/config/default.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -94,6 +96,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="jar://$PROJECT_DIR$/../../../Java/Maven/private_local_maven/org/springframework/spring-context/5.2.8.RELEASE/spring-context-5.2.8.RELEASE-sources.jar!/org/springframework/scheduling/config/TriggerTask.java" root0="SKIP_INSPECTION" />
@@ -259,6 +262,10 @@
     <option name="notificationShown" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/atlantis-zeus/src/main/resources.prod/config" />
+      <recent name="$PROJECT_DIR$/atlantis-zeus/src/main/resources.dev/config" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/atlantis-zeus/src/main/resources/mybatis/mappers/common/readonly" />
       <recent name="$PROJECT_DIR$/atlantis-zeus/src/main/resources/mybatis/mappers/index/common/readonly" />
@@ -268,10 +275,6 @@
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.atlantis.zeus.index" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/atlantis-zeus/src/main/resources.prod/config" />
-      <recent name="$PROJECT_DIR$/atlantis-zeus/src/main/resources.dev/config" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -861,6 +864,11 @@
           <url>file://$PROJECT_DIR$/atlantis-zeus/src/main/java/com/atlantis/zeus/index/service/impl/IndexStudentInfoImpl.java</url>
           <line>37</line>
           <option name="timeStamp" value="39" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/atlantis-zeus/src/main/java/com/atlantis/zeus/base/db/RedissonConfiguration.java</url>
+          <line>65</line>
+          <option name="timeStamp" value="47" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-defaults>

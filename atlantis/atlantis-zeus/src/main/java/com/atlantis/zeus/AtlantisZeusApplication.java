@@ -1,5 +1,6 @@
 package com.atlantis.zeus;
 
+import com.atlantis.zeus.base.custom.SpringBootBannerCustom;
 import lombok.val;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -37,7 +38,9 @@ public class AtlantisZeusApplication {
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(AtlantisZeusApplication.class, args);
+		SpringApplication app = new SpringApplication(AtlantisZeusApplication.class);
+		app.setBanner(new SpringBootBannerCustom());
+		app.run(args);
 	}
 
 }

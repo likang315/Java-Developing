@@ -22,7 +22,7 @@ import org.springframework.context.annotation.Configuration;
 public class RedissonConfiguration {
 
     @Data
-    public class RedissonConfig {
+    public static class RedissonConfig {
         private String address;
         private String password;
         private int database;
@@ -62,11 +62,11 @@ public class RedissonConfiguration {
     @Bean(name = "redissonClient", destroyMethod = "shutdown")
     RedissonClient initRedissonClient(@Qualifier("redissonConfig") RedissonConfig redissonConfig) {
         Config config = new Config();
+        // 单点模式
         config.setCodec(JsonJacksonCodec.INSTANCE)
-                // 单点模式
                 .useSingleServer()
                 .setAddress(redissonConfig.getAddress())
-                .setPassword(redissonConfig.password)
+//                .setPassword(redissonConfig.password)
                 .setTimeout(redissonConfig.getTimeout())
                 .setDatabase(redissonConfig.getDatabase())
                 .setConnectionPoolSize(redissonConfig.getMaxTotal())
