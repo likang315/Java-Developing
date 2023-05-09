@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Index Home</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <!-- 引入Quill的CSS文件 -->
+    <link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet">
+
+    <style>
+        label {
+            font-size: 18px;
+        }
+
+        .form-control.custom-height {
+            height: 130px; /* 修改高度为260px */
+        }
+
+        .ql-container.ql-snow {
+            max-height: 300px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <!--  注意 Thymeleaf 表达式示例  -->
+                <h3>[[${msg}]]</h3>
+                <label for="inputDesc">请输入学生ID：</label>
+                <div class="input-group">
+                    <textarea id="inputDesc" class="form-control custom-height" placeholder=""></textarea>
+                    <span class="input-group justify-content-end" style="padding-top: 10px">
+                        <button class="btn btn-primary" type="button" onclick="submitForm()">Submit</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="inputDesc">响应信息：</label>
+                <div id="editor" style="height: 400px"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+<!-- 引入Quill的JS文件 -->
+<script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
+
+
+<script>
+    // 多文本编辑框
+    let options = {
+        modules: {
+            toolbar: [
+                ['bold', 'italic', 'underline', 'strike'],        // 加粗、斜体、下划线、删除线
+                [{'color': []}, {'background': []}],          // 文字颜色、背景色
+                [{'header': [1, 2, 3, 4, 5, 6, false]}],         // 标题级别
+                [{'align': []}],                                // 对齐方式
+                ['link', 'image', 'video'],                       // 链接、图片、视频
+                ['clean']                                         // 清除格式
+            ]
+        },
+        placeholder: 'Display content...',
+        theme: 'snow'
+    };
+    let quill = new Quill('#editor', options);
+
+    // XHR 请求
+    function submitForm() {
+        let xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                let result = JSON.parse(xhr.responseText);
+                quill.setContents(quill.clipboard.convert(result.data.stuGlobalKey));
+            }
+        };
+
+        let inputDesc = document.getElementById("inputDesc").value;
+        xhr.open("GET", "/index/querySingle?value=" + inputDesc, true);
+        xhr.send();
+    }
+
+</script>
+
+</body>
+</html>
