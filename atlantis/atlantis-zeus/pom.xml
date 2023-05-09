@@ -183,8 +183,18 @@
                 </configuration>
             </plugin>
         </plugins>
+		<!--资源文件-->
+		<resources>
+			<resource>
+				<directory>src/main/resources.${deploy.type}</directory>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+		</resources>
     </build>
 
+	<!--配置不同环境-->
 	<profiles>
 		<profile>
 			<id>beta</id>
