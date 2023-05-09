@@ -7,12 +7,7 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b88aab76-233e-48b9-a066-dbc15c4ce812" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/atlantis-zeus/src/main/java/com/atlantis/zeus/index/controller/IndexPageController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/atlantis-zeus/src/main/resources/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/atlantis-zeus/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/atlantis-zeus/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/atlantis-zeus/src/main/resources/templates/error.html" beforeDir="false" afterPath="$PROJECT_DIR$/atlantis-zeus/src/main/resources/templates/error.html" afterDir="false" />
-    </list>
+    <list default="true" id="b88aab76-233e-48b9-a066-dbc15c4ce812" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -671,7 +666,7 @@
       <workItem from="1671780914251" duration="3121000" />
       <workItem from="1683513899599" duration="6832000" />
       <workItem from="1683617251070" duration="678000" />
-      <workItem from="1683618072247" duration="6760000" />
+      <workItem from="1683618072247" duration="7076000" />
     </task>
     <servers />
   </component>
