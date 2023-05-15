@@ -1,6 +1,7 @@
 package com.atlantis.zeus.index.service.impl;
 
 import com.atlantis.zeus.base.annotation.LogRecord;
+import com.atlantis.zeus.base.exception.BizException;
 import com.atlantis.zeus.base.exception.RespException;
 import com.atlantis.zeus.index.dao.readonly.StudentInfoReadMapper;
 import com.atlantis.zeus.index.dao.rw.StudentInfoMapper;
@@ -42,7 +43,12 @@ public class IndexStudentInfoImpl implements IndexStudentInfo {
     @Override
     public boolean insertOneStudentInfo(StudentInfoDO info) {
         // 调试数据库也会执行
-        int count = studentInfoMapper.insertStudentInfo(info);
+        int count = 0;
+        try {
+            count = studentInfoMapper.insertStudentInfo(info);
+        } catch (Exception e) {
+            throw new BizException("student insert error", info);
+        }
         return count > 0;
     }
 

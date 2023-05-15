@@ -8,8 +8,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b88aab76-233e-48b9-a066-dbc15c4ce812" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/atlantis-zeus/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/atlantis-zeus/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/atlantis-zeus/src/main/java/com/atlantis/zeus/base/aop/GlobalExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/atlantis-zeus/src/main/java/com/atlantis/zeus/base/exception/BizException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/atlantis-zeus/src/main/java/com/atlantis/zeus/base/utils/ApiResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/atlantis-zeus/src/main/java/com/atlantis/zeus/base/utils/ApiResult.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/atlantis-zeus/src/main/java/com/atlantis/zeus/index/controller/StudentInfoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/atlantis-zeus/src/main/java/com/atlantis/zeus/index/controller/StudentInfoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/atlantis-zeus/src/main/java/com/atlantis/zeus/index/service/impl/IndexStudentInfoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/atlantis-zeus/src/main/java/com/atlantis/zeus/index/service/impl/IndexStudentInfoImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,8 +48,8 @@
         <option value="spring-beans.schema" />
         <option value="AnnotationType" />
         <option value="Kotlin File" />
-        <option value="Class" />
         <option value="HTML File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -670,7 +673,8 @@
       <workItem from="1683513899599" duration="6832000" />
       <workItem from="1683617251070" duration="678000" />
       <workItem from="1683618072247" duration="7405000" />
-      <workItem from="1683631299262" duration="4428000" />
+      <workItem from="1683631299262" duration="4531000" />
+      <workItem from="1684149727114" duration="3474000" />
     </task>
     <task id="LOCAL-00001" summary="feature: add filter">
       <created>1683625517267</created>
@@ -866,9 +870,14 @@
           <option name="timeStamp" value="37" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/atlantis-zeus/src/main/java/com/atlantis/zeus/base/aop/GlobalExceptionHandler.java</url>
+          <line>46</line>
+          <option name="timeStamp" value="74" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/atlantis-zeus/src/main/java/com/atlantis/zeus/index/controller/StudentInfoController.java</url>
-          <line>37</line>
-          <option name="timeStamp" value="71" />
+          <line>54</line>
+          <option name="timeStamp" value="76" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-defaults>

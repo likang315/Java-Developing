@@ -59,8 +59,8 @@ public class ApiResult<T> implements Serializable {
      * @param errcode
      * @return ApiResult
      */
-    public static ApiResult error(String message, Integer errcode) {
-        ApiResult result = new ApiResult(false);
+    public static <T> ApiResult<T> error(String message, Integer errcode) {
+        ApiResult<T> result = new ApiResult<>(false);
         result.msg = message;
         result.code = errcode;
         return result;
@@ -81,8 +81,8 @@ public class ApiResult<T> implements Serializable {
      * @param data
      * @return ApiResult
      */
-    public static <T> ApiResult error(String message, T data) {
-        ApiResult result = new ApiResult(false);
+    public static <T> ApiResult<T> error(String message, T data) {
+        ApiResult<T> result = new ApiResult<>(false);
         result.msg = message;
         result.data = data;
         return result;
@@ -101,7 +101,7 @@ public class ApiResult<T> implements Serializable {
      * @param message
      * @return ApiResult
      */
-    public static ApiResult error(String message) {
+    public static <T> ApiResult<T> error(String message) {
         return error(message, null);
     }
 
@@ -116,7 +116,7 @@ public class ApiResult<T> implements Serializable {
      *
      * @return ApiResult
      */
-    public static ApiResult error() {
+    public static <T> ApiResult<T> error() {
         return error(null, null);
     }
 
@@ -133,7 +133,7 @@ public class ApiResult<T> implements Serializable {
      * @param errcode 错误码
      * @return ApiResult
      */
-    public static ApiResult error(Integer errcode) {
+    public static <T> ApiResult<T> error(Integer errcode) {
         return error(null, errcode);
     }
 
@@ -160,8 +160,8 @@ public class ApiResult<T> implements Serializable {
      * @param msg
      * @return ApiResult
      */
-    public static <T> ApiResult success(T object, String msg) {
-        ApiResult result = new ApiResult(true);
+    public static  <T> ApiResult<T> success(T object, String msg) {
+        ApiResult<T> result = new ApiResult<>(true);
         result.data = object;
         result.msg = msg;
         return result;
@@ -188,12 +188,12 @@ public class ApiResult<T> implements Serializable {
      * @param object 对象
      * @return ApiResult
      */
-    public static <T> ApiResult success(T object) {
+    public static <T> ApiResult<T> success(T object) {
         return success(object, "");
     }
 
-    public static <T> ApiResult success(T object, String msg, Integer errcode) {
-        ApiResult result = success(object, null);
+    public static <T> ApiResult<T> success(T object, String msg, Integer errcode) {
+        ApiResult<T> result = success(object, null);
         result.code = errcode;
         return result;
     }
@@ -212,7 +212,7 @@ public class ApiResult<T> implements Serializable {
      * @param msg
      * @return ApiResult
      */
-    public static ApiResult success(String msg) {
+    public static <T> ApiResult<T>  success(String msg) {
         return success(null, msg);
     }
 
@@ -227,7 +227,7 @@ public class ApiResult<T> implements Serializable {
      *
      * @return ApiResult
      */
-    public static ApiResult success() {
+    public static <T> ApiResult<T> success() {
         return success(null, null);
     }
 
