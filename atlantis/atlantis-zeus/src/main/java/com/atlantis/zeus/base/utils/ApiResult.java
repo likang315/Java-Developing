@@ -254,7 +254,7 @@ public class ApiResult<T> implements Serializable {
      *
      * @return Object
      */
-    public Object getData() {
+    public T getData() {
         return data;
     }
 
