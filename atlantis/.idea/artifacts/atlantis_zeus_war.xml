@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="atlantis-zeus:war">
+    <output-path>$PROJECT_DIR$/atlantis-zeus/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>atlantis-zeus</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="atlantis-zeus.war">
+      <element id="artifact" artifact-name="atlantis-zeus:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -1,6 +1,0 @@
-#NOTE: This is an internal implementation file, its format can be changed without prior notice.
-#Mon May 08 20:34:03 CST 2023
-default-http\://repo.maven.apache.org/maven2/.lastUpdated=1683549243862
-http\://repo.maven.apache.org/maven2/.error=Could not transfer artifact org.springframework.boot\:spring-boot-dependencies\:pom\:2.3.3.RELEASE from/to central (http\://repo.maven.apache.org/maven2)\: Failed to transfer file\: http\://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-dependencies/2.3.3.RELEASE/spring-boot-dependencies-2.3.3.RELEASE.pom. Return code is\: 501 , ReasonPhrase\:HTTPS Required.
-http\://nexus.corp.qunar.com/nexus/content/groups/public/.error=Could not transfer artifact org.springframework.boot\:spring-boot-dependencies\:pom\:2.3.3.RELEASE from/to QunarNexus (http\://nexus.corp.qunar.com/nexus/content/groups/public)\: Connection to http\://nexus.corp.qunar.com refused
-default-http\://nexus.corp.qunar.com/nexus/content/groups/public/.lastUpdated=1683549243274
