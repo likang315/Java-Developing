@@ -7,10 +7,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="atlantis-zeus" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="11">
-      <module name="atlantis-zeus" target="11" />
+      <module name="atlantis" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

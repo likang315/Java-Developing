@@ -7,7 +7,9 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b88aab76-233e-48b9-a066-dbc15c4ce812" name="Default Changelist" comment="" />
+    <list default="true" id="b88aab76-233e-48b9-a066-dbc15c4ce812" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/atlantis-zeus/src/main/resources.prod/config/default.properties" beforeDir="false" afterPath="$PROJECT_DIR$/atlantis-zeus/src/main/resources.prod/config/default.properties" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -157,6 +159,7 @@
       <MavenGeneralSettings>
         <option name="localRepository" value="$PROJECT_DIR$/../../../Java/Maven/private_local_maven" />
         <option name="mavenHome" value="$PROJECT_DIR$/../../../Java/Maven/private_apache-maven-3.6.1" />
+        <option name="useMavenConfig" value="true" />
         <option name="userSettingsFile" value="$PROJECT_DIR$/../../../Java/Maven/private_apache-maven-3.6.1/conf/settings.xml" />
       </MavenGeneralSettings>
     </option>
@@ -678,7 +681,7 @@
       <workItem from="1684209255449" duration="88000" />
       <workItem from="1684209451581" duration="3000" />
       <workItem from="1684209625278" duration="608000" />
-      <workItem from="1684211091770" duration="291000" />
+      <workItem from="1684211091770" duration="647000" />
     </task>
     <task id="LOCAL-00001" summary="feature: add filter">
       <created>1683625517267</created>
