@@ -30,7 +30,7 @@
         <lombok.version>1.18.12</lombok.version>
         <commons-lang3.version>3.11</commons-lang3.version>
         <commons-collections4.version>4.4</commons-collections4.version>
-        <poi_excel.version>4.1.0</poi_excel.version>
+        <poi_excel.version>5.2.2</poi_excel.version>
         <httpclient.version>4.5.13</httpclient.version>
     </properties>
 
