@@ -12,8 +12,10 @@ zeus:
       username: ${datasource.druid.username}
       password: ${datasource.druid.password}
       dbName: ${datasource.druid.driver-class-name}
-      core-pool-size: 10
-      max-pool-size: 30
+      min-idle-size: 30
+      max-pool-size: 100
+      minEvictableIdleTimeMillis: 600000
+      timeBetweenEvictionRunsMillis: 120000
     redisson:
       address: ${redis.address}
       database: ${redis.database}

@@ -51,7 +51,10 @@ public class DataSourceWriteConfig {
         dataSource.setUrl(pxcDataSourceConfig.getNamespace());
         dataSource.setUsername(pxcDataSourceConfig.getUsername());
         dataSource.setPassword(pxcDataSourceConfig.getPassword());
+        dataSource.setMinIdle(pxcDataSourceConfig.getMinIdleSize());
         dataSource.setMaxActive(pxcDataSourceConfig.getMaxPoolSize());
+        dataSource.setInitialSize(pxcDataSourceConfig.getMaxPoolSize());
+        dataSource.setTimeBetweenEvictionRunsMillis(pxcDataSourceConfig.getTimeBetweenEvictionRunsMillis());
         return dataSource;
     }
 
