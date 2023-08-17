@@ -66,7 +66,7 @@ public class RedissonConfiguration {
         config.setCodec(JsonJacksonCodec.INSTANCE)
                 .useSingleServer()
                 .setAddress(redissonConfig.getAddress())
-//                .setPassword(redissonConfig.password)
+                .setPassword(redissonConfig.password)
                 .setTimeout(redissonConfig.getTimeout())
                 .setDatabase(redissonConfig.getDatabase())
                 .setConnectionPoolSize(redissonConfig.getMaxTotal())

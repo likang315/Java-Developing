@@ -1,6 +1,7 @@
 package com.atlantis.zeus.base.db;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -13,6 +14,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
+import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 /**
@@ -26,6 +28,10 @@ import javax.sql.DataSource;
         sqlSessionTemplateRef = "writeSqlSessionTemplate")
 @Configuration
 public class DataSourceWriteConfig {
+
+    @Resource
+    private Interceptor[] interceptors;
+
     /**
      * pxc config
      *
@@ -72,6 +78,7 @@ public class DataSourceWriteConfig {
         bean.setDataSource(dataSource);
         bean.setConfigLocation(new PathMatchingResourcePatternResolver().getResource("classpath:mybatis/mybatis-config.xml"));
         bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mybatis/mappers/**/*.xml"));
+        bean.setPlugins(interceptors);
         return bean.getObject();
     }
 
