@@ -12,11 +12,11 @@ import lombok.extern.slf4j.Slf4j;
 public class Main extends ClassLoader {
 
     static class TreeNode {
-        private int val;
-        private TreeNode left;
-        private TreeNode right;
+        int val;
+        TreeNode left;
+        TreeNode right;
 
-        private TreeNode(int val) {
+        public TreeNode(int val) {
             this.val = val;
         }
     }
@@ -25,12 +25,13 @@ public class Main extends ClassLoader {
         int val;
         ListNode next;
 
-        ListNode(int x) {
+        public ListNode(int x) {
             val = x;
         }
     }
 
-    static void solution(String str) {
+    static void solution(int[] data) {
+
 
     }
 
@@ -38,6 +39,6 @@ public class Main extends ClassLoader {
     public static void main(String[] args) {
         int[] array = {4, 2, 3, 1, 5, 6, 7};
         int[][] arr = {{917}, {558, 224, 24}, {691, 434, 234, 56}};
-        solution("");
+        solution(array);
     }
 }
