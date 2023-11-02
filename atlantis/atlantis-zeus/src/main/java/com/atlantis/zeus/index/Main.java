@@ -30,8 +30,7 @@ public class Main extends ClassLoader {
         }
     }
 
-    static void solution(int[] data) {
-
+    static void solution(int[] a) {
 
     }
 
