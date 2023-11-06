@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
@@ -24,6 +25,7 @@ public class StudentInfoDO {
     /**
      * name
      */
+    @NotBlank(message = "名字异常")
     private String name;
 
     /**
