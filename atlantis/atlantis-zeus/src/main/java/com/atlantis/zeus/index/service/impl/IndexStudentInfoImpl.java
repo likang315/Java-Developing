@@ -9,15 +9,20 @@ import com.atlantis.zeus.index.pojo.Score;
 import com.atlantis.zeus.index.pojo.entity.StudentInfoDO;
 import com.atlantis.zeus.index.service.IndexStudentInfo;
 import lombok.extern.slf4j.Slf4j;
+import org.redisson.api.RSet;
+import org.redisson.api.RedissonClient;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author kangkang.li@qunar.com
@@ -33,10 +38,17 @@ public class IndexStudentInfoImpl implements IndexStudentInfo {
     @Resource
     private StudentInfoMapper studentInfoMapper;
 
+    @Resource(name = "redissonClient")
+    private RedissonClient redissonClient;
+
     @Cacheable(value = "studentInfoDO")
     @Override
     public StudentInfoDO getStudentInfo(int id) {
-        return studentInfoReadMapper.queryById(id);
+        StudentInfoDO infoDO = studentInfoReadMapper.queryById(id);
+        RSet<StudentInfoDO> rSet = redissonClient.getSet("INDEX:STUDENT:LIST");
+        rSet.add(infoDO);
+        rSet.expire(Duration.ofDays(3));
+        return infoDO;
     }
 
     @LogRecord(operateTime = "new java.util.Date()", biz = "#info")
