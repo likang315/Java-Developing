@@ -32,7 +32,7 @@ public interface StudentInfoReadMapper {
      * @return
      */
     @MapKey("stuGlobalKey")
-    Map<String, Map<String, String>>  queryStudentInfoById(@Param("ids") List<String> ids);
+    Map<String, Map<String, Object>> queryStudentInfoById(@Param("ids") List<String> ids);
 
     /**
      * 通过学生ID查询学生对应成绩

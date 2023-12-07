@@ -71,8 +71,8 @@ public class IndexStudentInfoImpl implements IndexStudentInfo {
      */
     @Retryable(value = {RespException.class}, backoff = @Backoff(delay = 3, multiplier = 2))
     @Override
-    public Map<String, Map<String, String>> queryStudentInfoById(List<String> ids) {
-        Map<String, Map<String, String>> map =  studentInfoReadMapper.queryStudentInfoById(ids);
+    public Map<String, Map<String, Object>> queryStudentInfoById(List<String> ids) {
+        Map<String, Map<String, Object>> map =  studentInfoReadMapper.queryStudentInfoById(ids);
         if (Objects.isNull(map) || map.isEmpty()) {
             throw new RespException("IndexStudentInfoImpl_queryStudentInfoById", ids.toString());
         }

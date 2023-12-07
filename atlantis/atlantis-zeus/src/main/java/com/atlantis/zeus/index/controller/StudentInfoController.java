@@ -41,7 +41,7 @@ public class StudentInfoController {
     }
 
     @RequestMapping("/queryBatch")
-    public ApiResult<Map<String, Map<String, String>>> queryBatch(@RequestBody List<String> globalKey) {
+    public ApiResult<Map<String, Map<String, Object>>> queryBatch(@RequestBody List<String> globalKey) {
         Assert.isTrue(CollectionUtils.isNotEmpty(globalKey), "req param error!!!");
 
         return ApiResult.success(indexStudentInfo.queryStudentInfoById(globalKey));

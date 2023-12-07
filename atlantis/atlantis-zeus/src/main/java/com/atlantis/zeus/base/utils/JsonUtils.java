@@ -8,8 +8,9 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
-import com.fasterxml.jackson.datatype.guava.GuavaModule;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.module.afterburner.AfterburnerModule;
 import lombok.Getter;
 import lombok.SneakyThrows;
@@ -18,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.TimeZone;
@@ -39,6 +41,8 @@ public class JsonUtils {
     private final String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
 
     static {
+        SimpleModule customModule = new SimpleModule();
+        customModule.addSerializer(new LocalDateTimeSerializer(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
         om = JsonMapper.builder()
                 .enable(JsonParser.Feature.ALLOW_COMMENTS)
                 .enable(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES)
@@ -52,9 +56,9 @@ public class JsonUtils {
                 // @JsonFormat将用到这个时区
                 .defaultTimeZone(TimeZone.getDefault())
                 .addModule(new AfterburnerModule())
-                .addModule(new GuavaModule())
                 // 增加自定义序列化类
                 .addModule(new JavaTimeModule())
+                .addModule(customModule)
                 .build();
     }
 

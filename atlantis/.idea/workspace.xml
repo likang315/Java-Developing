@@ -9,6 +9,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b88aab76-233e-48b9-a066-dbc15c4ce812" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/atlantis-zeus/src/main/java/com/atlantis/zeus/base/configuration/MvcJacksonConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/atlantis-zeus/src/main/java/com/atlantis/zeus/base/utils/JsonUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/atlantis-zeus/src/main/java/com/atlantis/zeus/base/utils/JsonUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/atlantis-zeus/src/main/java/com/atlantis/zeus/index/controller/StudentInfoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/atlantis-zeus/src/main/java/com/atlantis/zeus/index/controller/StudentInfoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/atlantis-zeus/src/main/java/com/atlantis/zeus/index/dao/readonly/StudentInfoReadMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/atlantis-zeus/src/main/java/com/atlantis/zeus/index/dao/readonly/StudentInfoReadMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/atlantis-zeus/src/main/java/com/atlantis/zeus/index/service/IndexStudentInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/atlantis-zeus/src/main/java/com/atlantis/zeus/index/service/IndexStudentInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/atlantis-zeus/src/main/java/com/atlantis/zeus/index/service/impl/IndexStudentInfoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/atlantis-zeus/src/main/java/com/atlantis/zeus/index/service/impl/IndexStudentInfoImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -255,7 +260,7 @@
     &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.runner&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;174dffa9addf216cc92c71d8e17ba04d&quot;
   }
 }</component>
@@ -730,7 +735,16 @@
       <workItem from="1699172183807" duration="1672000" />
       <workItem from="1699264550003" duration="2522000" />
       <workItem from="1699270305992" duration="961000" />
-      <workItem from="1699323137284" duration="686000" />
+      <workItem from="1699323137284" duration="1053000" />
+      <workItem from="1699528639696" duration="2479000" />
+      <workItem from="1700100824959" duration="13000" />
+      <workItem from="1700474777834" duration="237000" />
+      <workItem from="1700966191246" duration="3277000" />
+      <workItem from="1700972567818" duration="2139000" />
+      <workItem from="1701335098889" duration="33000" />
+      <workItem from="1701829677958" duration="1038000" />
+      <workItem from="1701852630167" duration="61000" />
+      <workItem from="1701939782662" duration="7081000" />
     </task>
     <task id="LOCAL-00001" summary="feature: add filter">
       <created>1683625517267</created>
@@ -949,14 +963,9 @@
           <option name="timeStamp" value="67" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/atlantis-zeus/src/main/java/com/atlantis/zeus/index/controller/StudentInfoController.java</url>
-          <line>62</line>
-          <option name="timeStamp" value="69" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/atlantis-zeus/src/main/java/com/atlantis/zeus/index/service/impl/IndexStudentInfoImpl.java</url>
-          <line>46</line>
-          <option name="timeStamp" value="72" />
+          <line>79</line>
+          <option name="timeStamp" value="86" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-defaults>
