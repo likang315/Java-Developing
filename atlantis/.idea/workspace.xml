@@ -9,12 +9,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b88aab76-233e-48b9-a066-dbc15c4ce812" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/atlantis-zeus/src/main/java/com/atlantis/zeus/base/configuration/MvcJacksonConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/atlantis-zeus/src/main/java/com/atlantis/zeus/base/utils/JsonUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/atlantis-zeus/src/main/java/com/atlantis/zeus/base/utils/JsonUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/atlantis-zeus/src/main/java/com/atlantis/zeus/index/controller/StudentInfoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/atlantis-zeus/src/main/java/com/atlantis/zeus/index/controller/StudentInfoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/atlantis-zeus/src/main/java/com/atlantis/zeus/index/dao/readonly/StudentInfoReadMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/atlantis-zeus/src/main/java/com/atlantis/zeus/index/dao/readonly/StudentInfoReadMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/atlantis-zeus/src/main/java/com/atlantis/zeus/index/service/IndexStudentInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/atlantis-zeus/src/main/java/com/atlantis/zeus/index/service/IndexStudentInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/atlantis-zeus/src/main/java/com/atlantis/zeus/index/service/impl/IndexStudentInfoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/atlantis-zeus/src/main/java/com/atlantis/zeus/index/service/impl/IndexStudentInfoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/atlantis-zeus/src/main/resources/mybatis/mappers/index/readonly/StudentInfoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/atlantis-zeus/src/main/resources/mybatis/mappers/index/readonly/StudentInfoMapper.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -744,7 +739,9 @@
       <workItem from="1701335098889" duration="33000" />
       <workItem from="1701829677958" duration="1038000" />
       <workItem from="1701852630167" duration="61000" />
-      <workItem from="1701939782662" duration="7081000" />
+      <workItem from="1701939782662" duration="7256000" />
+      <workItem from="1701959121149" duration="2941000" />
+      <workItem from="1702173403391" duration="1286000" />
     </task>
     <task id="LOCAL-00001" summary="feature: add filter">
       <created>1683625517267</created>
@@ -964,8 +961,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/atlantis-zeus/src/main/java/com/atlantis/zeus/index/service/impl/IndexStudentInfoImpl.java</url>
-          <line>79</line>
-          <option name="timeStamp" value="86" />
+          <line>74</line>
+          <option name="timeStamp" value="68" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-defaults>
