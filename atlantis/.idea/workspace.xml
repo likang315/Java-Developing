@@ -8,9 +8,7 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b88aab76-233e-48b9-a066-dbc15c4ce812" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/atlantis-zeus/src/main/resources/mybatis/mappers/index/readonly/StudentInfoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/atlantis-zeus/src/main/resources/mybatis/mappers/index/readonly/StudentInfoMapper.xml" afterDir="false" />
-    </list>
+    <list default="true" id="b88aab76-233e-48b9-a066-dbc15c4ce812" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -741,7 +739,7 @@
       <workItem from="1701852630167" duration="61000" />
       <workItem from="1701939782662" duration="7256000" />
       <workItem from="1701959121149" duration="2941000" />
-      <workItem from="1702173403391" duration="1286000" />
+      <workItem from="1702173403391" duration="2253000" />
     </task>
     <task id="LOCAL-00001" summary="feature: add filter">
       <created>1683625517267</created>
